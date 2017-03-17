@@ -1,0 +1,89 @@
+﻿@using MockProject.Common
+@using PagedList.Mvc;
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.SANPHAM>
+<div class="table-responsive">
+    <div class="m-t-lg">
+        <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+    </div>
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>#</th>
+           
+            <th>
+                Mã sản phẩm
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Loại sản phẩm
+            </th>
+            <th>
+                Số lượng tồn
+            </th>
+            <th>
+                Đơn vị tính
+            </th>
+            <th>
+                Giá bán
+            </th>
+            <th></th>
+
+        </tr>
+        @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+              
+                <td>
+                    <a href="@Url.Action("Edit",new {id = item.Id})">@item.Id</a>
+                    
+                </td>
+                <td>
+                    @item.TenSanpham
+                   
+                </td>
+                <td>
+                    @item.LOAISANPHAM.TenDanhmuc
+                </td>
+                <td>
+                    @item.Soluongton
+                </td>
+                <td>
+                    @item.Donvitinh
+                </td>
+                <td>
+                    @item.Giaban
+                </td>
+                <td>
+    
+                    @*@Ajax.ActionLink("Xóa", "Delete", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "content" }, new { @class = "btn btn-success", role = "button"})*@
+                    @Ajax.ActionLink("Xóa", "Delete", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "updateCommision", OnSuccess = "ShowModalCommision" }, new { @class = "btn btn-success", role = "button" })
+
+           
+                </td>
+
+
+            </tr>
+        }
+    </table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+    {
+        Model.SearchModel.PageIndex = page;
+        return Url.Action("List", Model.SearchModel);
+    },
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+</div>
+<div id="updateCommision">
+
+</div>
+
+<script type="text/javascript">
+    function ShowModalCommision(html) {
+        $('#modalCommission').modal('show');
+    }
+</script>

@@ -1,0 +1,7 @@
+F:\Mock Project\MockProject\MockProject.Resources\bin\Debug\MockProject.Resources.dll
+F:\Mock Project\MockProject\MockProject.Resources\bin\Debug\MockProject.Resources.pdb
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.csprojResolveAssemblyReference.cache
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.EnumText.resources
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.csproj.GenerateResource.Cache
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.dll
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.pdb

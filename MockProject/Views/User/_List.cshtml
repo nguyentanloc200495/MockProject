@@ -1,0 +1,56 @@
+﻿@using MockProject.Common
+@using PagedList.Mvc;
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.Account>
+<div class="table-responsive">
+    <div class="m-t-lg">
+        <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+    </div>
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>#</th>
+           
+            <th>
+                Full Name
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Phone
+            </th>
+        
+
+        </tr>
+        @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+              
+                <td>
+                   @item.Fullname
+                    
+                </td>
+                <td>
+                    @item.Username
+                    <a href="@Url.Action("Edit",new {id = item.Id})">@item.Username</a>
+                </td>
+                <td>
+                    @item.PhoneNumber
+                </td>
+              
+
+
+            </tr>
+        }
+    </table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("List", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+</div>

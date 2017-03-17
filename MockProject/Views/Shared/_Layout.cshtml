@@ -1,0 +1,150 @@
+﻿@*@using System.Configuration
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Tên nhóm | @ViewBag.Title</title>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/summernote-bs3.css" rel="stylesheet" />
+    <link href="~/Content/fix.css" rel="stylesheet" />
+    <script src="~/Scripts/common.js"></script>
+</head>
+
+
+<body>
+<div id="wrapper" class="Advanced">
+    @Html.Partial("_Navigation")
+
+    <div id="page-wrapper" class="gray-bg" style="margin-left:18%;padding:1px 16px;">
+
+        @RenderBody()
+    </div>
+
+</div>
+</body>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+</html>*@
+
+@using System.Configuration
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet">
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+    <link href="~/Content/footable.core.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/SignalR/Hubs"></script>
+</head>
+<body>
+
+    <!-- Wrapper-->
+    <div id="wrapper" class="Advanced">
+
+        <!-- Navigation -->
+        @Html.Partial("_Navigation")
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg">
+
+            <!-- Top Navbar -->
+            @*@Html.Partial("_TopNavbar")*@
+
+            <!-- Main view  -->
+            @RenderBody()
+
+            <!-- Footer -->
+            @*@Html.Partial("_Footer")*@
+
+        </div>
+        <!-- End page wrapper-->
+
+    </div>
+    <!-- End wrapper-->
+
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/metsiMenu")
+    @Scripts.Render("~/plugins/pace")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/plugins/sweetalert")
+    @Scripts.Render("~/plugins/select2")
+    @Scripts.Render("~/bundles/inspinia")
+
+    <script src="~/Scripts/toastr.min.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+    @if (ConfigurationManager.AppSettings["Analytic"] == "true")
+    {
+        <script id="script">
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-89509539-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+    }
+
+    <script type="text/javascript">
+    toastr.options.closeButton = true;
+    toastr.options.progressBar = true;
+
+    $(document)
+        .ready(function() {
+            //function that the hub can call when it receives a notification.
+            $.connection.notificationHub.client.displayNotification = function(title, message,url) {
+                Notify(title, message, url);
+            };
+            $.connection.notificationHub.client.displayNotificationUser = function(title, message,url) {
+                Notify(title, message, url);
+            };
+
+            window.notify = {
+                hubConnector: $.connection.hub
+                    .start() //start the connection and store object returned globally for access in child views
+            };
+
+        });
+
+        function Notify(title, message, url) {
+
+            $.post('@Url.Action("Notify","Notify")', {}, function (html) {
+                $('#NotifyTop').html(html);
+            })
+
+            //toastr.success(message, title, {
+            //    onclick: function () {
+            //        window.open(url, '_blank');
+            //    },
+            //})
+
+    }
+    // not validate hidden field
+    $.validator.defaults.ignore = ":hidden";
+    </script>
+</body>
+</html>
+
+
+

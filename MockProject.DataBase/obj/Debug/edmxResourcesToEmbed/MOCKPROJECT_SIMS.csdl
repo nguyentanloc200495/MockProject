@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MOCKPROJECT_SIMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="MOCKPROJECT_SIMSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="LOAISANPHAMs" EntityType="MOCKPROJECT_SIMSModel.LOAISANPHAM" />
+    <EntitySet Name="SANPHAMs" EntityType="MOCKPROJECT_SIMSModel.SANPHAM" />
+    <EntitySet Name="sysdiagrams" EntityType="MOCKPROJECT_SIMSModel.sysdiagram" />
+    <AssociationSet Name="FK__SANPHAM__LoaiSan__2A4B4B5E" Association="MOCKPROJECT_SIMSModel.FK__SANPHAM__LoaiSan__2A4B4B5E">
+      <End Role="LOAISANPHAM" EntitySet="LOAISANPHAMs" />
+      <End Role="SANPHAM" EntitySet="SANPHAMs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="LOAISANPHAM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDanhmuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SANPHAMs" Relationship="MOCKPROJECT_SIMSModel.FK__SANPHAM__LoaiSan__2A4B4B5E" FromRole="LOAISANPHAM" ToRole="SANPHAM" />
+  </EntityType>
+  <EntityType Name="SANPHAM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenSanpham" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Giaban" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Soluongton" Type="Int32" />
+    <Property Name="Donvitinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiSanphamID" Type="Int32" />
+    <NavigationProperty Name="LOAISANPHAM" Relationship="MOCKPROJECT_SIMSModel.FK__SANPHAM__LoaiSan__2A4B4B5E" FromRole="SANPHAM" ToRole="LOAISANPHAM" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__SANPHAM__LoaiSan__2A4B4B5E">
+    <End Type="MOCKPROJECT_SIMSModel.LOAISANPHAM" Role="LOAISANPHAM" Multiplicity="0..1" />
+    <End Type="MOCKPROJECT_SIMSModel.SANPHAM" Role="SANPHAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOAISANPHAM">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SANPHAM">
+        <PropertyRef Name="LoaiSanphamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
