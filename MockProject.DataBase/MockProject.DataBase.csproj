@@ -80,45 +80,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs">
-      <DependentUpon>MOCKPROJECT_SIMS.tt</DependentUpon>
-    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="CommandResult.cs" />
+    <Compile Include="CTHD.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GioiTinhType.cs" />
+    <Compile Include="GST_MockProject.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GST_MockProject.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GST_MockProject.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GST_MockProject.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GST_MockProject.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="HOADON.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
     <Compile Include="LOAISANPHAM.cs">
-      <DependentUpon>MOCKPROJECT_SIMS.tt</DependentUpon>
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="MOCKPROJECT_SIMS.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MOCKPROJECT_SIMS.Context.tt</DependentUpon>
+    <Compile Include="NHANVIEN.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="MOCKPROJECT_SIMS.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MOCKPROJECT_SIMS.tt</DependentUpon>
+    <Compile Include="NHANVIEN_QUYEN.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="MOCKPROJECT_SIMS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MOCKPROJECT_SIMS.edmx</DependentUpon>
+    <Compile Include="PHIEUNHAP.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SANPHAM.cs">
-      <DependentUpon>MOCKPROJECT_SIMS.tt</DependentUpon>
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>MOCKPROJECT_SIMS.tt</DependentUpon>
-    </Compile>
+    <Compile Include="TrangThaiNhanVien.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="MOCKPROJECT_SIMS.edmx">
+    <EntityDeploy Include="GST_MockProject.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MOCKPROJECT_SIMS.Designer.cs</LastGenOutput>
+      <LastGenOutput>GST_MockProject.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="MOCKPROJECT_SIMS.edmx.diagram">
-      <DependentUpon>MOCKPROJECT_SIMS.edmx</DependentUpon>
+    <None Include="GST_MockProject.edmx.diagram">
+      <DependentUpon>GST_MockProject.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -126,15 +137,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MOCKPROJECT_SIMS.Context.tt">
+    <Content Include="GST_MockProject.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MOCKPROJECT_SIMS.edmx</DependentUpon>
-      <LastGenOutput>MOCKPROJECT_SIMS.Context.cs</LastGenOutput>
+      <DependentUpon>GST_MockProject.edmx</DependentUpon>
+      <LastGenOutput>GST_MockProject.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="MOCKPROJECT_SIMS.tt">
+    <Content Include="GST_MockProject.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MOCKPROJECT_SIMS.edmx</DependentUpon>
-      <LastGenOutput>MOCKPROJECT_SIMS.cs</LastGenOutput>
+      <DependentUpon>GST_MockProject.edmx</DependentUpon>
+      <LastGenOutput>GST_MockProject.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

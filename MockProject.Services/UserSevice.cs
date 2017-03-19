@@ -9,67 +9,73 @@ namespace MockProject.Services
     public class UserSevice
     {
    
-        public static PagedSearchList<Account> Search(string userName, string fullName, string phoneNumber, int pageIndex)
+        public static PagedSearchList<NHANVIEN> Search(string Tennv, string Taikhoan, string Sodt,string Chucvu, int pageIndex)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            //dùng để search nhân viên
+            using (var context = new GST_MockProjectEntities())
 
             {
-                var query = context.Accounts.AsNoTracking().AsQueryable();
+                var query = context.NHANVIENs.AsNoTracking().AsQueryable();
 
-                if (!string.IsNullOrEmpty(fullName))
+                if (!string.IsNullOrEmpty(Tennv))
                 {
-                    query = query.Where(x => x.Fullname.Contains(fullName));
+                    query = query.Where(x => x.TenNV.Contains(Tennv));
                 }
-                if (!string.IsNullOrEmpty(userName))
+                if (!string.IsNullOrEmpty(Taikhoan))
                 {
-                    query = query.Where(x => x.Username.Contains(userName));
+                    query = query.Where(x => x.TaiKhoan.Contains(Taikhoan));
                 }
-                if (!string.IsNullOrEmpty(phoneNumber))
+                if (!string.IsNullOrEmpty(Sodt))
                 {
-                    query = query.Where(x => x.PhoneNumber.Contains(phoneNumber));
+                    query = query.Where(x => x.SoDT.Contains(Sodt));
                 }
-                query = query.OrderByDescending(x => x.Id);
+                query = query.OrderByDescending(x => x.ID);
                 int pageSize = 10;
                 pageIndex = pageIndex < 1 ? 1 : pageIndex;
-                return new PagedSearchList<Account>(query, pageIndex, pageSize);
+                return new PagedSearchList<NHANVIEN>(query, pageIndex, pageSize);
             }
         }
-        public static Account GetById(long id)
+        public static NHANVIEN GetById(long id)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            //hàm lấy nhân viên có ID = id
+            using (var context = new GST_MockProjectEntities())
             {
-                var query = context.Accounts.AsNoTracking().AsQueryable();
+                var query = context.NHANVIENs.AsNoTracking().AsQueryable();
      
 
-                return query.FirstOrDefault(x => x.Id == id);
+                return query.FirstOrDefault(x => x.ID == id);
             }
         }
-        public static CommandResult Create(Account c)
+        public static CommandResult Create(NHANVIEN c)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            //Tạo 1 nhân viên mới
+            using (var context = new GST_MockProjectEntities())
             {
                
-                context.Accounts.Add(c);
+                context.NHANVIENs.Add(c);
                 context.SaveChanges();
-                //TODO
-                //context.Log(c, LogType.BankBranch_Create, userId, "", HttpContext.Current.Request.Form);
+               
                 return new CommandResult();
             }
         }
-        public static CommandResult Edit(Account c)
+        public static CommandResult Edit(NHANVIEN c)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            //chỉnh sửa 1 nhân viên (không cho chỉnh sửa mật khẩu)
+            using (var context = new GST_MockProjectEntities())
             {
-                var Account = context.Accounts.First(x => x.Id == c.Id);
-              
-                Account.Username = c.Username;
-                Account.Fullname = c.Fullname;
-                Account.Password = c.Password;
-                Account.PhoneNumber = c.PhoneNumber;
-                Account.Image = c.Image;
+                var NhanVien = context.NHANVIENs.First(x => x.ID == c.ID);
+
+                NhanVien.TenNV = c.TenNV;
+                NhanVien.NgaySinh = c.NgaySinh;
+                NhanVien.GioiTinh = c.GioiTinh;
+                NhanVien.DiaChi = c.DiaChi;
+                NhanVien.SoDT = c.DiaChi;
+                NhanVien.TaiKhoan = c.TaiKhoan;
+                NhanVien.Email = c.Email;
+                NhanVien.ChucVu = c.ChucVu;
+                NhanVien.TrangThai = c.TrangThai;
                 context.SaveChanges();
-                //TODO
-                // context.Log(c, LogType.Customer_Edit, userId, "", HttpContext.Current.Request.Form);
+                
                 return new CommandResult();
             }
         }

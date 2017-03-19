@@ -61,13 +61,13 @@ namespace MockProject.Controllers
         //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
         public ActionResult CreateEdit(SANPHAM model)
         {
-            if (model.Id == 0)
+            if (model.ID == 0)
             {
 
                 var result = SanphamService.Create(model);
                 return
                  Json(
-                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.Id }) },
+                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
                 JsonRequestBehavior.AllowGet);
             }
             else
@@ -76,7 +76,7 @@ namespace MockProject.Controllers
                 var result = SanphamService.Edit(model);
                 return
                  Json(
-                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.Id }) },
+                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
                 JsonRequestBehavior.AllowGet);
             }
         }

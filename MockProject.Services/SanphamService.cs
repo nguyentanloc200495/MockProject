@@ -15,27 +15,27 @@ namespace MockProject.Services
         public static PagedSearchList<SANPHAM> Search(int? id, string tensanpham, decimal? Giaban,int? loaisanphamID, int pageIndex)
         {
                
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            using (var context = new GST_MockProjectEntities())
 
             {
                 var query = context.SANPHAMs.Include(x=>x.LOAISANPHAM ).AsNoTracking().AsQueryable();
                 if (id.HasValue)
                 {
-                    query = query.Where(x => x.Id==id);
+                    query = query.Where(x => x.ID==id);
                 }
                 if (!string.IsNullOrEmpty(tensanpham))
                 {
-                    query = query.Where(x => x.TenSanpham.Contains(tensanpham));
+                    query = query.Where(x => x.TenSP.Contains(tensanpham));
                 }
                 if (Giaban.HasValue)
                 {
-                    query = query.Where(x => x.Giaban == Giaban.Value);
+                    query = query.Where(x => x.GiaBan == Giaban.Value);
                 }
                 if (loaisanphamID.HasValue)
                 {
-                    query = query.Where(x => x.LoaiSanphamID==loaisanphamID);
+                    query = query.Where(x => x.LoaiSanPhamID==loaisanphamID);
                 }
-                query = query.OrderByDescending(x => x.Id);
+                query = query.OrderByDescending(x => x.ID);
                 int pageSize = 10;
                 pageIndex = pageIndex < 1 ? 1 : pageIndex;
                 return new PagedSearchList<SANPHAM>(query, pageIndex, pageSize);
@@ -43,7 +43,7 @@ namespace MockProject.Services
         }
         public static List<LOAISANPHAM> GetAllLoaisanpham()
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            using (var context = new GST_MockProjectEntities())
 
             {
                 return context.LOAISANPHAMs.AsNoTracking().ToList();
@@ -51,17 +51,17 @@ namespace MockProject.Services
         }
         public static SANPHAM GetById(long id)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            using (var context = new GST_MockProjectEntities())
             {
                 var query = context.SANPHAMs.AsNoTracking().AsQueryable();
 
 
-                return query.FirstOrDefault(x => x.Id == id);
+                return query.FirstOrDefault(x => x.ID == id);
             }
         }
         public static CommandResult Create(SANPHAM c)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            using (var context = new GST_MockProjectEntities())
             {
 
                 context.SANPHAMs.Add(c);
@@ -73,15 +73,15 @@ namespace MockProject.Services
         }
         public static CommandResult Edit(SANPHAM c)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            using (var context = new GST_MockProjectEntities())
             {
-                var Sanpham = context.SANPHAMs.First(x => x.Id == c.Id);
-                Sanpham.TenSanpham = c.TenSanpham;
-                Sanpham.Giaban = c.Giaban;
-                Sanpham.Soluongton = c.Soluongton;
-                Sanpham.Donvitinh = c.Donvitinh;
-                Sanpham.Image = c.Image;
-               Sanpham.LoaiSanphamID = c.LoaiSanphamID;
+                var Sanpham = context.SANPHAMs.First(x => x.ID == c.ID);
+                Sanpham.TenSP = c.TenSP;
+                Sanpham.GiaBan = c.GiaBan;
+                Sanpham.SoLuongTon = c.SoLuongTon;
+                Sanpham.DonViTinh = c.DonViTinh;
+                Sanpham.HinhSP = c.HinhSP;
+               Sanpham.LoaiSanPhamID = c.LoaiSanPhamID;
 
                 context.SaveChanges();
                 //TODO
@@ -92,9 +92,9 @@ namespace MockProject.Services
 
         public static CommandResult Delete(SANPHAM c)
         {
-            using (var context = new MOCKPROJECT_SIMSEntities1())
+            using (var context = new GST_MockProjectEntities())
             {
-                var Sanpham = context.SANPHAMs.First(x => x.Id == c.Id);
+                var Sanpham = context.SANPHAMs.First(x => x.ID == c.ID);
                 context.SANPHAMs.Remove(Sanpham);
                 context.SaveChanges();
                 return new CommandResult();

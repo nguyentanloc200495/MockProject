@@ -51,12 +51,75 @@ namespace MockProject.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Chưa xác định.
+        /// </summary>
+        public static string GioiTinhType_ChuaXacDinh {
+            get {
+                return ResourceManager.GetString("GioiTinhType.ChuaXacDinh", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Nam.
+        /// </summary>
+        public static string GioiTinhType_Nam {
+            get {
+                return ResourceManager.GetString("GioiTinhType.Nam", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Nữ.
+        /// </summary>
+        public static string GioiTinhType_Nu {
+            get {
+                return ResourceManager.GetString("GioiTinhType.Nu", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Công tác.
+        /// </summary>
+        public static string TrangThaiNhanVien_CongTac {
+            get {
+                return ResourceManager.GetString("TrangThaiNhanVien.CongTac", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Đang làm việc.
+        /// </summary>
+        public static string TrangThaiNhanVien_DangLamViec {
+            get {
+                return ResourceManager.GetString("TrangThaiNhanVien.DangLamViec", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Nghĩ phép.
+        /// </summary>
+        public static string TrangThaiNhanVien_NghiPhep {
+            get {
+                return ResourceManager.GetString("TrangThaiNhanVien.NghiPhep", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Nghĩ việc.
+        /// </summary>
+        public static string TrangThaiNhanVien_NghiViec {
+            get {
+                return ResourceManager.GetString("TrangThaiNhanVien.NghiViec", resourceCulture);
             }
         }
     }

@@ -8,9 +8,10 @@ namespace MockProject.Models
 {
     public class UserSearchModel : SearchModel
     {
-        public String Fullname { get; set; }
-        public String Username { get; set; }
-        public String PhoneNumber { get; set; }
+        public String TenNV { get; set; }
+        public String TaiKhoan { get; set; }
+        public String ChucVu { get; set; }
+        public String SoDT { get; set; }
       
     }
 }

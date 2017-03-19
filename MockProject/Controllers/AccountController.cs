@@ -21,13 +21,13 @@ namespace MockProject.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password, bool rememberMe)
         {
-            using (var context =new MOCKPROJECT_SIMSEntities1())
+            using (var context =new GST_MockProjectEntities())
             {
                 var passMD5 = Encryptor.MD5Hash(password);
-                var user = context.Accounts.FirstOrDefault(x => x.Username == username);
-                if (user!=null && user.Password !=null)
+                var user = context.NHANVIENs.FirstOrDefault(x => x.TaiKhoan == username);
+                if (user!=null && user.MatKhau !=null)
                 {
-                    if (user.Username == username && user.Password == passMD5)
+                    if (user.TaiKhoan == username && user.MatKhau == passMD5)
                     {
                         return RedirectToAction("Index", "Home");
                     }

@@ -14,14 +14,24 @@ namespace MockProject.DataBase
     
     public partial class SANPHAM
     {
-        public int Id { get; set; }
-        public string TenSanpham { get; set; }
-        public Nullable<decimal> Giaban { get; set; }
-        public Nullable<int> Soluongton { get; set; }
-        public string Donvitinh { get; set; }
-        public string Image { get; set; }
-        public Nullable<int> LoaiSanphamID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SANPHAM()
+        {
+            this.CTHDs = new HashSet<CTHD>();
+        }
     
+        public int ID { get; set; }
+        public Nullable<int> LoaiSanPhamID { get; set; }
+        public string TenSP { get; set; }
+        public string HinhSP { get; set; }
+        public string MoTa { get; set; }
+        public Nullable<decimal> GiaBan { get; set; }
+        public Nullable<decimal> SoLuongTon { get; set; }
+        public Nullable<int> DonViTinh { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTHD> CTHDs { get; set; }
         public virtual LOAISANPHAM LOAISANPHAM { get; set; }
     }
 }

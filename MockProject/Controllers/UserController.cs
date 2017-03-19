@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MockProject.DataBase;
+using CommonData;
 
 namespace MockProject.Controllers
 {
@@ -17,15 +18,19 @@ namespace MockProject.Controllers
         {
             return View();
         }
+        //show ra table nhân viên
         public ActionResult List(UserSearchModel searchModel)
         {
-            var pagedList = UserSevice.Search(searchModel.Username, searchModel.Fullname, searchModel.PhoneNumber, searchModel.PageIndex);
+            var pagedList = UserSevice.Search(searchModel.TenNV, searchModel.TaiKhoan, searchModel.SoDT,searchModel.ChucVu, searchModel.PageIndex);
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
         }
         public ActionResult Create()
         {
-            //TODO        
+            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<GioiTinhType>();
+            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
+            
+            //tạo nhân viên       
             return View("CreateEdit");
         }
         [HttpGet]
@@ -33,21 +38,22 @@ namespace MockProject.Controllers
         public ActionResult Edit(int id)
         {
             var model = UserSevice.GetById(id);
-            //TODO        
+            //chỉnh sửa nhân viên        
             return View("CreateEdit", model);
         }
         [HttpPost]
         //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
-        public ActionResult CreateEdit(Account model)
+        public ActionResult CreateEdit(NHANVIEN model)
         {
-            if (model.Id == 0)
+            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<GioiTinhType>();
+            if (model.ID == 0)
             {
                
                 var result = UserSevice.Create(model);
                 return
                  Json(
-                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.Id }) },
-                JsonRequestBehavior.AllowGet); 
+                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
+                JsonRequestBehavior.AllowGet);
             }
             else
             {
@@ -55,7 +61,7 @@ namespace MockProject.Controllers
                 var result = UserSevice.Edit(model);
                 return
                  Json(
-                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.Id }) },
+               new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
                 JsonRequestBehavior.AllowGet);
             }
         }
