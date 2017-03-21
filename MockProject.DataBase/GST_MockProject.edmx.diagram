@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="359fffad8d064286bd4ad03f9dec8a34" Name="Diagram1">
+        <EntityTypeShape EntityType="GST_MockProjectModel.CTHD" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.CTPN" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.HOADON" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.LOAISANPHAM" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.NHANVIEN_QUYEN" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.PHIEUNHAP" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTPN__PhieuNhapI__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__HOADON__NhanVien__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__NHANVIEN___NhanV__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__PHIEUNHAP__NhanV__21B6055D" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.sysdiagram" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.SANPHAM" Width="1.5" PointX="3" PointY="3.25" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTPN__SanPhamID__25869641" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__SANPHAM__LoaiSan__182C9B23" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

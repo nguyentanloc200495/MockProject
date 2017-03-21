@@ -1,4 +1,5 @@
 ﻿@using MockProject.Common
+@using CommonData
 @using PagedList.Mvc;
 @model MockProject.Services.PagedSearchList<MockProject.DataBase.LOAISANPHAM>
 <div class="table-responsive">
@@ -15,7 +16,9 @@
             <th>
                 Tên loại
             </th>
-        
+            <th>
+                Trạng thái
+            </th>
 
 
         </tr>
@@ -28,15 +31,17 @@
                 </td>
 
                 <td>
-                    @item.Id
-                    <a href="@Url.Action("Edit",new {id = item.Id})">@item.Id</a>
+                   
+                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.ID</a>
                 
                 </td>
                 <td>
-                    @item.TenDanhmuc
+                    @item.TenLoaiSanPham
                
                 </td>
-             
+                <td>
+                    @item.TrangThai.GetString()
+                </td>
 
 
 

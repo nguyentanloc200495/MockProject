@@ -87,10 +87,12 @@
                                             @if (Model == null)
                                             {
                                                 @Html.TextBoxFor(x => x.MatKhau, new {@class = "form-control", @required = ""})
+                                               // PasswordFor
                                             }
                                             else
                                             {
-                                                @Html.TextBoxFor(x => x.MatKhau, new { @class = "form-control", @disabled = "disabled" })
+                                                @Html.TextBoxFor(x => x.MatKhau, new { @class = "form-control", @disabled = "disabled", @type = "password" })
+                                              
                                             }
                                             
                                         </div>
@@ -151,3 +153,15 @@
     </div>
 </div>
 <script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.input-group.date')
+            .datetimepicker({
+                locale: 'vi',
+                format: 'DD/MM/YYYY',
+                extraFormats: ["MM/YYYY"],
+                defaultDate: null
+            });
+    });
+
+</script>

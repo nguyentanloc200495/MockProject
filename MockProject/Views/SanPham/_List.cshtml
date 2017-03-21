@@ -39,29 +39,29 @@
                 </td>
               
                 <td>
-                    <a href="@Url.Action("Edit",new {id = item.Id})">@item.Id</a>
+                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.ID</a>
                     
                 </td>
                 <td>
-                    @item.TenSanpham
+                    @item.TenSP
                    
                 </td>
                 <td>
-                    @item.LOAISANPHAM.TenDanhmuc
+                    @item.LOAISANPHAM.TenLoaiSanPham
                 </td>
                 <td>
-                    @item.Soluongton
+                    @item.SoLuongTon
                 </td>
                 <td>
-                    @item.Donvitinh
+                    @item.DonViTinh
                 </td>
                 <td>
-                    @item.Giaban
+                    @item.GiaBan
                 </td>
                 <td>
     
                     @*@Ajax.ActionLink("Xóa", "Delete", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "content" }, new { @class = "btn btn-success", role = "button"})*@
-                    @Ajax.ActionLink("Xóa", "Delete", new { id = item.Id }, new AjaxOptions() { UpdateTargetId = "updateCommision", OnSuccess = "ShowModalCommision" }, new { @class = "btn btn-success", role = "button" })
+                    @Ajax.ActionLink("Xóa", "Delete", new { id = item.ID }, new AjaxOptions() { UpdateTargetId = "updateCommision", OnSuccess = "ShowModalCommision" }, new { @class = "btn btn-success", role = "button" })
 
            
                 </td>

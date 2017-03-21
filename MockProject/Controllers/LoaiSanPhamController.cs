@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MockProject.DataBase;
 using MockProject.Services;
+using CommonData;
 
 namespace MockProject.Controllers
 {
@@ -23,16 +24,18 @@ namespace MockProject.Controllers
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
         }
-
+        [HttpGet]
         public ActionResult Create()
         {
-            //TODO        
+            //TODO     
+            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiLoaiSanPham>();
             return View("CreateEdit");
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiLoaiSanPham>();
             var model = LoaiSanPham.GetById(id);
             //TODO        
             return View("CreateEdit", model);

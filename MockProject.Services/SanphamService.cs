@@ -18,7 +18,8 @@ namespace MockProject.Services
             using (var context = new GST_MockProjectEntities())
 
             {
-                var query = context.SANPHAMs.Include(x=>x.LOAISANPHAM ).AsNoTracking().AsQueryable();
+                var query = context.SANPHAMs.Include(x=>x.LOAISANPHAM ).AsNoTracking().AsQueryable().Where(x=>x.TrangThai==true);
+                
                 if (id.HasValue)
                 {
                     query = query.Where(x => x.ID==id);
@@ -53,7 +54,7 @@ namespace MockProject.Services
         {
             using (var context = new GST_MockProjectEntities())
             {
-                var query = context.SANPHAMs.AsNoTracking().AsQueryable();
+                var query = context.SANPHAMs.Include(x=>x.LOAISANPHAM).AsNoTracking().AsQueryable();
 
 
                 return query.FirstOrDefault(x => x.ID == id);
@@ -63,7 +64,7 @@ namespace MockProject.Services
         {
             using (var context = new GST_MockProjectEntities())
             {
-
+                c.TrangThai = true;
                 context.SANPHAMs.Add(c);
                 context.SaveChanges();
                 //TODO
@@ -95,7 +96,7 @@ namespace MockProject.Services
             using (var context = new GST_MockProjectEntities())
             {
                 var Sanpham = context.SANPHAMs.First(x => x.ID == c.ID);
-                context.SANPHAMs.Remove(Sanpham);
+                Sanpham.TrangThai = false;
                 context.SaveChanges();
                 return new CommandResult();
             }

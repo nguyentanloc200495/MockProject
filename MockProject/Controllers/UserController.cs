@@ -27,7 +27,7 @@ namespace MockProject.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<GioiTinhType>();
+            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
             ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
             
             //tạo nhân viên       
@@ -38,6 +38,8 @@ namespace MockProject.Controllers
         public ActionResult Edit(int id)
         {
             var model = UserSevice.GetById(id);
+            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
+            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
             //chỉnh sửa nhân viên        
             return View("CreateEdit", model);
         }
@@ -45,7 +47,7 @@ namespace MockProject.Controllers
         //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
         public ActionResult CreateEdit(NHANVIEN model)
         {
-            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<GioiTinhType>();
+            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
             if (model.ID == 0)
             {
                

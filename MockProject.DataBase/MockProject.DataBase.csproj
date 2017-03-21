@@ -85,7 +85,9 @@
     <Compile Include="CTHD.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="GioiTinhType.cs" />
+    <Compile Include="CTPN.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
     <Compile Include="GST_MockProject.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,6 +106,9 @@
     <Compile Include="HOADON.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoaiGioiTinh.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
     <Compile Include="LOAISANPHAM.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
@@ -120,7 +125,21 @@
     <Compile Include="SANPHAM.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="TrangThaiNhanVien.cs" />
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrangThaiLoaiSanPham.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrangThaiNhanVien.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -137,6 +156,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="GST_MockProject.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GST_MockProject.edmx</DependentUpon>
@@ -147,9 +169,6 @@
       <DependentUpon>GST_MockProject.edmx</DependentUpon>
       <LastGenOutput>GST_MockProject.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

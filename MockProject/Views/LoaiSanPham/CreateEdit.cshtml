@@ -13,7 +13,7 @@
                 @Html.ActionLink("Quản lý loại sản phẩm", "Index")
             </li>
             <li class="active">
-                <strong>@(Model == null || Model.Id == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
+                <strong>@(Model == null || Model.ID == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
             </li>
         </ol>
     </div>
@@ -25,14 +25,21 @@
             <div class="ibox-content">
                 @using (Ajax.BeginForm("CreateEdit", "LoaiSanPham", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
                 {
-                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.ID)
                     <div class="form-horizontal">
                         <div class="col-lg-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Tên loại<span style="color: Red">(*)</span></label>
+                                    <label class="col-md-4 control-label">Tên loại <span style="color: Red">(*)</span></label>
                                     <div class="col-md-8">
-                                        @Html.TextBoxFor(x => x.TenDanhmuc, new { @class = "form-control", @required = "" })
+                                        @Html.TextBoxFor(x => x.TenLoaiSanPham, new { @class = "form-control", @required = "" })
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Trạng thái </label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(x => x.TrangThai, null, new { @class = "form-control"})
 
                                     </div>
                                 </div>

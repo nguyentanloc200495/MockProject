@@ -14,7 +14,7 @@ namespace MockProject.Controllers
         // GET: SanPham
         public ActionResult Index(SanphamSearchModel searchModel)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenDanhmuc");
+            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             return View(searchModel);
         }
         public ActionResult List(SanphamSearchModel searchModel)
@@ -26,14 +26,14 @@ namespace MockProject.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenDanhmuc");
+            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             //TODO        
             return View("CreateEdit");
         }
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenDanhmuc");
+            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             var model = SanphamService.GetById(id);
             //TODO        
             return View("CreateEdit", model);
@@ -41,7 +41,7 @@ namespace MockProject.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenDanhmuc");
+            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             var model = SanphamService.GetById(id);
             //TODO        
             return PartialView("_Delete", model);
@@ -49,7 +49,7 @@ namespace MockProject.Controllers
         [HttpPost]
         public ActionResult Delete2(SANPHAM model)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenDanhmuc");
+            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             var result = SanphamService.Delete(model);
             return
                 Json(

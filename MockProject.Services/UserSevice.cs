@@ -2,7 +2,7 @@
 using System.Linq;
 using MockProject;
 using MockProject.DataBase;
-
+using CommonData;
 
 namespace MockProject.Services
 {
@@ -51,7 +51,7 @@ namespace MockProject.Services
             //Tạo 1 nhân viên mới
             using (var context = new GST_MockProjectEntities())
             {
-               
+                c.MatKhau = Encryptor.MD5Hash(c.MatKhau);
                 context.NHANVIENs.Add(c);
                 context.SaveChanges();
                

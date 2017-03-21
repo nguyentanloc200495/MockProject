@@ -59,34 +59,52 @@ namespace MockProject.Resources {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Chưa xác định.
         /// </summary>
-        public static string GioiTinhType_ChuaXacDinh {
+        public static string LoaiGioiTinh_ChuaXacDinh {
             get {
-                return ResourceManager.GetString("GioiTinhType.ChuaXacDinh", resourceCulture);
+                return ResourceManager.GetString("LoaiGioiTinh.ChuaXacDinh", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Nam.
         /// </summary>
-        public static string GioiTinhType_Nam {
+        public static string LoaiGioiTinh_Nam {
             get {
-                return ResourceManager.GetString("GioiTinhType.Nam", resourceCulture);
+                return ResourceManager.GetString("LoaiGioiTinh.Nam", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Nữ.
         /// </summary>
-        public static string GioiTinhType_Nu {
+        public static string LoaiGioiTinh_Nu {
             get {
-                return ResourceManager.GetString("GioiTinhType.Nu", resourceCulture);
+                return ResourceManager.GetString("LoaiGioiTinh.Nu", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đang dùng.
+        /// </summary>
+        public static string TrangThaiLoaiSanPham_Dung {
+            get {
+                return ResourceManager.GetString("TrangThaiLoaiSanPham.Dung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không dùng.
+        /// </summary>
+        public static string TrangThaiLoaiSanPham_KhongDung {
+            get {
+                return ResourceManager.GetString("TrangThaiLoaiSanPham.KhongDung", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Công tác.
         /// </summary>
@@ -95,7 +113,7 @@ namespace MockProject.Resources {
                 return ResourceManager.GetString("TrangThaiNhanVien.CongTac", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Đang làm việc.
         /// </summary>
@@ -104,7 +122,7 @@ namespace MockProject.Resources {
                 return ResourceManager.GetString("TrangThaiNhanVien.DangLamViec", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Nghĩ phép.
         /// </summary>
@@ -113,7 +131,7 @@ namespace MockProject.Resources {
                 return ResourceManager.GetString("TrangThaiNhanVien.NghiPhep", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Nghĩ việc.
         /// </summary>

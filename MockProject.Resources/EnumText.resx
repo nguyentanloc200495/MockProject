@@ -117,14 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GioiTinhType.ChuaXacDinh" xml:space="preserve">
+  <data name="LoaiGioiTinh.ChuaXacDinh" xml:space="preserve">
     <value>Chưa xác định</value>
   </data>
-  <data name="GioiTinhType.Nam" xml:space="preserve">
+  <data name="LoaiGioiTinh.Nam" xml:space="preserve">
     <value>Nam</value>
   </data>
-  <data name="GioiTinhType.Nu" xml:space="preserve">
+  <data name="LoaiGioiTinh.Nu" xml:space="preserve">
     <value>Nữ</value>
+  </data>
+  <data name="TrangThaiLoaiSanPham.Dung" xml:space="preserve">
+    <value>Đang dùng</value>
+  </data>
+  <data name="TrangThaiLoaiSanPham.KhongDung" xml:space="preserve">
+    <value>Không dùng</value>
   </data>
   <data name="TrangThaiNhanVien.CongTac" xml:space="preserve">
     <value>Công tác</value>

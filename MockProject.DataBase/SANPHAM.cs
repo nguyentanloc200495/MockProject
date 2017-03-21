@@ -18,6 +18,7 @@ namespace MockProject.DataBase
         public SANPHAM()
         {
             this.CTHDs = new HashSet<CTHD>();
+            this.CTPNs = new HashSet<CTPN>();
         }
     
         public int ID { get; set; }
@@ -27,11 +28,13 @@ namespace MockProject.DataBase
         public string MoTa { get; set; }
         public Nullable<decimal> GiaBan { get; set; }
         public Nullable<decimal> SoLuongTon { get; set; }
-        public Nullable<int> DonViTinh { get; set; }
+        public string DonViTinh { get; set; }
         public Nullable<bool> TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHDs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTPN> CTPNs { get; set; }
         public virtual LOAISANPHAM LOAISANPHAM { get; set; }
     }
 }

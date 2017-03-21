@@ -114,6 +114,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonData\CommonData.csproj">
+      <Project>{BC387234-7799-47C4-94FE-FFE949EE36BE}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MockProject.DataBase\MockProject.DataBase.csproj">
       <Project>{20CDE88F-8E81-4E04-9BA5-776DBDF48104}</Project>
       <Name>MockProject.DataBase</Name>

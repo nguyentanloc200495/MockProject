@@ -41,7 +41,7 @@ namespace MockProject.Services
         {
             using (var context = new GST_MockProjectEntities())
             {
-
+              
                 context.LOAISANPHAMs.Add(c);
                 context.SaveChanges();
                 //TODO
@@ -56,6 +56,7 @@ namespace MockProject.Services
                 var Loaisanpham = context.LOAISANPHAMs.First(x => x.ID == c.ID);
 
                 Loaisanpham.TenLoaiSanPham = c.TenLoaiSanPham;
+                Loaisanpham.TrangThai = c.TrangThai;
                 
                 context.SaveChanges();
                 //TODO

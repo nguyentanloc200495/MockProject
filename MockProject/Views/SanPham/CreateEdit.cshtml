@@ -13,7 +13,7 @@
                 @Html.ActionLink("Quản lý sản phẩm", "Index")
             </li>
             <li class="active">
-                <strong>@(Model == null || Model.Id == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
+                <strong>@(Model == null || Model.ID == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
             </li>
         </ol>
     </div>
@@ -25,14 +25,14 @@
                 <div class="ibox-content">
                     @using (Ajax.BeginForm("CreateEdit", "SanPham", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
                     {
-                        @Html.HiddenFor(x => x.Id)
+                        @Html.HiddenFor(x => x.ID)
                         <div class="form-horizontal">
                             <div class="col-lg-12">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Tên sản phẩm <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.TenSanpham, new { @class = "form-control", @required = "" })
+                                            @Html.TextBoxFor(x => x.TenSP, new { @class = "form-control", @required = "" })
 
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Loại sản phẩm <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.DropDownListFor(x => x.LoaiSanphamID, null, "--- Tất cã ---", new { @class = "form-control" })
+                                            @Html.DropDownListFor(x => x.LoaiSanPhamID, null, "--- Tất cã ---", new { @class = "form-control" })
 
                                         </div>
                                     </div>
@@ -50,7 +50,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Giá bán <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.Giaban, new { @class = "form-control", @required = "" })
+                                            @Html.TextBoxFor(x => x.GiaBan, new { @class = "form-control", @required = "" })
 
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Số lượng tồn<span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.Soluongton, new { @class = "form-control", @required = "" })
+                                            @Html.TextBoxFor(x => x.SoLuongTon, new { @class = "form-control", @required = "" })
 
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Đơn vị tính</label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.Donvitinh, new { @class = "form-control" })
+                                            @Html.TextBoxFor(x => x.DonViTinh, new { @class = "form-control" })
 
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Hình ảnh</label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.Image, new { @class = "form-control" })
+                                            @Html.TextBoxFor(x => x.HinhSP, new { @class = "form-control" })
 
                                         </div>
                                     </div>

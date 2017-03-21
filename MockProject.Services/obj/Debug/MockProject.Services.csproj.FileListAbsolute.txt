@@ -29,3 +29,7 @@ F:\Mock Project\MockProject\MockProject.Services\bin\Debug\System.Web.WebPages.D
 F:\Mock Project\MockProject\MockProject.Services\bin\Debug\System.Web.WebPages.Razor.xml
 F:\Mock Project\MockProject\MockProject.Services\obj\Debug\MockProject.Services.dll
 F:\Mock Project\MockProject\MockProject.Services\obj\Debug\MockProject.Services.pdb
+F:\Mock Project\MockProject\MockProject.Services\bin\Debug\CommonData.dll
+F:\Mock Project\MockProject\MockProject.Services\bin\Debug\MockProject.Resources.dll
+F:\Mock Project\MockProject\MockProject.Services\bin\Debug\CommonData.pdb
+F:\Mock Project\MockProject\MockProject.Services\bin\Debug\MockProject.Resources.pdb

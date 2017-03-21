@@ -12,13 +12,14 @@ namespace MockProject.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class CTPN
     {
-        public int Id { get; set; }
-        public string Fullname { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Image { get; set; }
+        public int PhieuNhapID { get; set; }
+        public int SanPhamID { get; set; }
+        public Nullable<decimal> GiaNhap { get; set; }
+        public Nullable<decimal> SoLuong { get; set; }
+    
+        public virtual PHIEUNHAP PHIEUNHAP { get; set; }
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }
