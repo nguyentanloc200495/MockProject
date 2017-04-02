@@ -1,0 +1,80 @@
+﻿@using System.Linq
+@using MockProject.DataBase
+@using MockProject.Common
+@using Newtonsoft.Json
+@model List<Permission>
+@{
+    var allPermissions = EnumUtil.GetListPermission().ToList();
+    var dic = new Dictionary<Permission, EnumUtil.NodeStatus>();
+    foreach (var permission in allPermissions)
+    {
+        dic.Add(permission, new EnumUtil.NodeStatus()
+        {
+            Selected = Model.Any(x => x == permission),
+            Showed = false
+        });
+    }
+}
+<link href="~/Content/plugin/JsTree/style.css" rel="stylesheet" />
+<div id="jstree2"></div>
+
+<script src="~/Scripts/jsTree3/jstree.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#jstree2').jstree({
+            'plugins': ["checkbox"],
+            'core': {
+                'data': [
+                    {
+                        "text": "Nhân viên",
+                        "icon": "fa fa-user",
+                        "state": { "opened": false },
+                        "children": [
+                            {
+                                "text": "Quản lý nhân viên",
+                                "children": [
+                                    @EnumUtil.ToTreeNode(Permission.NhanVien_Xem, dic),
+                                    @EnumUtil.ToTreeNode(Permission.NhanVien_Sua, dic),
+                                   
+                                ]
+                            },
+                            {
+                                "text": "Quản lý nhóm user",
+                                "children": [
+                                    @*@EnumUtil.ToTreeList(dic,
+                                        Permission.User_View_Group,
+                                        Permission.User_Create_Group,
+                                        Permission.User_Edit_Group,
+                                        Permission.User_Add_Permission_Group
+                                    )*@
+                                ]
+                            },
+                           
+                        {
+                            "text": "Quản lý căn hộ",
+                            "children": [
+                                 @*@EnumUtil.ToTreeNode(Permission.Resident_ManagerApartment, dic)*@
+                            ]
+                        }
+                        ]
+                    }
+                   
+
+                ]
+            }
+        });
+    });
+
+    function GetSelectedPermisison() {
+        var checked = [];
+        var selelected = $("#jstree2").jstree("get_checked", true);
+        $.each(selelected, function () {
+            if (this.original.id) {
+                checked.push(this.original.id);
+            }
+        });
+        return checked;
+    }
+
+
+</script>

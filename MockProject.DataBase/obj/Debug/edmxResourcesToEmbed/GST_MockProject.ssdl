@@ -10,7 +10,26 @@
     <Property Name="GiaBan" Type="decimal" Precision="18" Scale="0" />
     <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
-  <EntityType Name="CTPN">
+  <EntityType Name="CTKHO">
+    <Key>
+      <PropertyRef Name="KhoID" />
+      <PropertyRef Name="SanPhamID" />
+    </Key>
+    <Property Name="KhoID" Type="int" Nullable="false" />
+    <Property Name="SanPhamID" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="CTPHIEUNHAPXUATKHO">
+    <Key>
+      <PropertyRef Name="NhapXuatKhoID" />
+      <PropertyRef Name="SanPhamID" />
+    </Key>
+    <Property Name="NhapXuatKhoID" Type="int" Nullable="false" />
+    <Property Name="SanPhamID" Type="int" Nullable="false" />
+    <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DonGia" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="CTPHIEUTRAHANG">
     <Key>
       <PropertyRef Name="PhieuNhapID" />
       <PropertyRef Name="SanPhamID" />
@@ -28,6 +47,15 @@
     <Property Name="NgayLap" Type="date" />
     <Property Name="NhanVienID" Type="int" />
     <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="KHO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenKho" Type="nvarchar" MaxLength="50" />
+    <Property Name="ViTriKho" Type="nvarchar" MaxLength="50" />
+    <Property Name="TinhTrang" Type="int" />
   </EntityType>
   <EntityType Name="LOAISANPHAM">
     <Key>
@@ -52,6 +80,7 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
     <Property Name="TrangThai" Type="int" />
+    <Property Name="HinhAnh" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="NHANVIEN_QUYEN">
     <Key>
@@ -61,7 +90,17 @@
     <Property Name="NhanVienID" Type="int" Nullable="false" />
     <Property Name="QuyenID" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="PHIEUNHAP">
+  <EntityType Name="NHAPXUATKHO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayLapPhieu" Type="date" />
+    <Property Name="NhanVienID" Type="int" />
+    <Property Name="KhoID" Type="int" />
+    <Property Name="LoaiPhieu" Type="int" />
+  </EntityType>
+  <EntityType Name="PHIEUTRAHANG">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -119,25 +158,25 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__CTPN__PhieuNhapI__24927208">
-    <End Role="PHIEUNHAP" Type="Self.PHIEUNHAP" Multiplicity="1" />
-    <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
+    <End Role="PHIEUTRAHANG" Type="Self.PHIEUTRAHANG" Multiplicity="1" />
+    <End Role="CTPHIEUTRAHANG" Type="Self.CTPHIEUTRAHANG" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PHIEUNHAP">
+      <Principal Role="PHIEUTRAHANG">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTPN">
+      <Dependent Role="CTPHIEUTRAHANG">
         <PropertyRef Name="PhieuNhapID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__CTPN__SanPhamID__25869641">
     <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
-    <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
+    <End Role="CTPHIEUTRAHANG" Type="Self.CTPHIEUTRAHANG" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SANPHAM">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTPN">
+      <Dependent Role="CTPHIEUTRAHANG">
         <PropertyRef Name="SanPhamID" />
       </Dependent>
     </ReferentialConstraint>
@@ -168,12 +207,12 @@
   </Association>
   <Association Name="FK__PHIEUNHAP__NhanV__21B6055D">
     <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-    <End Role="PHIEUNHAP" Type="Self.PHIEUNHAP" Multiplicity="*" />
+    <End Role="PHIEUTRAHANG" Type="Self.PHIEUTRAHANG" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NHANVIEN">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="PHIEUNHAP">
+      <Dependent Role="PHIEUTRAHANG">
         <PropertyRef Name="NhanVienID" />
       </Dependent>
     </ReferentialConstraint>
@@ -187,6 +226,78 @@
       </Principal>
       <Dependent Role="SANPHAM">
         <PropertyRef Name="LoaiSanPhamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTKHO_KHO">
+    <End Role="KHO" Type="Self.KHO" Multiplicity="1" />
+    <End Role="CTKHO" Type="Self.CTKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTKHO">
+        <PropertyRef Name="KhoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTKHO_SANPHAM">
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+    <End Role="CTKHO" Type="Self.CTKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTKHO">
+        <PropertyRef Name="SanPhamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
+    <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="1" />
+    <End Role="CTPHIEUNHAPXUATKHO" Type="Self.CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHAPXUATKHO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPHIEUNHAPXUATKHO">
+        <PropertyRef Name="NhapXuatKhoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPHIEUNHAPKHO_SANPHAM">
+    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+    <End Role="CTPHIEUNHAPXUATKHO" Type="Self.CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SANPHAM">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTPHIEUNHAPXUATKHO">
+        <PropertyRef Name="SanPhamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PHIEUNHAPKHO_KHO">
+    <End Role="KHO" Type="Self.KHO" Multiplicity="0..1" />
+    <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KHO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NHAPXUATKHO">
+        <PropertyRef Name="KhoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PHIEUNHAPKHO_NHANVIEN">
+    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+    <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NHANVIEN">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NHAPXUATKHO">
+        <PropertyRef Name="NhanVienID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -223,12 +334,16 @@
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="GST_MockProjectModelStoreContainer">
     <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CTPN" EntityType="Self.CTPN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTKHO" EntityType="Self.CTKHO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPHIEUNHAPXUATKHO" EntityType="Self.CTPHIEUNHAPXUATKHO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTPHIEUTRAHANG" EntityType="Self.CTPHIEUTRAHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KHO" EntityType="Self.KHO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NHANVIEN_QUYEN" EntityType="Self.NHANVIEN_QUYEN" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PHIEUNHAP" EntityType="Self.PHIEUNHAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NHAPXUATKHO" EntityType="Self.NHAPXUATKHO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHIEUTRAHANG" EntityType="Self.PHIEUTRAHANG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__CTHD__HoaDonID__1DE57479" Association="Self.FK__CTHD__HoaDonID__1DE57479">
@@ -240,12 +355,12 @@
       <End Role="CTHD" EntitySet="CTHD" />
     </AssociationSet>
     <AssociationSet Name="FK__CTPN__PhieuNhapI__24927208" Association="Self.FK__CTPN__PhieuNhapI__24927208">
-      <End Role="PHIEUNHAP" EntitySet="PHIEUNHAP" />
-      <End Role="CTPN" EntitySet="CTPN" />
+      <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANG" />
+      <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANG" />
     </AssociationSet>
     <AssociationSet Name="FK__CTPN__SanPhamID__25869641" Association="Self.FK__CTPN__SanPhamID__25869641">
       <End Role="SANPHAM" EntitySet="SANPHAM" />
-      <End Role="CTPN" EntitySet="CTPN" />
+      <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANG" />
     </AssociationSet>
     <AssociationSet Name="FK__HOADON__NhanVien__1B0907CE" Association="Self.FK__HOADON__NhanVien__1B0907CE">
       <End Role="NHANVIEN" EntitySet="NHANVIEN" />
@@ -257,11 +372,35 @@
     </AssociationSet>
     <AssociationSet Name="FK__PHIEUNHAP__NhanV__21B6055D" Association="Self.FK__PHIEUNHAP__NhanV__21B6055D">
       <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-      <End Role="PHIEUNHAP" EntitySet="PHIEUNHAP" />
+      <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANG" />
     </AssociationSet>
     <AssociationSet Name="FK__SANPHAM__LoaiSan__182C9B23" Association="Self.FK__SANPHAM__LoaiSan__182C9B23">
       <End Role="LOAISANPHAM" EntitySet="LOAISANPHAM" />
       <End Role="SANPHAM" EntitySet="SANPHAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTKHO_KHO" Association="Self.FK_CTKHO_KHO">
+      <End Role="KHO" EntitySet="KHO" />
+      <End Role="CTKHO" EntitySet="CTKHO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTKHO_SANPHAM" Association="Self.FK_CTKHO_SANPHAM">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="CTKHO" EntitySet="CTKHO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" Association="Self.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
+      <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
+      <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPHIEUNHAPKHO_SANPHAM" Association="Self.FK_CTPHIEUNHAPKHO_SANPHAM">
+      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHIEUNHAPKHO_KHO" Association="Self.FK_PHIEUNHAPKHO_KHO">
+      <End Role="KHO" EntitySet="KHO" />
+      <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHIEUNHAPKHO_NHANVIEN" Association="Self.FK_PHIEUNHAPKHO_NHANVIEN">
+      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+      <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

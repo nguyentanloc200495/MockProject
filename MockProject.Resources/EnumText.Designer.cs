@@ -88,6 +88,42 @@ namespace MockProject.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phiếu nhập kho.
+        /// </summary>
+        public static string LoaiPhieuNhapXuatKho1_PhieuNhap {
+            get {
+                return ResourceManager.GetString("LoaiPhieuNhapXuatKho1.PhieuNhap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phiếu xuất kho.
+        /// </summary>
+        public static string LoaiPhieuNhapXuatKho1_PhieuXuat {
+            get {
+                return ResourceManager.GetString("LoaiPhieuNhapXuatKho1.PhieuXuat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không kích hoạt.
+        /// </summary>
+        public static string TinhTrangKho_KhongKichHoat {
+            get {
+                return ResourceManager.GetString("TinhTrangKho.KhongKichHoat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kích hoạt.
+        /// </summary>
+        public static string TinhTrangKho_KichHoat {
+            get {
+                return ResourceManager.GetString("TinhTrangKho.KichHoat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Đang dùng.
         /// </summary>
         public static string TrangThaiLoaiSanPham_Dung {

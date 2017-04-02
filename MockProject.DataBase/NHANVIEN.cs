@@ -17,9 +17,10 @@ namespace MockProject.DataBase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHANVIEN()
         {
-            this.HOADONs = new HashSet<HOADON>();
             this.NHANVIEN_QUYEN = new HashSet<NHANVIEN_QUYEN>();
-            this.PHIEUNHAPs = new HashSet<PHIEUNHAP>();
+            this.PHIEUTRAHANGs = new HashSet<PHIEUTRAHANG>();
+            this.HOADONs = new HashSet<HOADON>();
+            this.NHAPXUATKHOes = new HashSet<NHAPXUATKHO>();
         }
     
         public int ID { get; set; }
@@ -33,12 +34,15 @@ namespace MockProject.DataBase
         public string Email { get; set; }
         public string ChucVu { get; set; }
         public Nullable<TrangThaiNhanVien> TrangThai { get; set; }
+        public string HinhAnh { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOADON> HOADONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANVIEN_QUYEN> NHANVIEN_QUYEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUNHAP> PHIEUNHAPs { get; set; }
+        public virtual ICollection<PHIEUTRAHANG> PHIEUTRAHANGs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HOADON> HOADONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NHAPXUATKHO> NHAPXUATKHOes { get; set; }
     }
 }

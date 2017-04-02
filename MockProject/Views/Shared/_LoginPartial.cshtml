@@ -1,4 +1,4 @@
-﻿@using CTGroup.BO.Services
+﻿@using MockProject.Services
 @using Microsoft.AspNet.Identity
 
 @if (Request.IsAuthenticated)
@@ -7,16 +7,15 @@
     <ul class="nav navbar-top-links navbar-right">
        
         <li>
-            @Html.ActionLink(UserService.GetUserInfo().Fullname + "!", "Profile", "Account", routeValues: new {id = UserService.GetUserInfo().Id}, htmlAttributes: new {title = "Manage"})
+            @Html.ActionLink(UserService.GetUserInfo().TenNV + "!", "Profile", "Account", routeValues: new {id = UserService.GetUserInfo().ID}, htmlAttributes: new {title = "Manage"})
         </li>
-        <li class="dropdown" id="NotifyTop">
-            @Html.Action("Notify", "Notify")
-        </li>
+
         <li>
             <a href="javascript:document.getElementById('logoutForm').submit()" onclick="disconnectSignalr()"><i class="fa fa-sign-out"></i>Thoát</a>
         </li>
         <li>
-            <a href="@Url.Action("Profile", "Account", routeValues: new {id = UserService.GetUserInfo().Id})"><img class="img-circle" src="@UserLogin.Avatar()" alt="@User.Identity.GetUserName()" style="width: 36px; height: 36px;"/></a>
+         
+            <a href="@Url.Action("Profile", "Account", routeValues: new {id = UserService.GetUserInfo().ID})"><img class="img-circle" src="@UserLogin.Avatar()" alt="@User.Identity.GetUserName()" style="width: 36px; height: 36px;"/></a>
         </li>
     </ul>
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style="display:none" }))

@@ -15,7 +15,26 @@
           <Property Name="GiaBan" Type="decimal" Precision="18" Scale="0" />
           <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="CTPN">
+        <EntityType Name="CTKHO">
+          <Key>
+            <PropertyRef Name="KhoID" />
+            <PropertyRef Name="SanPhamID" />
+          </Key>
+          <Property Name="KhoID" Type="int" Nullable="false" />
+          <Property Name="SanPhamID" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="CTPHIEUNHAPXUATKHO">
+          <Key>
+            <PropertyRef Name="NhapXuatKhoID" />
+            <PropertyRef Name="SanPhamID" />
+          </Key>
+          <Property Name="NhapXuatKhoID" Type="int" Nullable="false" />
+          <Property Name="SanPhamID" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DonGia" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="CTPHIEUTRAHANG">
           <Key>
             <PropertyRef Name="PhieuNhapID" />
             <PropertyRef Name="SanPhamID" />
@@ -33,6 +52,15 @@
           <Property Name="NgayLap" Type="date" />
           <Property Name="NhanVienID" Type="int" />
           <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="KHO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenKho" Type="nvarchar" MaxLength="50" />
+          <Property Name="ViTriKho" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="int" />
         </EntityType>
         <EntityType Name="LOAISANPHAM">
           <Key>
@@ -57,6 +85,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
           <Property Name="TrangThai" Type="int" />
+          <Property Name="HinhAnh" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="NHANVIEN_QUYEN">
           <Key>
@@ -66,7 +95,17 @@
           <Property Name="NhanVienID" Type="int" Nullable="false" />
           <Property Name="QuyenID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="PHIEUNHAP">
+        <EntityType Name="NHAPXUATKHO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayLapPhieu" Type="date" />
+          <Property Name="NhanVienID" Type="int" />
+          <Property Name="KhoID" Type="int" />
+          <Property Name="LoaiPhieu" Type="int" />
+        </EntityType>
+        <EntityType Name="PHIEUTRAHANG">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -124,25 +163,25 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CTPN__PhieuNhapI__24927208">
-          <End Role="PHIEUNHAP" Type="Self.PHIEUNHAP" Multiplicity="1" />
-          <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
+          <End Role="PHIEUTRAHANG" Type="Self.PHIEUTRAHANG" Multiplicity="1" />
+          <End Role="CTPHIEUTRAHANG" Type="Self.CTPHIEUTRAHANG" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PHIEUNHAP">
+            <Principal Role="PHIEUTRAHANG">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="CTPN">
+            <Dependent Role="CTPHIEUTRAHANG">
               <PropertyRef Name="PhieuNhapID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__CTPN__SanPhamID__25869641">
           <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
-          <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
+          <End Role="CTPHIEUTRAHANG" Type="Self.CTPHIEUTRAHANG" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SANPHAM">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="CTPN">
+            <Dependent Role="CTPHIEUTRAHANG">
               <PropertyRef Name="SanPhamID" />
             </Dependent>
           </ReferentialConstraint>
@@ -173,12 +212,12 @@
         </Association>
         <Association Name="FK__PHIEUNHAP__NhanV__21B6055D">
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-          <End Role="PHIEUNHAP" Type="Self.PHIEUNHAP" Multiplicity="*" />
+          <End Role="PHIEUTRAHANG" Type="Self.PHIEUTRAHANG" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="NHANVIEN">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="PHIEUNHAP">
+            <Dependent Role="PHIEUTRAHANG">
               <PropertyRef Name="NhanVienID" />
             </Dependent>
           </ReferentialConstraint>
@@ -192,6 +231,78 @@
             </Principal>
             <Dependent Role="SANPHAM">
               <PropertyRef Name="LoaiSanPhamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTKHO_KHO">
+          <End Role="KHO" Type="Self.KHO" Multiplicity="1" />
+          <End Role="CTKHO" Type="Self.CTKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTKHO">
+              <PropertyRef Name="KhoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTKHO_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="CTKHO" Type="Self.CTKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTKHO">
+              <PropertyRef Name="SanPhamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
+          <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="1" />
+          <End Role="CTPHIEUNHAPXUATKHO" Type="Self.CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAPXUATKHO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTPHIEUNHAPXUATKHO">
+              <PropertyRef Name="NhapXuatKhoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTPHIEUNHAPKHO_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="CTPHIEUNHAPXUATKHO" Type="Self.CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTPHIEUNHAPXUATKHO">
+              <PropertyRef Name="SanPhamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEUNHAPKHO_KHO">
+          <End Role="KHO" Type="Self.KHO" Multiplicity="0..1" />
+          <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NHAPXUATKHO">
+              <PropertyRef Name="KhoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEUNHAPKHO_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NHAPXUATKHO">
+              <PropertyRef Name="NhanVienID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -228,12 +339,16 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GST_MockProjectModelStoreContainer">
           <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CTPN" EntityType="Self.CTPN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTKHO" EntityType="Self.CTKHO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTPHIEUNHAPXUATKHO" EntityType="Self.CTPHIEUNHAPXUATKHO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTPHIEUTRAHANG" EntityType="Self.CTPHIEUTRAHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHO" EntityType="Self.KHO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN_QUYEN" EntityType="Self.NHANVIEN_QUYEN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PHIEUNHAP" EntityType="Self.PHIEUNHAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHAPXUATKHO" EntityType="Self.NHAPXUATKHO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHIEUTRAHANG" EntityType="Self.PHIEUTRAHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CTHD__HoaDonID__1DE57479" Association="Self.FK__CTHD__HoaDonID__1DE57479">
@@ -245,12 +360,12 @@
             <End Role="CTHD" EntitySet="CTHD" />
           </AssociationSet>
           <AssociationSet Name="FK__CTPN__PhieuNhapI__24927208" Association="Self.FK__CTPN__PhieuNhapI__24927208">
-            <End Role="PHIEUNHAP" EntitySet="PHIEUNHAP" />
-            <End Role="CTPN" EntitySet="CTPN" />
+            <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANG" />
+            <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANG" />
           </AssociationSet>
           <AssociationSet Name="FK__CTPN__SanPhamID__25869641" Association="Self.FK__CTPN__SanPhamID__25869641">
             <End Role="SANPHAM" EntitySet="SANPHAM" />
-            <End Role="CTPN" EntitySet="CTPN" />
+            <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANG" />
           </AssociationSet>
           <AssociationSet Name="FK__HOADON__NhanVien__1B0907CE" Association="Self.FK__HOADON__NhanVien__1B0907CE">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
@@ -262,11 +377,35 @@
           </AssociationSet>
           <AssociationSet Name="FK__PHIEUNHAP__NhanV__21B6055D" Association="Self.FK__PHIEUNHAP__NhanV__21B6055D">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-            <End Role="PHIEUNHAP" EntitySet="PHIEUNHAP" />
+            <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANG" />
           </AssociationSet>
           <AssociationSet Name="FK__SANPHAM__LoaiSan__182C9B23" Association="Self.FK__SANPHAM__LoaiSan__182C9B23">
             <End Role="LOAISANPHAM" EntitySet="LOAISANPHAM" />
             <End Role="SANPHAM" EntitySet="SANPHAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTKHO_KHO" Association="Self.FK_CTKHO_KHO">
+            <End Role="KHO" EntitySet="KHO" />
+            <End Role="CTKHO" EntitySet="CTKHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTKHO_SANPHAM" Association="Self.FK_CTKHO_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="CTKHO" EntitySet="CTKHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" Association="Self.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
+            <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
+            <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTPHIEUNHAPKHO_SANPHAM" Association="Self.FK_CTPHIEUNHAPKHO_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEUNHAPKHO_KHO" Association="Self.FK_PHIEUNHAPKHO_KHO">
+            <End Role="KHO" EntitySet="KHO" />
+            <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEUNHAPKHO_NHANVIEN" Association="Self.FK_PHIEUNHAPKHO_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -282,31 +421,8 @@
           <Property Name="SanPhamID" Type="Int32" Nullable="false" />
           <Property Name="GiaBan" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SoLuong" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="HOADON" Relationship="Self.FK__CTHD__HoaDonID__1DE57479" FromRole="CTHD" ToRole="HOADON" />
           <NavigationProperty Name="SANPHAM" Relationship="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" FromRole="CTHD" ToRole="SANPHAM" />
-        </EntityType>
-        <EntityType Name="CTPN">
-          <Key>
-            <PropertyRef Name="PhieuNhapID" />
-            <PropertyRef Name="SanPhamID" />
-          </Key>
-          <Property Name="PhieuNhapID" Type="Int32" Nullable="false" />
-          <Property Name="SanPhamID" Type="Int32" Nullable="false" />
-          <Property Name="GiaNhap" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SoLuong" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="PHIEUNHAP" Relationship="Self.FK__CTPN__PhieuNhapI__24927208" FromRole="CTPN" ToRole="PHIEUNHAP" />
-          <NavigationProperty Name="SANPHAM" Relationship="GST_MockProjectModel.FK__CTPN__SanPhamID__25869641" FromRole="CTPN" ToRole="SANPHAM" />
-        </EntityType>
-        <EntityType Name="HOADON">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NgayLap" Type="DateTime" Precision="0" />
-          <Property Name="NhanVienID" Type="Int32" />
-          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="CTHDs" Relationship="Self.FK__CTHD__HoaDonID__1DE57479" FromRole="HOADON" ToRole="CTHD" />
-          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__HOADON__NhanVien__1B0907CE" FromRole="HOADON" ToRole="NHANVIEN" />
+          <NavigationProperty Name="HOADON" Relationship="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" FromRole="CTHD" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="LOAISANPHAM">
           <Key>
@@ -332,9 +448,11 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="GST_MockProjectModel.TrangThaiNhanVien" />
-          <NavigationProperty Name="HOADONs" Relationship="Self.FK__HOADON__NhanVien__1B0907CE" FromRole="NHANVIEN" ToRole="HOADON" />
           <NavigationProperty Name="NHANVIEN_QUYEN" Relationship="Self.FK__NHANVIEN___NhanV__1367E606" FromRole="NHANVIEN" ToRole="NHANVIEN_QUYEN" />
-          <NavigationProperty Name="PHIEUNHAPs" Relationship="Self.FK__PHIEUNHAP__NhanV__21B6055D" FromRole="NHANVIEN" ToRole="PHIEUNHAP" />
+          <Property Name="HinhAnh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PHIEUTRAHANGs" Relationship="GST_MockProjectModel.FK__PHIEUNHAP__NhanV__21B6055D1" FromRole="NHANVIEN" ToRole="PHIEUTRAHANG" />
+          <NavigationProperty Name="HOADONs" Relationship="GST_MockProjectModel.FK__HOADON__NhanVien__1B0907CE" FromRole="NHANVIEN" ToRole="HOADON" />
+          <NavigationProperty Name="NHAPXUATKHOes" Relationship="GST_MockProjectModel.FK_PHIEUNHAPKHO_NHANVIEN" FromRole="NHANVIEN" ToRole="NHAPXUATKHO" />
         </EntityType>
         <EntityType Name="NHANVIEN_QUYEN">
           <Key>
@@ -345,53 +463,6 @@
           <Property Name="QuyenID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__NHANVIEN___NhanV__1367E606" FromRole="NHANVIEN_QUYEN" ToRole="NHANVIEN" />
         </EntityType>
-        <EntityType Name="PHIEUNHAP">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NgayLap" Type="DateTime" Precision="0" />
-          <Property Name="NhanVienID" Type="Int32" />
-          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="CTPNs" Relationship="Self.FK__CTPN__PhieuNhapI__24927208" FromRole="PHIEUNHAP" ToRole="CTPN" />
-          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK__PHIEUNHAP__NhanV__21B6055D" FromRole="PHIEUNHAP" ToRole="NHANVIEN" />
-        </EntityType>
-        <Association Name="FK__CTHD__HoaDonID__1DE57479">
-          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
-          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HOADON">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CTHD">
-              <PropertyRef Name="HoaDonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CTPN__PhieuNhapI__24927208">
-          <End Role="PHIEUNHAP" Type="Self.PHIEUNHAP" Multiplicity="1" />
-          <End Role="CTPN" Type="Self.CTPN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PHIEUNHAP">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CTPN">
-              <PropertyRef Name="PhieuNhapID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__HOADON__NhanVien__1B0907CE">
-          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANVIEN">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="HOADON">
-              <PropertyRef Name="NhanVienID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__NHANVIEN___NhanV__1367E606">
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
           <End Role="NHANVIEN_QUYEN" Type="Self.NHANVIEN_QUYEN" Multiplicity="*" />
@@ -404,45 +475,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUNHAP__NhanV__21B6055D">
-          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-          <End Role="PHIEUNHAP" Type="Self.PHIEUNHAP" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANVIEN">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PHIEUNHAP">
-              <PropertyRef Name="NhanVienID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GST_MockProjectEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CTHDs" EntityType="Self.CTHD" />
-          <EntitySet Name="CTPNs" EntityType="Self.CTPN" />
-          <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
           <EntitySet Name="LOAISANPHAMs" EntityType="Self.LOAISANPHAM" />
           <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
           <EntitySet Name="NHANVIEN_QUYEN" EntityType="Self.NHANVIEN_QUYEN" />
-          <EntitySet Name="PHIEUNHAPs" EntityType="Self.PHIEUNHAP" />
-          <AssociationSet Name="FK__CTHD__HoaDonID__1DE57479" Association="Self.FK__CTHD__HoaDonID__1DE57479">
-            <End Role="HOADON" EntitySet="HOADONs" />
-            <End Role="CTHD" EntitySet="CTHDs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CTPN__PhieuNhapI__24927208" Association="Self.FK__CTPN__PhieuNhapI__24927208">
-            <End Role="PHIEUNHAP" EntitySet="PHIEUNHAPs" />
-            <End Role="CTPN" EntitySet="CTPNs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__HOADON__NhanVien__1B0907CE" Association="Self.FK__HOADON__NhanVien__1B0907CE">
-            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
-            <End Role="HOADON" EntitySet="HOADONs" />
-          </AssociationSet>
           <AssociationSet Name="FK__NHANVIEN___NhanV__1367E606" Association="Self.FK__NHANVIEN___NhanV__1367E606">
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="NHANVIEN_QUYEN" EntitySet="NHANVIEN_QUYEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PHIEUNHAP__NhanV__21B6055D" Association="Self.FK__PHIEUNHAP__NhanV__21B6055D">
-            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
-            <End Role="PHIEUNHAP" EntitySet="PHIEUNHAPs" />
           </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="GST_MockProjectModel.sysdiagram" />
           <FunctionImport Name="sp_alterdiagram">
@@ -480,15 +520,62 @@
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
             <End Role="CTHD" EntitySet="CTHDs" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTPN__SanPhamID__25869641" Association="GST_MockProjectModel.FK__CTPN__SanPhamID__25869641">
-            <End Role="SANPHAM" EntitySet="SANPHAMs" />
-            <End Role="CTPN" EntitySet="CTPNs" />
-          </AssociationSet>
           <AssociationSet Name="FK__SANPHAM__LoaiSan__182C9B23" Association="GST_MockProjectModel.FK__SANPHAM__LoaiSan__182C9B23">
             <End Role="LOAISANPHAM" EntitySet="LOAISANPHAMs" />
             <End Role="SANPHAM" EntitySet="SANPHAMs" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="CTKHOes" EntityType="GST_MockProjectModel.CTKHO" />
+          <EntitySet Name="KHOes" EntityType="GST_MockProjectModel.KHO" />
+          <AssociationSet Name="FK_CTKHO_KHO" Association="GST_MockProjectModel.FK_CTKHO_KHO">
+            <End Role="KHO" EntitySet="KHOes" />
+            <End Role="CTKHO" EntitySet="CTKHOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTKHO_SANPHAM" Association="GST_MockProjectModel.FK_CTKHO_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="CTKHO" EntitySet="CTKHOes" />
+          </AssociationSet>
+          <EntitySet Name="CTPHIEUTRAHANGs" EntityType="GST_MockProjectModel.CTPHIEUTRAHANG" />
+          <EntitySet Name="PHIEUTRAHANGs" EntityType="GST_MockProjectModel.PHIEUTRAHANG" />
+          <AssociationSet Name="FK__CTPN__PhieuNhapI__249272081" Association="GST_MockProjectModel.FK__CTPN__PhieuNhapI__249272081">
+            <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANGs" />
+            <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTPN__SanPhamID__258696411" Association="GST_MockProjectModel.FK__CTPN__SanPhamID__258696411">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUNHAP__NhanV__21B6055D1" Association="GST_MockProjectModel.FK__PHIEUNHAP__NhanV__21B6055D1">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANGs" />
+          </AssociationSet>
+          <EntitySet Name="HOADONs" EntityType="GST_MockProjectModel.HOADON" />
+          <AssociationSet Name="FK__CTHD__HoaDonID__1DE57479" Association="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479">
+            <End Role="HOADON" EntitySet="HOADONs" />
+            <End Role="CTHD" EntitySet="CTHDs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HOADON__NhanVien__1B0907CE" Association="GST_MockProjectModel.FK__HOADON__NhanVien__1B0907CE">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <EntitySet Name="CTPHIEUNHAPXUATKHOes" EntityType="GST_MockProjectModel.CTPHIEUNHAPXUATKHO" />
+          <EntitySet Name="NHAPXUATKHOes" EntityType="GST_MockProjectModel.NHAPXUATKHO" />
+          <AssociationSet Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
+            <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHOes" />
+            <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTPHIEUNHAPKHO_SANPHAM" Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAMs" />
+            <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEUNHAPKHO_KHO" Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_KHO">
+            <End Role="KHO" EntitySet="KHOes" />
+            <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PHIEUNHAPKHO_NHANVIEN" Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHOes" />
+          </AssociationSet>
+          </EntityContainer>
         <EnumType Name="LoaiGioiTinh" />
         <EnumType Name="TrangThaiNhanVien" />
         <EnumType Name="TrangThaiLoaiSanPham" />
@@ -527,8 +614,10 @@
           <Property Name="DonViTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TrangThai" Type="Boolean" />
           <NavigationProperty Name="CTHDs" Relationship="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" FromRole="SANPHAM" ToRole="CTHD" />
-          <NavigationProperty Name="CTPNs" Relationship="GST_MockProjectModel.FK__CTPN__SanPhamID__25869641" FromRole="SANPHAM" ToRole="CTPN" />
           <NavigationProperty Name="LOAISANPHAM" Relationship="GST_MockProjectModel.FK__SANPHAM__LoaiSan__182C9B23" FromRole="SANPHAM" ToRole="LOAISANPHAM" />
+          <NavigationProperty Name="CTKHOes" Relationship="GST_MockProjectModel.FK_CTKHO_SANPHAM" FromRole="SANPHAM" ToRole="CTKHO" />
+          <NavigationProperty Name="CTPHIEUTRAHANGs" Relationship="GST_MockProjectModel.FK__CTPN__SanPhamID__258696411" FromRole="SANPHAM" ToRole="CTPHIEUTRAHANG" />
+          <NavigationProperty Name="CTPHIEUNHAPXUATKHOes" Relationship="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_SANPHAM" FromRole="SANPHAM" ToRole="CTPHIEUNHAPXUATKHO" />
         </EntityType>
         <Association Name="FK__CTHD__SanPhamID__1ED998B2">
           <End Type="GST_MockProjectModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
@@ -538,18 +627,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CTHD">
-              <PropertyRef Name="SanPhamID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CTPN__SanPhamID__25869641">
-          <End Type="GST_MockProjectModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
-          <End Type="GST_MockProjectModel.CTPN" Role="CTPN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SANPHAM">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CTPN">
               <PropertyRef Name="SanPhamID" />
             </Dependent>
           </ReferentialConstraint>
@@ -566,7 +643,223 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="CTKHO">
+          <Key>
+            <PropertyRef Name="KhoID" />
+            <PropertyRef Name="SanPhamID" />
+          </Key>
+          <Property Name="KhoID" Type="Int32" Nullable="false" />
+          <Property Name="SanPhamID" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="KHO" Relationship="GST_MockProjectModel.FK_CTKHO_KHO" FromRole="CTKHO" ToRole="KHO" />
+          <NavigationProperty Name="SANPHAM" Relationship="GST_MockProjectModel.FK_CTKHO_SANPHAM" FromRole="CTKHO" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="KHO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenKho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ViTriKho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="GST_MockProjectModel.TinhTrangKho" />
+          <NavigationProperty Name="CTKHOes" Relationship="GST_MockProjectModel.FK_CTKHO_KHO" FromRole="KHO" ToRole="CTKHO" />
+          <NavigationProperty Name="NHAPXUATKHOes" Relationship="GST_MockProjectModel.FK_PHIEUNHAPKHO_KHO" FromRole="KHO" ToRole="NHAPXUATKHO" />
+        </EntityType>
+        <Association Name="FK_CTKHO_KHO">
+          <End Type="GST_MockProjectModel.KHO" Role="KHO" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTKHO" Role="CTKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTKHO">
+              <PropertyRef Name="KhoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTKHO_SANPHAM">
+          <End Type="GST_MockProjectModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTKHO" Role="CTKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTKHO">
+              <PropertyRef Name="SanPhamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="TinhTrangKho" />
+        <EntityType Name="CTPHIEUTRAHANG">
+          <Key>
+            <PropertyRef Name="PhieuNhapID" />
+            <PropertyRef Name="SanPhamID" />
+          </Key>
+          <Property Name="PhieuNhapID" Type="Int32" Nullable="false" />
+          <Property Name="SanPhamID" Type="Int32" Nullable="false" />
+          <Property Name="GiaNhap" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SoLuong" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="PHIEUTRAHANG" Relationship="GST_MockProjectModel.FK__CTPN__PhieuNhapI__249272081" FromRole="CTPHIEUTRAHANG" ToRole="PHIEUTRAHANG" />
+          <NavigationProperty Name="SANPHAM" Relationship="GST_MockProjectModel.FK__CTPN__SanPhamID__258696411" FromRole="CTPHIEUTRAHANG" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="PHIEUTRAHANG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayLap" Type="DateTime" Precision="0" />
+          <Property Name="NhanVienID" Type="Int32" />
+          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CTPHIEUTRAHANGs" Relationship="GST_MockProjectModel.FK__CTPN__PhieuNhapI__249272081" FromRole="PHIEUTRAHANG" ToRole="CTPHIEUTRAHANG" />
+          <NavigationProperty Name="NHANVIEN" Relationship="GST_MockProjectModel.FK__PHIEUNHAP__NhanV__21B6055D1" FromRole="PHIEUTRAHANG" ToRole="NHANVIEN" />
+        </EntityType>
+        <Association Name="FK__CTPN__PhieuNhapI__249272081">
+          <End Type="GST_MockProjectModel.PHIEUTRAHANG" Role="PHIEUTRAHANG" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTPHIEUTRAHANG" Role="CTPHIEUTRAHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHIEUTRAHANG">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTPHIEUTRAHANG">
+              <PropertyRef Name="PhieuNhapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTPN__SanPhamID__258696411">
+          <End Type="GST_MockProjectModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTPHIEUTRAHANG" Role="CTPHIEUTRAHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTPHIEUTRAHANG">
+              <PropertyRef Name="SanPhamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUNHAP__NhanV__21B6055D1">
+          <End Type="GST_MockProjectModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
+          <End Type="GST_MockProjectModel.PHIEUTRAHANG" Role="PHIEUTRAHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PHIEUTRAHANG">
+              <PropertyRef Name="NhanVienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="LoaiPhieuNhapXuatKho" />
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayLap" Type="DateTime" Precision="0" />
+          <Property Name="NhanVienID" Type="Int32" />
+          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CTHDs" Relationship="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" FromRole="HOADON" ToRole="CTHD" />
+          <NavigationProperty Name="NHANVIEN" Relationship="GST_MockProjectModel.FK__HOADON__NhanVien__1B0907CE" FromRole="HOADON" ToRole="NHANVIEN" />
+        </EntityType>
+        <Association Name="FK__CTHD__HoaDonID__1DE57479">
+          <End Type="GST_MockProjectModel.HOADON" Role="HOADON" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTHD" Role="CTHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTHD">
+              <PropertyRef Name="HoaDonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HOADON__NhanVien__1B0907CE">
+          <End Type="GST_MockProjectModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
+          <End Type="GST_MockProjectModel.HOADON" Role="HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="NhanVienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CTPHIEUNHAPXUATKHO">
+          <Key>
+            <PropertyRef Name="NhapXuatKhoID" />
+            <PropertyRef Name="SanPhamID" />
+          </Key>
+          <Property Name="NhapXuatKhoID" Type="Int32" Nullable="false" />
+          <Property Name="SanPhamID" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DonGia" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="NHAPXUATKHO" Relationship="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" FromRole="CTPHIEUNHAPXUATKHO" ToRole="NHAPXUATKHO" />
+          <NavigationProperty Name="SANPHAM" Relationship="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_SANPHAM" FromRole="CTPHIEUNHAPXUATKHO" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="NHAPXUATKHO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayLapPhieu" Type="DateTime" Precision="0" />
+          <Property Name="NhanVienID" Type="Int32" />
+          <Property Name="KhoID" Type="Int32" />
+          <Property Name="LoaiPhieu" Type="GST_MockProjectModel.LoaiPhieuNhapXuatKho1" />
+          <NavigationProperty Name="CTPHIEUNHAPXUATKHOes" Relationship="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" FromRole="NHAPXUATKHO" ToRole="CTPHIEUNHAPXUATKHO" />
+          <NavigationProperty Name="KHO" Relationship="GST_MockProjectModel.FK_PHIEUNHAPKHO_KHO" FromRole="NHAPXUATKHO" ToRole="KHO" />
+          <NavigationProperty Name="NHANVIEN" Relationship="GST_MockProjectModel.FK_PHIEUNHAPKHO_NHANVIEN" FromRole="NHAPXUATKHO" ToRole="NHANVIEN" />
+        </EntityType>
+        <Association Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
+          <End Type="GST_MockProjectModel.NHAPXUATKHO" Role="NHAPXUATKHO" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTPHIEUNHAPXUATKHO" Role="CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHAPXUATKHO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTPHIEUNHAPXUATKHO">
+              <PropertyRef Name="NhapXuatKhoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTPHIEUNHAPKHO_SANPHAM">
+          <End Type="GST_MockProjectModel.SANPHAM" Role="SANPHAM" Multiplicity="1" />
+          <End Type="GST_MockProjectModel.CTPHIEUNHAPXUATKHO" Role="CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CTPHIEUNHAPXUATKHO">
+              <PropertyRef Name="SanPhamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEUNHAPKHO_KHO">
+          <End Type="GST_MockProjectModel.KHO" Role="KHO" Multiplicity="0..1" />
+          <End Type="GST_MockProjectModel.NHAPXUATKHO" Role="NHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NHAPXUATKHO">
+              <PropertyRef Name="KhoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PHIEUNHAPKHO_NHANVIEN">
+          <End Type="GST_MockProjectModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
+          <End Type="GST_MockProjectModel.NHAPXUATKHO" Role="NHAPXUATKHO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NHAPXUATKHO">
+              <PropertyRef Name="NhanVienID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="LoaiPhieuNhapXuatKho1" />
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -582,26 +875,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CTPNs">
-            <EntityTypeMapping TypeName="GST_MockProjectModel.CTPN">
-              <MappingFragment StoreEntitySet="CTPN">
-                <ScalarProperty Name="PhieuNhapID" ColumnName="PhieuNhapID" />
-                <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-                <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HOADONs">
-            <EntityTypeMapping TypeName="GST_MockProjectModel.HOADON">
-              <MappingFragment StoreEntitySet="HOADON">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
-                <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LOAISANPHAMs">
             <EntityTypeMapping TypeName="GST_MockProjectModel.LOAISANPHAM">
               <MappingFragment StoreEntitySet="LOAISANPHAM">
@@ -614,6 +887,7 @@
           <EntitySetMapping Name="NHANVIENs">
             <EntityTypeMapping TypeName="GST_MockProjectModel.NHANVIEN">
               <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TenNV" ColumnName="TenNV" />
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
@@ -633,16 +907,6 @@
               <MappingFragment StoreEntitySet="NHANVIEN_QUYEN">
                 <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
                 <ScalarProperty Name="QuyenID" ColumnName="QuyenID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PHIEUNHAPs">
-            <EntityTypeMapping TypeName="GST_MockProjectModel.PHIEUNHAP">
-              <MappingFragment StoreEntitySet="PHIEUNHAP">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
-                <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -692,6 +956,76 @@
                 <ScalarProperty Name="HinhSP" ColumnName="HinhSP" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
                 <ScalarProperty Name="LoaiSanPhamID" ColumnName="LoaiSanPhamID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTKHOes">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.CTKHO">
+              <MappingFragment StoreEntitySet="CTKHO">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+                <ScalarProperty Name="KhoID" ColumnName="KhoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHOes">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.KHO">
+              <MappingFragment StoreEntitySet="KHO">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="ViTriKho" ColumnName="ViTriKho" />
+                <ScalarProperty Name="TenKho" ColumnName="TenKho" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTPHIEUTRAHANGs">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.CTPHIEUTRAHANG">
+              <MappingFragment StoreEntitySet="CTPHIEUTRAHANG">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+                <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+                <ScalarProperty Name="PhieuNhapID" ColumnName="PhieuNhapID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHIEUTRAHANGs">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.PHIEUTRAHANG">
+              <MappingFragment StoreEntitySet="PHIEUTRAHANG">
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADONs">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+                <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTPHIEUNHAPXUATKHOes">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.CTPHIEUNHAPXUATKHO">
+              <MappingFragment StoreEntitySet="CTPHIEUNHAPXUATKHO">
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+                <ScalarProperty Name="NhapXuatKhoID" ColumnName="NhapXuatKhoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHAPXUATKHOes">
+            <EntityTypeMapping TypeName="GST_MockProjectModel.NHAPXUATKHO">
+              <MappingFragment StoreEntitySet="NHAPXUATKHO">
+                <ScalarProperty Name="LoaiPhieu" ColumnName="LoaiPhieu" />
+                <ScalarProperty Name="KhoID" ColumnName="KhoID" />
+                <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+                <ScalarProperty Name="NgayLapPhieu" ColumnName="NgayLapPhieu" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

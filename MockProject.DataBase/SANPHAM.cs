@@ -18,7 +18,9 @@ namespace MockProject.DataBase
         public SANPHAM()
         {
             this.CTHDs = new HashSet<CTHD>();
-            this.CTPNs = new HashSet<CTPN>();
+            this.CTKHOes = new HashSet<CTKHO>();
+            this.CTPHIEUTRAHANGs = new HashSet<CTPHIEUTRAHANG>();
+            this.CTPHIEUNHAPXUATKHOes = new HashSet<CTPHIEUNHAPXUATKHO>();
         }
     
         public int ID { get; set; }
@@ -33,8 +35,12 @@ namespace MockProject.DataBase
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHDs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTPN> CTPNs { get; set; }
         public virtual LOAISANPHAM LOAISANPHAM { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTKHO> CTKHOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTPHIEUTRAHANG> CTPHIEUTRAHANGs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTPHIEUNHAPXUATKHO> CTPHIEUNHAPXUATKHOes { get; set; }
     }
 }

@@ -42,7 +42,7 @@
                                         <label class="col-md-4 control-label">Ngày sinh</label>
                                         <div class="col-md-8">
                                             <div class="input-group date">
-                                                @Html.TextBoxFor(x => x.NgaySinh, DateTime.Now.ToShortDateString().ToString(), new { @class = "form-control", data_val = "false", value = "" })
+                                                @Html.TextBoxFor(x => x.NgaySinh@*DateTime.Now.ToShortDateString().ToString()*@, new { @class = "form-control", data_val = "false", value = "" })
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
                                         </div>

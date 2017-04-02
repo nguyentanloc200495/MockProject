@@ -19,4 +19,29 @@ namespace MockProject.Models
 
         public bool RememberMe { get; set; }
     }
+    public class ResetPasswordModel
+    {
+        [DataType(DataType.Password)]
+        [Required()]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+
+        [Required()]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+
+        [Required()]
+        [Compare("NewPassword")]
+        public string ConfirmNewPassword { get; set; }
+    }
+    public class AddUserPermission
+    {
+        public string Username { get; set; }
+        public string Fullname { get; set; }
+        public string Image { get; set; }
+        public int UserId { get; set; }
+        public int[] SelectedPermisson { get; set; }
+    }
 }

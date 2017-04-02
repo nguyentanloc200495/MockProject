@@ -11,26 +11,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CTPNs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.CTPN">
-        <MappingFragment StoreEntitySet="CTPN">
-          <ScalarProperty Name="PhieuNhapID" ColumnName="PhieuNhapID" />
-          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-          <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HOADONs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.HOADON">
-        <MappingFragment StoreEntitySet="HOADON">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
-          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LOAISANPHAMs">
       <EntityTypeMapping TypeName="GST_MockProjectModel.LOAISANPHAM">
         <MappingFragment StoreEntitySet="LOAISANPHAM">
@@ -43,6 +23,7 @@
     <EntitySetMapping Name="NHANVIENs">
       <EntityTypeMapping TypeName="GST_MockProjectModel.NHANVIEN">
         <MappingFragment StoreEntitySet="NHANVIEN">
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TenNV" ColumnName="TenNV" />
           <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
@@ -62,16 +43,6 @@
         <MappingFragment StoreEntitySet="NHANVIEN_QUYEN">
           <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
           <ScalarProperty Name="QuyenID" ColumnName="QuyenID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PHIEUNHAPs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.PHIEUNHAP">
-        <MappingFragment StoreEntitySet="PHIEUNHAP">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
-          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -121,6 +92,76 @@
           <ScalarProperty Name="HinhSP" ColumnName="HinhSP" />
           <ScalarProperty Name="TenSP" ColumnName="TenSP" />
           <ScalarProperty Name="LoaiSanPhamID" ColumnName="LoaiSanPhamID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTKHOes">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.CTKHO">
+        <MappingFragment StoreEntitySet="CTKHO">
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+          <ScalarProperty Name="KhoID" ColumnName="KhoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KHOes">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.KHO">
+        <MappingFragment StoreEntitySet="KHO">
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="ViTriKho" ColumnName="ViTriKho" />
+          <ScalarProperty Name="TenKho" ColumnName="TenKho" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTPHIEUTRAHANGs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.CTPHIEUTRAHANG">
+        <MappingFragment StoreEntitySet="CTPHIEUTRAHANG">
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+          <ScalarProperty Name="PhieuNhapID" ColumnName="PhieuNhapID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PHIEUTRAHANGs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.PHIEUTRAHANG">
+        <MappingFragment StoreEntitySet="PHIEUTRAHANG">
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HOADONs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.HOADON">
+        <MappingFragment StoreEntitySet="HOADON">
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTPHIEUNHAPXUATKHOes">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.CTPHIEUNHAPXUATKHO">
+        <MappingFragment StoreEntitySet="CTPHIEUNHAPXUATKHO">
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+          <ScalarProperty Name="NhapXuatKhoID" ColumnName="NhapXuatKhoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NHAPXUATKHOes">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.NHAPXUATKHO">
+        <MappingFragment StoreEntitySet="NHAPXUATKHO">
+          <ScalarProperty Name="LoaiPhieu" ColumnName="LoaiPhieu" />
+          <ScalarProperty Name="KhoID" ColumnName="KhoID" />
+          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
+          <ScalarProperty Name="NgayLapPhieu" ColumnName="NgayLapPhieu" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

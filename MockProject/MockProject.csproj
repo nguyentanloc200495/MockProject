@@ -96,6 +96,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -206,9 +207,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\AjaxCommonOption.cs" />
+    <Compile Include="Common\Enum.cs" />
+    <Compile Include="Common\Security.cs" />
+    <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhoController.cs" />
     <Compile Include="Controllers\LoaiSanPhamController.cs" />
+    <Compile Include="Controllers\NhapXuatKhoController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,8 +223,10 @@
     <Compile Include="HtmlHelperExtension.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\KhoSearchModel.cs" />
     <Compile Include="Models\LoaiSanPhamSearchModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NhapXuatKhoSearchModel.cs" />
     <Compile Include="Models\SanphamSearchModel.cs" />
     <Compile Include="Models\UserSearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,11 +238,25 @@
     <Content Include="Content\bootstrap-nav-wizard.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen.css" />
     <Content Include="Content\fix.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\footable.core.css" />
     <Content Include="Content\Image\1logo.png" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\jquery.steps.css" />
+    <Content Include="Content\jsTree\docs.css" />
+    <Content Include="Content\jsTree\themes\default-dark\32px.png" />
+    <Content Include="Content\jsTree\themes\default-dark\40px.png" />
+    <Content Include="Content\jsTree\themes\default-dark\style.css" />
+    <Content Include="Content\jsTree\themes\default-dark\style.min.css" />
+    <Content Include="Content\jsTree\themes\default-dark\throbber.gif" />
+    <Content Include="Content\jsTree\themes\default\32px.png" />
+    <Content Include="Content\jsTree\themes\default\40px.png" />
+    <Content Include="Content\jsTree\themes\default\style.css" />
+    <Content Include="Content\jsTree\themes\default\style.min.css" />
+    <Content Include="Content\jsTree\themes\default\throbber.gif" />
+    <Content Include="Content\nv.d3.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\patterns\1.png" />
     <Content Include="Content\patterns\2.png" />
@@ -271,10 +293,13 @@
     <Content Include="Content\plugin\select2\select2.min.css" />
     <Content Include="Content\plugin\sweetalert\sweetalert.css" />
     <Content Include="Content\plugin\switchery\switchery.css" />
+    <Content Include="Content\star-rating.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\summernote-bs3.css" />
+    <Content Include="Content\summernote.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\Upload\noimage.png" />
+    <Content Include="Content\UserImage\1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -327,7 +352,6 @@
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="Content\Upload\PaymentRequest\TAMUNG~1-636192068460975431.DOC" />
     <Content Include="Content\plugin\JsTree\style.less" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.order.jquery.min.js" />
     <Content Include="Scripts\common.js" />
@@ -335,8 +359,6 @@
     <Content Include="Scripts\Fix.js" />
     <Content Include="Scripts\footable.all.min.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
@@ -398,8 +420,9 @@
     <Content Include="Scripts\star-rating.js" />
     <Content Include="Scripts\summernote.min.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -427,6 +450,19 @@
     <Content Include="Views\SanPham\_List.cshtml" />
     <Content Include="Views\SanPham\CreateEdit.cshtml" />
     <Content Include="Views\SanPham\_Delete.cshtml" />
+    <Content Include="Views\Kho\Index.cshtml" />
+    <Content Include="Views\Kho\_List.cshtml" />
+    <Content Include="Views\Kho\CreateEdit.cshtml" />
+    <Content Include="Views\NhapXuatKho\Index.cshtml" />
+    <Content Include="Views\NhapXuatKho\CreateEdit.cshtml" />
+    <Content Include="Views\NhapXuatKho\_List.cshtml" />
+    <Content Include="Views\NhapXuatKho\CreateCTPNX.cshtml" />
+    <Content Include="Views\NhapXuatKho\_CreateEditCTPNX.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Account\ShowUpdateImage.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\User\_PermissionTree.cshtml" />
+    <Content Include="Views\User\ListPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -438,7 +474,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

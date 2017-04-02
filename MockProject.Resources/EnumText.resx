@@ -126,6 +126,18 @@
   <data name="LoaiGioiTinh.Nu" xml:space="preserve">
     <value>Nữ</value>
   </data>
+  <data name="LoaiPhieuNhapXuatKho1.PhieuNhap" xml:space="preserve">
+    <value>Phiếu nhập kho</value>
+  </data>
+  <data name="LoaiPhieuNhapXuatKho1.PhieuXuat" xml:space="preserve">
+    <value>Phiếu xuất kho</value>
+  </data>
+  <data name="TinhTrangKho.KhongKichHoat" xml:space="preserve">
+    <value>Không kích hoạt</value>
+  </data>
+  <data name="TinhTrangKho.KichHoat" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
   <data name="TrangThaiLoaiSanPham.Dung" xml:space="preserve">
     <value>Đang dùng</value>
   </data>

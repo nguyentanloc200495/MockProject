@@ -28,14 +28,18 @@ namespace MockProject.DataBase
         }
     
         public virtual DbSet<CTHD> CTHDs { get; set; }
-        public virtual DbSet<CTPN> CTPNs { get; set; }
-        public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<NHANVIEN_QUYEN> NHANVIEN_QUYEN { get; set; }
-        public virtual DbSet<PHIEUNHAP> PHIEUNHAPs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
+        public virtual DbSet<CTKHO> CTKHOes { get; set; }
+        public virtual DbSet<KHO> KHOes { get; set; }
+        public virtual DbSet<CTPHIEUTRAHANG> CTPHIEUTRAHANGs { get; set; }
+        public virtual DbSet<PHIEUTRAHANG> PHIEUTRAHANGs { get; set; }
+        public virtual DbSet<HOADON> HOADONs { get; set; }
+        public virtual DbSet<CTPHIEUNHAPXUATKHO> CTPHIEUNHAPXUATKHOes { get; set; }
+        public virtual DbSet<NHAPXUATKHO> NHAPXUATKHOes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

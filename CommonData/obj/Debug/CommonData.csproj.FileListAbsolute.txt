@@ -23,3 +23,7 @@ F:\Mock Project\MockProject\CommonData\bin\Debug\System.Web.WebPages.Deployment.
 F:\Mock Project\MockProject\CommonData\bin\Debug\System.Web.WebPages.Razor.xml
 F:\Mock Project\MockProject\CommonData\bin\Debug\MockProject.Resources.dll
 F:\Mock Project\MockProject\CommonData\bin\Debug\MockProject.Resources.pdb
+F:\Mock Project\MockProject\CommonData\bin\Debug\MockProject.DataBase.dll
+F:\Mock Project\MockProject\CommonData\bin\Debug\Newtonsoft.Json.dll
+F:\Mock Project\MockProject\CommonData\bin\Debug\MockProject.DataBase.pdb
+F:\Mock Project\MockProject\CommonData\bin\Debug\Newtonsoft.Json.xml

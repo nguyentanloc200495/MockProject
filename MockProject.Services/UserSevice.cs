@@ -69,7 +69,7 @@ namespace MockProject.Services
                 NhanVien.NgaySinh = c.NgaySinh;
                 NhanVien.GioiTinh = c.GioiTinh;
                 NhanVien.DiaChi = c.DiaChi;
-                NhanVien.SoDT = c.DiaChi;
+                NhanVien.SoDT = c.SoDT;
                 NhanVien.TaiKhoan = c.TaiKhoan;
                 NhanVien.Email = c.Email;
                 NhanVien.ChucVu = c.ChucVu;

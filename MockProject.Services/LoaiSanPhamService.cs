@@ -37,6 +37,7 @@ namespace MockProject.Services
                 return query.FirstOrDefault(x => x.ID == id);
             }
         }
+      
         public static CommandResult Create(LOAISANPHAM c)
         {
             using (var context = new GST_MockProjectEntities())

@@ -7,8 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 
 using MockProject.DataBase;
+using MockProject.Services;
 
-namespace CTGroup.BO.Web.Common
+namespace MockProject.Common
 {
     [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Unsealed so that subclassed types can set properties in the default constructor or override our behavior.")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
@@ -28,8 +29,8 @@ namespace CTGroup.BO.Web.Common
             // if base return true, check additional logic base on Permissions
             if (result)
             {
-                return AuthorizeService.HasPermission((int) Permission) ||
-                       (Permissions != null && AuthorizeService.HasPermission(Permissions.Select(x => (int) x).ToArray()));
+                return AuthorizeService.HasPermission((int)Permission) ||
+                       (Permissions != null && AuthorizeService.HasPermission(Permissions.Select(x => (int)x).ToArray()));
             }
             return false;
         }

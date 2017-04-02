@@ -13,5 +13,9 @@ namespace MockProject.DataBase
     
     public enum TrangThaiNhanVien : int
     {
+        DangLamViec = 0,
+        NghiViec = 1 ,
+        NghiPhep = 2,
+        CongTac = 3,
     }
 }

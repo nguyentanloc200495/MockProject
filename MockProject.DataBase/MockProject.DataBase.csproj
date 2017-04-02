@@ -85,9 +85,16 @@
     <Compile Include="CTHD.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="CTPN.cs">
+    <Compile Include="CTKHO.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
+    <Compile Include="CTPHIEUNHAPXUATKHO.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CTPHIEUTRAHANG.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\Permission.cs" />
     <Compile Include="GST_MockProject.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,7 +113,13 @@
     <Compile Include="HOADON.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
+    <Compile Include="KHO.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoaiGioiTinh.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoaiPhieuNhapXuatKho1.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="LOAISANPHAM.cs">
@@ -118,7 +131,10 @@
     <Compile Include="NHANVIEN_QUYEN.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="PHIEUNHAP.cs">
+    <Compile Include="NHAPXUATKHO.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PHIEUTRAHANG.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,6 +148,9 @@
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TinhTrangKho.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="TrangThaiLoaiSanPham.cs">
@@ -155,9 +174,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="GST_MockProject.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

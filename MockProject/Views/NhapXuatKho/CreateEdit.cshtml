@@ -1,0 +1,105 @@
+﻿@using MockProject.Common
+@model MockProject.DataBase.NHAPXUATKHO
+@{
+    ViewBag.Title = "CreateEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/plugin/iCheck/custom.css" rel="stylesheet" />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Quản lý nhập xuất", "Index")
+            </li>
+            <li class="active">
+                <strong>@(Model == null || Model.ID == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                @using (Ajax.BeginForm("CreateEdit", "NhapXuatKho", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+                {
+                    @Html.HiddenFor(x => x.ID)
+                    <div class="form-horizontal">
+                        <div class="col-lg-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Tên Kho</label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(x => x.KhoID, null, "-----Tất cả--------", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Loại phiếu</label>
+                                    <div class="col-md-8">
+                                        @Html.DropDownListFor(x => x.LoaiPhieu, null, "-----Tất cả--------", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Ngày lập</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date">
+                                            <input type="text" name="NgayLapPhieu" class="form-control" data_val="false" value="">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                     
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button class="btn btn-primary" type="submit">Lưu</button>
+                                @Html.ActionLink("Hủy", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @Ajax.ActionLink("Cập nhật chi tiết", "CreateCTPNX", new { id = Model.ID }, new AjaxOptions() { UpdateTargetId = "updateCommision", OnSuccess = "ShowModalCommision" }, new { @class = "btn btn-success", role = "button" })
+
+
+                            </div>
+                        </div>
+                       
+
+
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    <div id="updateCommision">
+
+</div>
+<script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>
+<script src="~/Scripts/chosen.jquery.js"></script>
+@*<script src="~/Scripts/common.js"></script>*@
+<script type="text/javascript">
+    function ShowModalCommision(html) {
+        $('#modalCommission').modal('show');
+    }
+    $(function() {
+        $('.input-group.date').datetimepicker({
+
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            extraFormats: ["MM/YYYY"],
+            defaultDate: null
+        });
+    })
+</script>

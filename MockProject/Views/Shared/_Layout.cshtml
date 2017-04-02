@@ -65,7 +65,7 @@
         <div id="page-wrapper" class="gray-bg">
 
             <!-- Top Navbar -->
-            @*@Html.Partial("_TopNavbar")*@
+            @Html.Partial("_TopNavbar")
 
             <!-- Main view  -->
             @RenderBody()
@@ -110,36 +110,9 @@
     toastr.options.closeButton = true;
     toastr.options.progressBar = true;
 
-    $(document)
-        .ready(function() {
-            //function that the hub can call when it receives a notification.
-            $.connection.notificationHub.client.displayNotification = function(title, message,url) {
-                Notify(title, message, url);
-            };
-            $.connection.notificationHub.client.displayNotificationUser = function(title, message,url) {
-                Notify(title, message, url);
-            };
+    
 
-            window.notify = {
-                hubConnector: $.connection.hub
-                    .start() //start the connection and store object returned globally for access in child views
-            };
-
-        });
-
-        function Notify(title, message, url) {
-
-            $.post('@Url.Action("Notify","Notify")', {}, function (html) {
-                $('#NotifyTop').html(html);
-            })
-
-            //toastr.success(message, title, {
-            //    onclick: function () {
-            //        window.open(url, '_blank');
-            //    },
-            //})
-
-    }
+    
     // not validate hidden field
     $.validator.defaults.ignore = ":hidden";
     </script>
