@@ -17,10 +17,10 @@ namespace MockProject.DataBase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SANPHAM()
         {
-            this.CTHDs = new HashSet<CTHD>();
             this.CTKHOes = new HashSet<CTKHO>();
             this.CTPHIEUTRAHANGs = new HashSet<CTPHIEUTRAHANG>();
             this.CTPHIEUNHAPXUATKHOes = new HashSet<CTPHIEUNHAPXUATKHO>();
+            this.CTHDs = new HashSet<CTHD>();
         }
     
         public int ID { get; set; }
@@ -33,8 +33,6 @@ namespace MockProject.DataBase
         public string DonViTinh { get; set; }
         public Nullable<bool> TrangThai { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTHD> CTHDs { get; set; }
         public virtual LOAISANPHAM LOAISANPHAM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTKHO> CTKHOes { get; set; }
@@ -42,5 +40,7 @@ namespace MockProject.DataBase
         public virtual ICollection<CTPHIEUTRAHANG> CTPHIEUTRAHANGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPHIEUNHAPXUATKHO> CTPHIEUNHAPXUATKHOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTHD> CTHDs { get; set; }
     }
 }

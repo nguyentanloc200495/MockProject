@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using MockProject.DataBase;
 
 namespace MockProject.Services
@@ -36,6 +37,31 @@ namespace MockProject.Services
             {
                 var query = context.KHOes.AsNoTracking().AsQueryable();
                 return query.FirstOrDefault(x => x.ID == id);
+            }
+        }
+
+        public static PagedSearchList<CTKHO> SearchCTKho(int? Khoid, int? Sanphamid, int pageIndex)
+        {
+            using (var context = new GST_MockProjectEntities())
+
+            {
+                var query = context.CTKHOes
+                    .Include(x=>x.SANPHAM)
+                    .Include(x=>x.KHO)
+                    .AsNoTracking().AsQueryable();
+
+                if (Khoid.HasValue)
+                {
+                    query = query.Where(x => x.KhoID == Khoid);
+                }
+                if (Sanphamid.HasValue)
+                {
+                    query = query.Where(x => x.SanPhamID == Sanphamid);
+                }
+                query = query.OrderBy(x => x.SoLuong);
+                int pageSize = 10;
+                pageIndex = pageIndex < 1 ? 1 : pageIndex;
+                return new PagedSearchList<CTKHO>(query, pageIndex, pageSize);
             }
         }
         public static CommandResult Create(KHO c)

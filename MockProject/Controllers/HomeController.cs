@@ -10,8 +10,8 @@ namespace MockProject.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["SubTitle"] = "Welcome to Tên Nhóm Website";
-            ViewData["Message"] = "";
+            ViewData["SubTitle"] = "Welcome to Hutech_Net1_SIMS Website";
+            ViewData["Message"] = "Trang web quản lý cửa hàng bách hóa";
 
             return View();
         }

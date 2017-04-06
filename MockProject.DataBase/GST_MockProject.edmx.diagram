@@ -5,14 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="359fffad8d064286bd4ad03f9dec8a34" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="GST_MockProjectModel.CTHD" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GST_MockProjectModel.LOAISANPHAM" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="GST_MockProjectModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GST_MockProjectModel.NHANVIEN_QUYEN" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
         <AssociationConnector Association="GST_MockProjectModel.FK__NHANVIEN___NhanV__1367E606" ManuallyRouted="false" />
         <EntityTypeShape EntityType="GST_MockProjectModel.sysdiagram" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="GST_MockProjectModel.SANPHAM" Width="1.5" PointX="3" PointY="3.25" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" />
         <AssociationConnector Association="GST_MockProjectModel.FK__SANPHAM__LoaiSan__182C9B23" />
         <EntityTypeShape EntityType="GST_MockProjectModel.CTKHO" Width="1.5" PointX="9.875" PointY="1.875" />
         <EntityTypeShape EntityType="GST_MockProjectModel.KHO" Width="1.5" PointX="7.625" PointY="8.875" />
@@ -24,7 +22,6 @@
         <AssociationConnector Association="GST_MockProjectModel.FK__CTPN__SanPhamID__258696411" />
         <AssociationConnector Association="GST_MockProjectModel.FK__PHIEUNHAP__NhanV__21B6055D1" />
         <EntityTypeShape EntityType="GST_MockProjectModel.HOADON" Width="1.5" PointX="3" PointY="8.75" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" />
         <AssociationConnector Association="GST_MockProjectModel.FK__HOADON__NhanVien__1B0907CE" />
         <EntityTypeShape EntityType="GST_MockProjectModel.CTPHIEUNHAPXUATKHO" Width="1.5" PointX="12.125" PointY="6.125" />
         <EntityTypeShape EntityType="GST_MockProjectModel.NHAPXUATKHO" Width="1.5" PointX="9.875" PointY="8.5" />
@@ -32,6 +29,9 @@
         <AssociationConnector Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_SANPHAM" />
         <AssociationConnector Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_KHO" />
         <AssociationConnector Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_NHANVIEN" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.CTHD" Width="1.5" PointX="5.25" PointY="3" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

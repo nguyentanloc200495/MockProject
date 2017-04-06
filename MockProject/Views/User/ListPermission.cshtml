@@ -1,4 +1,5 @@
-﻿@using MockProject.DataBase
+﻿@using MockProject.Common
+@using MockProject.DataBase
 @model MockProject.DataBase.NHANVIEN
 @{
     ViewBag.Title = "ListPermission";
@@ -10,7 +11,7 @@
     <div class="col-lg-12 m-t-md">
         <div class="col-md-6">
             <div class="profile-image">
-                <a href="@Url.Action("ShowUpdateImage")">
+                @*<a href="@Url.Action("ShowUpdateImage")">*@
                     @if (!string.IsNullOrEmpty(Model.HinhAnh))
                     {
                         <img src="~/Content/UserImage/@Model.HinhAnh" class="img-circle circle-border m-b-md" alt="profile" />
@@ -41,32 +42,67 @@
     </div>
 </div>
 
-<div class="ibox float-e-margins">
-    <div class="ibox-title">
-        <h5>Danh sách quyền</h5>
-        <div class="ibox-tools">
-            <a class="collapse-link">
-                <i class="fa fa-chevron-down"></i>
-            </a>
-        </div>
-    </div>
-    <div class="ibox-content">
-        <div class="row">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @*@using (Ajax.BeginForm("ListPermission", "User", null, new AjaxCommonOption(), new { role = "form", @id = "CreateEditAjax" }))
+            {*@
+        @using (Ajax.BeginForm("ListPermission2", "User", null, new AjaxCommonOption(), new { role = "form", @id = "CreateEditAjax" }))
+        {
+            <input type="hidden" name="selectedPermissions" id="selectedPermissions"/>
+            @Html.Hidden("UserId", Model.ID)
+            @Html.HiddenFor(model => model.ID)
             <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <div class="m-b-md">
-                        @Html.Partial("_PermissionTree", Model.NHANVIEN_QUYEN.Select(x => (Permission)x.QuyenID).ToList())
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <input onclick="btnSubmit()" type="button" value="Lưu" class="btn btn-primary" />
-                            @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-white" })
-                        </div>
+                <div class="ibox-title">
+                    <h5>Danh sách quyền</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
                     </div>
                 </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="m-b-md">
+                                    @Html.Partial("_PermissionTree", Model.NHANVIEN_QUYEN.Select(x => (Permission)x.QuyenID).ToList())
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @*<button class="btn btn-primary" type="submit">Lưu</button>*@
+                                        <input onclick="btnSubmit()" type="button" value="Lưu" class="btn btn-primary" />
+                                        @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-white" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-
-        </div>
+        }
     </div>
-
 </div>
+<script>
+    $(document)
+        .on('ready',
+            function () {
+                @{
+                    <text>
+                $('#CreateEditAjax').submit(function () {
+               
+                    var permission = GetSelectedPermisison();
+                    $('#selectedPermissions').val(permission.join());
+
+                });
+                </text>
+                }
+            });
+
+    function btnSubmit() {
+       
+        $('#CreateEditAjax').submit();
+    }
+</script>

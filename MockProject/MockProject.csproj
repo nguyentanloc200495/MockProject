@@ -211,6 +211,8 @@
     <Compile Include="Common\Security.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CTKhoController.cs" />
+    <Compile Include="Controllers\HoaDonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhoController.cs" />
     <Compile Include="Controllers\LoaiSanPhamController.cs" />
@@ -222,6 +224,8 @@
     </Compile>
     <Compile Include="HtmlHelperExtension.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CTKhoSearchModel.cs" />
+    <Compile Include="Models\HoaDonSearchModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KhoSearchModel.cs" />
     <Compile Include="Models\LoaiSanPhamSearchModel.cs" />
@@ -456,13 +460,23 @@
     <Content Include="Views\NhapXuatKho\Index.cshtml" />
     <Content Include="Views\NhapXuatKho\CreateEdit.cshtml" />
     <Content Include="Views\NhapXuatKho\_List.cshtml" />
-    <Content Include="Views\NhapXuatKho\CreateCTPNX.cshtml" />
     <Content Include="Views\NhapXuatKho\_CreateEditCTPNX.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\ShowUpdateImage.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\User\_PermissionTree.cshtml" />
     <Content Include="Views\User\ListPermission.cshtml" />
+    <Content Include="Views\NhapXuatKho\_CreateCTPNX.cshtml" />
+    <Content Include="Views\NhapXuatKho\_ListCTPNX.cshtml" />
+    <Content Include="Views\CTKho\Index.cshtml" />
+    <Content Include="Views\CTKho\_List.cshtml" />
+    <Content Include="Views\HoaDon\Create.cshtml" />
+    <Content Include="Views\HoaDon\_List.cshtml" />
+    <Content Include="Views\HoaDon\CreateEdit.cshtml" />
+    <Content Include="Views\HoaDon\Index.cshtml" />
+    <Content Include="Views\HoaDon\_EditCTHD.cshtml" />
+    <Content Include="Views\HoaDon\Edit.cshtml" />
+    <Content Include="Views\HoaDon\CreateEdit1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

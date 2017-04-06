@@ -1,0 +1,45 @@
+﻿@using MockProject.Common
+@model MockProject.DataBase.HOADON
+@{
+    ViewBag.Title = "CreateEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/plugin/iCheck/custom.css" rel="stylesheet" />
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Quản lý hóa đơn", "Index")
+            </li>
+            <li class="active">
+                <strong>@(Model == null || Model.ID == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    @using (Ajax.BeginForm("CreateEdit", "HoaDon", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+                    {
+                        @Html.HiddenFor(x => x.ID)
+                        <div class="form-horizontal">
+
+                            <h4 class="modal-title">Bạn có chắc muốn tạo hóa đơn mới</h4>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary" type="submit">Lưu</button>
+                                    @Html.ActionLink("Hủy", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>

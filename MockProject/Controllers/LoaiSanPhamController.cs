@@ -7,12 +7,15 @@ using System.Web.Mvc;
 using MockProject.DataBase;
 using MockProject.Services;
 using CommonData;
+using MockProject.Common;
 
 namespace MockProject.Controllers
 {
+    [AuthorizeAdmin(Permission = Permission.NhanVien_Xem)]
     public class LoaiSanPhamController : Controller
     {
         // GET: LoaiSanPham
+        [AuthorizeAdmin(Permission = Permission.LoaiSanPham_Xem)]
         public ActionResult Index()
         {
             return View();
@@ -41,7 +44,7 @@ namespace MockProject.Controllers
             return View("CreateEdit", model);
         }
         [HttpPost]
-        //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
+        [AuthorizeAdmin(Permission = Permission.LoaiSanPham_ThemSua)]
         public ActionResult CreateEdit(LOAISANPHAM model)
         {
             if (model.ID == 0)

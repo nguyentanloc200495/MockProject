@@ -14,4 +14,9 @@ namespace MockProject.Models
         public int? KhoID { get; set; }
         public LoaiPhieuNhapXuatKho1? LoaiPhieu { get; set; }
     }
+
+    public class CTPNXSearchModel : SearchModel
+    {
+        public int? ID { get; set; }
+    }
 }

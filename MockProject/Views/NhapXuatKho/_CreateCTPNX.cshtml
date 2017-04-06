@@ -1,0 +1,100 @@
+﻿@using MockProject.Common
+@model MockProject.DataBase.CTPHIEUNHAPXUATKHO
+<link href="~/Content/chosen.css" rel="stylesheet" />
+<style>
+    .select2-container--open {
+        z-index: 9999999;
+    }
+</style>
+
+<div class="modal inmodal fade" id="modalCommission" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Thông tin chi tiết phiếu nhập/xuất kho</h4>
+                <small class="font-bold"></small>
+            </div>
+            @using (Ajax.BeginForm("CreateCTPNX", "NhapXuatKho", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+            {
+                
+               <div class="form-horizontal">
+                    <div class="col-lg-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Mã phiếu </label>
+                                <div class="col-md-8">
+                                    @*@Html.TextBoxFor(x => x.NhapXuatKhoID,null, new { @class = "form-control NhapXuatKhoID2", @disabled = "disabled" })*@
+                                    <input type="text" value="@ViewBag.NhapXuatKhoID" id="IDtest" class="form-control " />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Sản phẩm</label>
+                                <div class="col-md-8">
+
+                                    @Html.DropDownListFor(x => x.SanPhamID, null, "--------", new { @class = "form-control select2 SanPhamID" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Số lượnng</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.SoLuong, new { @class = "form-control SoLuong" })
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Đơn giá </label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.DonGia, new { @class = "form-control Amount" })
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="text-align: center">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary" type="submit" onclick="btnClick()">Xác nhận</button>
+                            @Html.ActionLink("Hủy", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                        </div>
+                    </div>
+                    <div class="modal-header">
+                        @*<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>*@
+                        @*<h4 class="modal-title">Bạn có chắc muốn xóa sản phẩm này</h4>*@
+                        <small class="font-bold"></small>
+                    </div>
+                </div>
+            }
+            <div style="width: 100px">
+
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/plugins/select2/select2.full.min.js"></script>*@
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger 
+        $('#Amount').autoNumeric('init', { aPad: false, aSep: '.', aDec: ',', vMin: 0.00, vMax: 99999999999999999.00 });
+        @*$('#NhapXuatKhoID2').val("@ViewBag.NhapXuatKhoID")*@ 
+    })
+
+    function btnClick(e) {
+
+        var Khoid = $('.KhoID').val();
+        var Sanphamid = $('.SanPhamID').val();
+        var Soluong = $('.SoLuong').val();
+        $.post('@Url.Action("UpdateSoLuongSanPham")',{KhoID : Khoid, SanPhamID: Sanphamid,SoLuong: Soluong },function(html) {
+          
+        })
+
+    }
+</script>

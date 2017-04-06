@@ -13,11 +13,20 @@ namespace MockProject.DataBase
     }
     public enum Permission
     {
+        //cấp quyền cho nhân viên
         [Description("Xem danh sách nhân viên")]
-        NhanVien_Xem = 1003,
-        [Description("Sửa nhân viên")]
-        NhanVien_Sua = 1004,
+        NhanVien_Xem = 1001,
+        [Description("Thêm sửa nhân viên")]
+        NhanVien_ThemSua = 1002,
         [Description("Cấp quyền nhân viên")]
-        NhanVien_CapQuyen = 1005,
+        NhanVien_CapQuyen = 1003,
+
+
+        //cấp quyền cho loại sản phẩm
+        [Description("Xem loại sản phẩm")]
+        LoaiSanPham_Xem = 2001,
+        [Description("Thêm, sửa loại sản phẩm")]
+        LoaiSanPham_ThemSua = 2002,
+
     }
 }

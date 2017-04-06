@@ -1,0 +1,100 @@
+﻿@using MockProject.Common
+@model MockProject.DataBase.HOADON
+@{
+    ViewBag.Title = "CreateEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/plugin/iCheck/custom.css" rel="stylesheet" />
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Quản lý hóa đơn", "Index")
+            </li>
+            <li class="active">
+                <strong>@(Model == null || Model.ID == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    @using (Ajax.BeginForm("CreateEdit", "HoaDon", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+                    {
+                        @Html.HiddenFor(x => x.ID)
+                        <div class="form-horizontal">
+                     
+                            <div class="col-lg-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label"> <span style="color: Red">(*)</span></label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(x => x.TenSP, new {@class = "form-control", @required = ""})
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Loại sản phẩm <span style="color: Red">(*)</span></label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(x => x.LoaiSanPhamID, null, "--- Tất cã ---", new {@class = "form-control"})
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Giá bán <span style="color: Red">(*)</span></label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(x => x.GiaBan, new {@class = "form-control", @required = ""})
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Số lượng tồn<span style="color: Red">(*)</span></label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(x => x.SoLuongTon, new {@class = "form-control", @required = ""})
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Đơn vị tính</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(x => x.DonViTinh, new {@class = "form-control"})
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Hình ảnh</label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(x => x.HinhSP, new {@class = "form-control"})
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary" type="submit">Lưu</button>
+                                    @Html.ActionLink("Hủy", "Index", null, htmlAttributes: new {@class = "btn btn-default", role = "button"})
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>

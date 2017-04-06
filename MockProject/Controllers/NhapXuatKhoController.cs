@@ -67,53 +67,79 @@ namespace MockProject.Controllers
             }
         }
 
-
-        //Chi tiết phiếu nhập xuất
+        [HttpGet]
+        //tạo phiếu nhập xuất kho
         public ActionResult CreateCTPNX(int id)
         {
-            //TODO     
+           
+          
             ViewBag.NhapXuatKhoID = id;
+            //ViewData["ID"]=id;
             ViewBag.SanPhamID = new SelectList(NhapXuatKhoService.GetSanPham(), "ID", "TenSP");
-            return PartialView("_CreateEditCTPNX");
-        }
-
-        [HttpGet]
-        public ActionResult EditCTPNX(int idSP,int idPNXK)
-        {
-            
-            var model = NhapXuatKhoService.GetByIdCT(idSP,idSP);
-            //TODO        
-            return PartialView("_CreateEditCTPNX");
+     
+            return PartialView("_CreateCTPNX");
         }
         [HttpPost]
-        //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
-        public ActionResult CreateEditCTPNX(NHAPXUATKHO model)
+        public ActionResult CreateCTPNX(CTPHIEUNHAPXUATKHO model)
         {
-            if (model.ID == 0)
-            {
-
-                var result = NhapXuatKhoService.Create(model);
-                return
-
+            var result = NhapXuatKhoService.CreateCTPNX(model);
+            return
                 Json(
-                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
-                JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
+               new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Edit", new { id = model.NhapXuatKhoID }) },
+               JsonRequestBehavior.AllowGet);
 
-                var result = NhapXuatKhoService.Edit(model);
-                return
-                 Json(
-                new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
-                JsonRequestBehavior.AllowGet);
-            }
+
         }
-        //public JsonResult GetSanPham(string name)
+        public ActionResult UpdateSoLuongSanPham(int KhoID, int SanPhamID,decimal SoLuong)
+        {
+            var result = NhapXuatKhoService.UpdateSoLuongSanPham(KhoID, SanPhamID, SoLuong);
+            return
+                 Json(
+                 new RedirectCommand() { Code = result.Code, Message = result.Message },
+                 JsonRequestBehavior.AllowGet);
+        }
+
+        //chưa xử lý được vì không biết truyền 2id từ view vào contrler
+
+        //[HttpGet]
+        //public ActionResult EditCTPNX(int idSP,int idPNXK)
         //{
-        //    var data = NhapXuatKhoService.GetSanPham(name);
-        //    return Json(data.Select(x => new { Id = x.ID, Name = x.TenSP}).ToList(), JsonRequestBehavior.AllowGet);
+
+        //    var model = NhapXuatKhoService.GetByIdCT(idSP,idSP);
+        //    return PartialView("_CreateCTPNX");
         //}
+        //[HttpPost]
+
+        //public ActionResult CreateEditCTPNX(CTPHIEUNHAPXUATKHO model)
+        //{
+        //    if (model.NhapXuatKhoID == 0 && model.SanPhamID == 0)
+        //    {
+
+        //        var result = NhapXuatKhoService.CreateCTPNX(model);
+        //        return
+        //            Json(
+        //           new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Edit", new { id = model.NhapXuatKhoID }) },
+        //           JsonRequestBehavior.AllowGet);
+
+        //    }
+        //    else
+        //    {
+
+        //        var result = NhapXuatKhoService.EditCTPNX(model);
+        //        return
+        //         Json(
+        //        new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Edit", new { id = model.NhapXuatKhoID }) },
+        //        JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+
+
+        public ActionResult ListCTPNX(CTPNXSearchModel searchModel)
+        {
+            var pagedList = NhapXuatKhoService.SearchCTPNX(searchModel.ID, searchModel.PageIndex);
+            pagedList.SearchModel = searchModel;
+            return PartialView("_ListCTPNX", pagedList);
+        }
 
     }
 }

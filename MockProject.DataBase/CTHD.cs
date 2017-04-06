@@ -19,7 +19,7 @@ namespace MockProject.DataBase
         public Nullable<decimal> GiaBan { get; set; }
         public Nullable<decimal> SoLuong { get; set; }
     
-        public virtual SANPHAM SANPHAM { get; set; }
         public virtual HOADON HOADON { get; set; }
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }

@@ -1,0 +1,68 @@
+﻿@using MockProject.Common
+@using PagedList.Mvc;
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.HOADON>
+<div class="table-responsive">
+    <div class="m-t-lg">
+        <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
+    </div>
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>#</th>
+           
+            <th>
+                Mã hóa đơn
+            </th>
+            <th>
+                Tên nhân viên lập
+            </th>
+            <th>
+                Ngày lập
+            </th>
+            <th>
+                Số tiền
+            </th>
+            
+
+        </tr>
+        @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(index++)
+                </td>
+              
+                <td>
+                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.ID</a>
+                    
+                </td>
+                <td>
+                    @item.NHANVIEN.TenNV
+                   
+                </td>
+                <td>
+                    @item.NgayLap.ToString()
+                </td>
+                <td>
+                    @item.TongTien
+                </td>
+            </tr>
+        }
+    </table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+    {
+        Model.SearchModel.PageIndex = page;
+        return Url.Action("List", Model.SearchModel);
+    },
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+</div>
+<div id="updateCommision">
+
+</div>
+
+<script type="text/javascript">
+    function ShowModalCommision(html) {
+        $('#modalCommission').modal('show');
+    }
+</script>

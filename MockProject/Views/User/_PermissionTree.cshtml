@@ -33,23 +33,23 @@
                             {
                                 "text": "Quản lý nhân viên",
                                 "children": [
+                                    @EnumUtil.ToTreeNode(Permission.NhanVien_CapQuyen, dic),
                                     @EnumUtil.ToTreeNode(Permission.NhanVien_Xem, dic),
-                                    @EnumUtil.ToTreeNode(Permission.NhanVien_Sua, dic),
-                                   
+                                    @EnumUtil.ToTreeNode(Permission.NhanVien_ThemSua, dic),
+                                    
+
                                 ]
                             },
                             {
-                                "text": "Quản lý nhóm user",
+                                "text": "Loại sản phẩm",
                                 "children": [
-                                    @*@EnumUtil.ToTreeList(dic,
-                                        Permission.User_View_Group,
-                                        Permission.User_Create_Group,
-                                        Permission.User_Edit_Group,
-                                        Permission.User_Add_Permission_Group
-                                    )*@
+                                    @EnumUtil.ToTreeNode(Permission.LoaiSanPham_Xem, dic),
+                                    @EnumUtil.ToTreeNode(Permission.LoaiSanPham_ThemSua, dic),
+                                    
+                                    
                                 ]
                             },
-                           
+
                         {
                             "text": "Quản lý căn hộ",
                             "children": [
@@ -58,7 +58,7 @@
                         }
                         ]
                     }
-                   
+
 
                 ]
             }

@@ -31,26 +31,27 @@ namespace MockProject.Controllers
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
         }
+        //tạo nhân viên  
         public ActionResult Create()
         {
             ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
             ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
             
-            //tạo nhân viên       
+              
             return View("CreateEdit");
         }
         [HttpGet]
-        [AuthorizeAdmin(Permission = Permission.NhanVien_Sua)]
+       
         public ActionResult Edit(int id)
         {
             var model = UserSevice.GetById(id);
             ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
             ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
-            //chỉnh sửa nhân viên        
+                   
             return View("CreateEdit", model);
         }
         [HttpPost]
-        //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
+        [AuthorizeAdmin(Permission = Permission.NhanVien_ThemSua)]
         public ActionResult CreateEdit(NHANVIEN model)
         {
             ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
@@ -77,7 +78,8 @@ namespace MockProject.Controllers
 
 
         //phân quyền nhân viên
-        //[AuthorizeAdmin(Permission = Permission.User_Edit)]
+        //trang hiển thị quyền
+        [AuthorizeAdmin(Permission = Permission.NhanVien_CapQuyen)]
         public ActionResult ListPermission(int? id)
         {
             if (id == null)
@@ -93,25 +95,15 @@ namespace MockProject.Controllers
             return View(user);
         }
 
-        // POST: /Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-       // [AuthorizeAdmin(Permission = Permission.User_Edit)]
+        [AuthorizeAdmin(Permission = Permission.NhanVien_CapQuyen)]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ListPermission(NHANVIEN user, AddUserPermission model,
-            HttpPostedFileBase Image, string selectedPermissions)
+       // [ValidateAntiForgeryToken]
+        public ActionResult ListPermission2(NHANVIEN user, AddUserPermission model, string selectedPermissions)
         {
-            try
-            {
+            //lấy ra các quyền nhân viên
                 int[] SelectedGroupPermission = string.IsNullOrWhiteSpace(selectedPermissions) ? new int[0]
                     : selectedPermissions.Split(',').Select(x => int.Parse(x)).ToArray();
           
-                
-
-                #region add userpermission
-                if (UserPermission.Has(Permission.NhanVien_CapQuyen))
-                {
                     user = db.NHANVIENs.Include(x => x.NHANVIEN_QUYEN).FirstOrDefault(x => x.ID == model.UserId);
                     if (user == null)
                     {
@@ -121,7 +113,7 @@ namespace MockProject.Controllers
                     {
                         SelectedGroupPermission = new int[0];
                     }
-                    //ktra selectedpermiss co chua permissionid ko nam trong trong tbl user_per
+                    //ktra selectedpermiss có quyền hay chưa
                     var deleted = user.NHANVIEN_QUYEN.Where(x => SelectedGroupPermission.Contains(x.QuyenID) == false);
                     foreach (var userPermission in deleted.ToList())
                     {
@@ -135,28 +127,12 @@ namespace MockProject.Controllers
                         permission.QuyenID = permissionId;
                         db.NHANVIEN_QUYEN.Add(permission);
                     }
-                }
-                #endregion
-
-               
-
                 var log = new StringBuilder();
-            
                 log.Append(db.GetAddDeleteLog((NHANVIEN_QUYEN permission) => permission.QuyenID));
-              
                 db.SaveChanges();
-                
-           
-
                 return Json(new RedirectCommand() { Code = ResultCode.Success, Message = "Cập nhật thành công", Url = Url.Action("ListPermission", new { id = user.ID }) },
                       JsonRequestBehavior.AllowGet);
             }
-
-            catch (DbEntityValidationException ex)
-            {
-                return View();
-            }
-        }
 
 
     }

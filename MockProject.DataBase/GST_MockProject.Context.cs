@@ -27,7 +27,6 @@ namespace MockProject.DataBase
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CTHD> CTHDs { get; set; }
         public virtual DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<NHANVIEN_QUYEN> NHANVIEN_QUYEN { get; set; }
@@ -40,6 +39,7 @@ namespace MockProject.DataBase
         public virtual DbSet<HOADON> HOADONs { get; set; }
         public virtual DbSet<CTPHIEUNHAPXUATKHO> CTPHIEUNHAPXUATKHOes { get; set; }
         public virtual DbSet<NHAPXUATKHO> NHAPXUATKHOes { get; set; }
+        public virtual DbSet<CTHD> CTHDs { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

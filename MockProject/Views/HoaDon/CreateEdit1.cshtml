@@ -1,0 +1,151 @@
+﻿@model MockProject.DataBase.HOADON
+@using MockProject.DataBase
+@using MockProject.Common
+@{
+    ViewBag.Title = "Hóa đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Quản lý hóa đơn", "Index")
+            </li>
+            <li class="active">
+                <strong>@(Model == null || Model.ID == 0 ? "Tạo mới" : "Chỉnh sửa")</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    @*@using (Ajax.BeginForm("CreateEdit1", "HoaDon", null, new AjaxCommonOption() { OnSuccess = "SubmitCreateEdit" }, new { role = "form", id = "MainForm", enctype = "multipart/form-data" }))*@
+                        @using (Ajax.BeginForm("CreateEdit", "HoaDon", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+                        {
+                        @Html.HiddenFor(x => x.ID)
+                        <div class="form-horizontal">
+                            <div class="col-lg-12">
+                         
+                           
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <button type="button" onclick="addRowProduct()" class="btn btn-success dim btn-sm">Thêm sản phẩm</button>
+                                    </div>
+                                    <div class="col-md-10">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                @if (Model != null)
+                                {
+                                    @Html.Action("GetViewListProduct", new { id = Model.ID })
+                                }
+                                else
+                                {
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                              
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="viewProducts"></tbody>
+                                    </table>
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                               
+                                    <button class="btn btn-primary" type="submit" name="flag" value="0">Lưu</button>
+                     
+                                @Html.ActionLink("Thoát", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $().ready(function () {
+
+        $('.autoNumeric')
+           .autoNumeric('init', { aSep: '.', aDec: ',' });
+        $('.autoNumeric').blur();
+
+    });
+
+    function select2() {
+        $(".txtProduct")
+               .select2({
+                   minimumInputLength: 1,
+                   ajax: {
+                       url: '@Url.Action("GetSanPham", "HoaDon")',
+                       dataType: 'json',
+                       delay: 500,
+                       type: "POST",
+                       data: function (params) {
+
+                           var queryParameters = {
+                               name: params.term
+                           };
+                           return queryParameters;
+                       },
+                       processResults: function (data) {
+                           return {
+                               results: $.map(data,
+                                   function (item) {
+                                       return {
+                                           text: item.Name,
+                                           id: item.Id
+                                       };
+                                   })
+                           };
+                       }
+                   }
+               });
+    }
+
+ 
+
+
+    function addRowProduct() {
+        var htmlQuantityApprove = '';
+  
+        $('#viewProducts')
+            .append('<tr>' +
+                '<td><select class="select2 form-control txtProduct" style="width: 400px" required="" name="txtProductIdRow"></select></td>' +
+                '<td><input type="number" class="form-control" style="width:200px" value="" required="" name="txtQuantityRow"/></td>' +
+                '<td><input type="text" class="form-control "  value=""  name="txtPriceRow"/></td>' +
+                htmlQuantityApprove +
+                '<td><a onclick="removeRowProducts(this)"><i style="color: red" class="fa fa-close"></i></a></td>' +
+                '</tr>');
+        select2();
+
+        $('.autoNumeric')
+           .autoNumeric('init', { aSep: '.', aDec: ',' });
+        $('.autoNumeric').blur();
+
+    }
+
+    function removeRowProducts(e) {
+        $(e).parent().parent().remove();
+    }
+
+</script>
+

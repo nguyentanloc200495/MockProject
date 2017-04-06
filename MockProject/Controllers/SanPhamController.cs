@@ -43,13 +43,13 @@ namespace MockProject.Controllers
         {
             ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             var model = SanphamService.GetById(id);
-            //TODO        
+                  
             return PartialView("_Delete", model);
         }
         [HttpPost]
         public ActionResult Delete2(SANPHAM model)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
+            //ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             var result = SanphamService.Delete(model);
             return
                 Json(

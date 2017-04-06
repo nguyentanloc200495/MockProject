@@ -1,0 +1,48 @@
+﻿@using MockProject.Common
+@model MockProject.DataBase.CTHD
+
+<div class="table-responsive">
+
+    <div class="col-lg-12">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-4 control-label">Sản phẩm</label>
+                <div class="col-md-8">
+
+                    @*@Html.DropDownListFor(x => x.SanPhamID, null, "--------", new { @class = "form-control select2 SanPhamID" })*@
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-4 control-label">Số lượnng</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(x => x.SoLuong, new { @class = "form-control SoLuong" })
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="col-md-4 control-label">Đơn giá </label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(x => x.GiaBan, new { @class = "form-control Amount" })
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger
+        $('#Amount').autoNumeric('init', { aPad: false, aSep: '.', aDec: ',', vMin: 0.00, vMax: 99999999999999999.00 });
+        @*$('#NhapXuatKhoID2').val("@ViewBag.NhapXuatKhoID")*@
+    })
+</script>

@@ -15,6 +15,6 @@ namespace MockProject.DataBase
     {
         Nam = 0,
         Nu = 1,
-        ChuaXacDinh =2,
+        ChuaXacDinh = 2,
     }
 }

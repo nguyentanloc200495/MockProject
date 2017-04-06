@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="GST_MockProjectModelStoreContainer" CdmEntityContainer="GST_MockProjectEntities">
-    <EntitySetMapping Name="CTHDs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.CTHD">
-        <MappingFragment StoreEntitySet="CTHD">
-          <ScalarProperty Name="HoaDonID" ColumnName="HoaDonID" />
-          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="LOAISANPHAMs">
       <EntityTypeMapping TypeName="GST_MockProjectModel.LOAISANPHAM">
         <MappingFragment StoreEntitySet="LOAISANPHAM">
@@ -163,6 +153,16 @@
           <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
           <ScalarProperty Name="NgayLapPhieu" ColumnName="NgayLapPhieu" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CTHDs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.CTHD">
+        <MappingFragment StoreEntitySet="CTHD">
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
+          <ScalarProperty Name="HoaDonID" ColumnName="HoaDonID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -13,5 +13,7 @@ namespace MockProject.DataBase
     
     public enum LoaiPhieuNhapXuatKho1 : int
     {
+        PhieuNhap=0,
+        PhieuXuat=1,
     }
 }

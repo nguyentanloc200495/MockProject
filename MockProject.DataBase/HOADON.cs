@@ -25,8 +25,8 @@ namespace MockProject.DataBase
         public Nullable<int> NhanVienID { get; set; }
         public Nullable<decimal> TongTien { get; set; }
     
+        public virtual NHANVIEN NHANVIEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHDs { get; set; }
-        public virtual NHANVIEN NHANVIEN { get; set; }
     }
 }
