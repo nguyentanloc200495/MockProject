@@ -1,6 +1,6 @@
 ﻿@using MockProject.Common
 @using PagedList.Mvc;
-@model MockProject.Services.PagedSearchList<MockProject.DataBase.HOADON>
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.BILL>
 <div class="table-responsive">
     <div class="m-t-lg">
         <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
@@ -33,18 +33,19 @@
                 </td>
               
                 <td>
-                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.ID</a>
+                    <a href="@Url.Action("Edit1",new {id = item.ID})">@item.ID</a>
                     
                 </td>
                 <td>
-                    @item.NHANVIEN.TenNV
+                    @item.CreateBy
+         
                    
                 </td>
                 <td>
-                    @item.NgayLap.ToString()
+                    @item.CreateDate.ToString()
                 </td>
                 <td>
-                    @item.TongTien
+                    @item.Amount
                 </td>
             </tr>
         }

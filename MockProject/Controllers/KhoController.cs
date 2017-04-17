@@ -17,12 +17,12 @@ namespace MockProject.Controllers
       
         public ActionResult Index()
         {
-            ViewBag.TinhTrang = WebUtil.GetEnumSelectList<TinhTrangKho>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<Warehouse_Status>();
             return View();
         }
         public ActionResult List(KhoSearchModel searchModel)
         {
-            var pagedList = KhoService.Search(searchModel.TenKho,searchModel.TinhTrang, searchModel.PageIndex);
+            var pagedList = KhoService.Search(searchModel.WarehouseName,searchModel.Status, searchModel.PageIndex);
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
         }
@@ -30,21 +30,21 @@ namespace MockProject.Controllers
         public ActionResult Create()
         {
             //TODO     
-            ViewBag.TinhTrang = WebUtil.GetEnumSelectList<TinhTrangKho>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<Warehouse_Status>();
             return View("CreateEdit");
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.TinhTrang = WebUtil.GetEnumSelectList<TinhTrangKho>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<Warehouse_Status>();
             var model = KhoService.GetById(id);
             //TODO        
             return View("CreateEdit", model);
         }
         [HttpPost]
         //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
-        public ActionResult CreateEdit(KHO model)
+        public ActionResult CreateEdit(WAREHOUSE model)
         {
             if (model.ID == 0)
             {

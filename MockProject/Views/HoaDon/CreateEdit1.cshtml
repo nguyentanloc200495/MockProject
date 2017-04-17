@@ -1,4 +1,4 @@
-﻿@model MockProject.DataBase.HOADON
+﻿@model MockProject.DataBase.BILL
 @using MockProject.DataBase
 @using MockProject.Common
 @{
@@ -22,60 +22,113 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
-                    @*@using (Ajax.BeginForm("CreateEdit1", "HoaDon", null, new AjaxCommonOption() { OnSuccess = "SubmitCreateEdit" }, new { role = "form", id = "MainForm", enctype = "multipart/form-data" }))*@
-                        @using (Ajax.BeginForm("CreateEdit", "HoaDon", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
-                        {
-                        @Html.HiddenFor(x => x.ID)
-                        <div class="form-horizontal">
-                            <div class="col-lg-12">
-                         
-                           
+    @*@using (Ajax.BeginForm("CreateEdit1", "HoaDon", null, new AjaxCommonOption() { OnSuccess = "SubmitCreateEdit" }, new { role = "form", id = "MainForm", enctype = "multipart/form-data" }))*@
+    @using (Ajax.BeginForm("CreateEdit1", "HoaDon", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+    {
+        @Html.HiddenFor(x => x.ID)
+        if (Model != null)
+        {
+            <div class="row form-horizontal">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"> Mã hóa đơn</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.ID, new {@class = "form-control", @disabled = "disabled"})
 
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <button type="button" onclick="addRowProduct()" class="btn btn-success dim btn-sm">Thêm sản phẩm</button>
-                                    </div>
-                                    <div class="col-md-10">
-
-                                    </div>
                                 </div>
-
-                            </div>
-                            <div>
-                                @if (Model != null)
-                                {
-                                    @Html.Action("GetViewListProduct", new { id = Model.ID })
-                                }
-                                else
-                                {
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Sản phẩm</th>
-                                                <th>Số lượng</th>
-                                                <th>Đơn giá</th>
-                                              
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="viewProducts"></tbody>
-                                    </table>
-                                }
-
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nhân viên lập</label>
+                                <div class="col-md-8">
+                           
+                                    @Html.DropDownListFor(x => x.CreateBy, null, "------", new { @class = "form-control select", @disabled = "disabled" })
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"> Tổng tiền</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.Amount, new {@class = "form-control", @disabled = "disabled"})
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"> Ngày lập</label>
+                                <div class="col-md-8">
+
+
+                                    @Html.TextBoxFor(x => x.CreateDate, new {@class = "form-control", @data_val = "false", @disabled = "disabled"})
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+                <div class="form-horizontal">
+                    <div class="col-lg-12">
+
+
 
                         <div class="row">
-                            <div class="col-lg-12">
-                               
-                                    <button class="btn btn-primary" type="submit" name="flag" value="0">Lưu</button>
-                     
-                                @Html.ActionLink("Thoát", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                            <div class="col-md-2">
+                                <button type="button" onclick="addRowProduct()" class="btn btn-success dim btn-sm">Thêm sản phẩm</button>
+                            </div>
+                            <div class="col-md-10">
+
                             </div>
                         </div>
-                    }
 
+                    </div>
+                    <div>
+                        @if (Model != null)
+                        {
+                            @Html.Action("GetViewListProduct", new { id = Model.ID })
+                        }
+                        else
+                        {
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="viewProducts"></tbody>
+                            </table>
+                        }
+
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <button class="btn btn-primary" type="submit" name="flag" value="0">Lưu</button>
+
+                        @Html.ActionLink("Thoát", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                    </div>
+                </div>
+                }
+
+            </div>
             </div>
         </div>
     </div>
@@ -83,6 +136,13 @@
 
 <script>
     $().ready(function () {
+
+        $('.input-group.date').datetimepicker({
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            defaultDate: null,
+            viewMode: 'days'
+        });
 
         $('.autoNumeric')
            .autoNumeric('init', { aSep: '.', aDec: ',' });
@@ -121,19 +181,19 @@
                });
     }
 
- 
+
 
 
     function addRowProduct() {
         var htmlQuantityApprove = '';
-  
+
         $('#viewProducts')
             .append('<tr>' +
-                '<td><select class="select2 form-control txtProduct" style="width: 400px" required="" name="txtProductIdRow"></select></td>' +
-                '<td><input type="number" class="form-control" style="width:200px" value="" required="" name="txtQuantityRow"/></td>' +
-                '<td><input type="text" class="form-control "  value=""  name="txtPriceRow"/></td>' +
+                '<td style="width: 45%"><select class="select2 form-control txtProduct" style="width: 100%" required="" name="txtProductIdRow"></select></td>' +
+                '<td style="width: 20%"><input type="number" class="form-control" style="width:200px" value="" required="" name="txtQuantityRow"/></td>' +
+                '<td style="width: 50%"><input type="text" class="form-control "  value=""  name="txtPriceRow"/></td>' +
                 htmlQuantityApprove +
-                '<td><a onclick="removeRowProducts(this)"><i style="color: red" class="fa fa-close"></i></a></td>' +
+                '<td style="width: 5%"><a onclick="removeRowProducts(this)"><i style="color: red" class="fa fa-close"></i></a></td>' +
                 '</tr>');
         select2();
 

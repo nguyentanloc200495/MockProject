@@ -2,7 +2,7 @@
 @using MockProject.DataBase
 @using PagedList.Mvc;
 @using CommonData
-@model MockProject.Services.PagedSearchList<MockProject.DataBase.NHANVIEN>
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.USER>
 <div class="table-responsive">
     <div class="m-t-lg">
         <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
@@ -38,21 +38,21 @@
                 </td>
               
                 <td>
-                   @item.TenNV
+                   @item.FullName
                     
                 </td>
                 <td>
                  
-                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.TaiKhoan</a>
+                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.UserName</a>
                 </td>
                 <td>
                     @item.Email
                 </td>
                 <td>
-                    @item.ChucVu
+                    @item.Office
                 </td>
                 <td>
-                    @item.TrangThai.GetString()
+                    @item.Status.GetString()
                 </td>
               
 

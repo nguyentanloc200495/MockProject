@@ -4,35 +4,41 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="359fffad8d064286bd4ad03f9dec8a34" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="GST_MockProjectModel.LOAISANPHAM" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.NHANVIEN_QUYEN" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+      <Diagram DiagramId="68badddd486c4685aa178113296dd1a8" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="GST_MockProjectModel.BILL" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.BILL_DETAIL" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.PRODUCT" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.PRODUCT_TYPE" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.RETURN_BILL" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.RETURNBILL_DETAIL" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.USER" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.USER_PERMISSION" Width="1.5" PointX="6" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.WAREHOUSE" Width="1.5" PointX="3.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.WAREHOUSE_DETAIL" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.WAREHOUSE_TRANSACTION" Width="2.625" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.WAREHOUSETRANSACTION_DETAIL" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_PHIEUTRAHANG_BILL" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__CTPN__SanPhamID__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK__SANPHAM__LoaiSan__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_CTKHO_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_SANPHAM" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_CTPHIEUTRAHANG_PHIEUTRAHANG" ManuallyRouted="false" />
         <AssociationConnector Association="GST_MockProjectModel.FK__NHANVIEN___NhanV__1367E606" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.sysdiagram" Width="1.5" PointX="5.375" PointY="6.75" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.SANPHAM" Width="1.5" PointX="3" PointY="3.25" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__SANPHAM__LoaiSan__182C9B23" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.CTKHO" Width="1.5" PointX="9.875" PointY="1.875" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.KHO" Width="1.5" PointX="7.625" PointY="8.875" />
-        <AssociationConnector Association="GST_MockProjectModel.FK_CTKHO_KHO" />
-        <AssociationConnector Association="GST_MockProjectModel.FK_CTKHO_SANPHAM" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.CTPHIEUTRAHANG" Width="1.5" PointX="5.25" PointY="10.625" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.PHIEUTRAHANG" Width="1.5" PointX="3" PointY="17.875" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__CTPN__PhieuNhapI__249272081" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__CTPN__SanPhamID__258696411" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__PHIEUNHAP__NhanV__21B6055D1" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.HOADON" Width="1.5" PointX="3" PointY="8.75" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__HOADON__NhanVien__1B0907CE" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.CTPHIEUNHAPXUATKHO" Width="1.5" PointX="12.125" PointY="6.125" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.NHAPXUATKHO" Width="1.5" PointX="9.875" PointY="8.5" />
-        <AssociationConnector Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" />
-        <AssociationConnector Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_SANPHAM" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_NHANVIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_CTKHO_KHO" ManuallyRouted="false" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.NOTIFY" Width="1.5" PointX="6" PointY="18" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_Notify_NHANVIEN" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_BILL_USER" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_BILL_USER1" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_RETURN_BILL_USER" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_RETURN_BILL_USER1" />
+        <AssociationConnector Association="GST_MockProjectModel.FK_WAREHOUSE_TRANSACTION_USER4" />
+        <EntityTypeShape EntityType="GST_MockProjectModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
         <AssociationConnector Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_KHO" />
-        <AssociationConnector Association="GST_MockProjectModel.FK_PHIEUNHAPKHO_NHANVIEN" />
-        <EntityTypeShape EntityType="GST_MockProjectModel.CTHD" Width="1.5" PointX="5.25" PointY="3" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__HoaDonID__1DE57479" />
-        <AssociationConnector Association="GST_MockProjectModel.FK__CTHD__SanPhamID__1ED998B2" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -1,0 +1,104 @@
+﻿@using MockProject.Common
+@model MockProject.Models.TraHangSearchModel
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Hóa đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>Quản lý hóa đơn</strong>
+            </li>
+        </ol>
+        <a class="btn btn-primary m-t-sm" href=@Url.Action("Create", "TraHang")> Tạo mới</a>
+        @*@Ajax.ActionLink("Tạo mới", "Create", new {}, new AjaxOptions() { UpdateTargetId = "updateCommision", OnSuccess = "ShowModalCommision" }, new { @class = "btn btn-success", role = "button" })*@
+
+</div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInUp">
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Tìm kiếm</h5>
+        </div>
+        <div class="ibox-content">
+            @using (Ajax.BeginForm("List", "TraHang", new AjaxOptions() { UpdateTargetId = "content" }))
+            {
+                <div class="row form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Mã phiếu trả hàng</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.ID, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Tên nhân viên lập</label>
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(x => x.CreateBy, null, "-----Tất cả--------", new { @class = "form-control select2" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Từ ngày</label>
+                                <div class="col-md-8">
+                                    <div class="input-group date">
+                                        @Html.TextBoxFor(x => x.TuNgay, null, new { @class = "form-control", data_val = "false" })
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Đến ngày</label>
+                                <div class="col-md-8">
+                                    <div class="input-group date">
+                                        @Html.TextBoxFor(x => x.DenNgay, null, new { @class = "form-control", data_val = "false" })
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary" type="submit" id="submit">Tìm</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div id="content" class="loading">
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="updateCommision">
+
+    </div>
+<script type="text/javascript">
+   
+    $(function() {
+        $('.input-group.date').datetimepicker({
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            extraFormats: ["MM/YYYY"],
+            defaultDate: null
+        });
+
+        $("#Status").val("");
+    })
+    function ShowModalCommision(html) {
+        $('#modalCommission').modal('show');
+    }
+</script>

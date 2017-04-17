@@ -14,26 +14,26 @@ namespace MockProject.Controllers
         // GET: SanPham
         public ActionResult Index(SanphamSearchModel searchModel)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
+            ViewBag.ProductType_ID = new SelectList(SanphamService.GetAllLoaisanpham(), "ID", "ProductTypeName");
             return View(searchModel);
         }
         public ActionResult List(SanphamSearchModel searchModel)
         {
-            var pagedList = SanphamService.Search(searchModel.ID, searchModel.TenSanpham, searchModel.Giaban, searchModel.LoaiSanphamID, searchModel.PageIndex);
+            var pagedList = SanphamService.Search(searchModel.ID, searchModel.ProductName, searchModel.Amount, searchModel.ProductType_ID, searchModel.PageIndex);
          
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
         }
         public ActionResult Create()
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
+            ViewBag.ProductType_ID = new SelectList(SanphamService.GetAllLoaisanpham(), "ID", "ProductTypeName");
             //TODO        
             return View("CreateEdit");
         }
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
+            ViewBag.ProductType_ID = new SelectList(SanphamService.GetAllLoaisanpham(), "ID", "ProductTypeName");
             var model = SanphamService.GetById(id);
             //TODO        
             return View("CreateEdit", model);
@@ -41,15 +41,15 @@ namespace MockProject.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
+            ViewBag.ProductType_ID = new SelectList(SanphamService.GetAllLoaisanpham(), "ID", "ProductTypeName");
             var model = SanphamService.GetById(id);
                   
             return PartialView("_Delete", model);
         }
         [HttpPost]
-        public ActionResult Delete2(SANPHAM model)
+        public ActionResult Delete2(PRODUCT model)
         {
-            //ViewBag.LoaiSanphamID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
+            //ViewBag.ProductType_ID = new SelectList(SanphamService.GetAllLoaisanpham(), "Id", "TenLoaiSanPham");
             var result = SanphamService.Delete(model);
             return
                 Json(
@@ -59,7 +59,7 @@ namespace MockProject.Controllers
         }
         [HttpPost]
         //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
-        public ActionResult CreateEdit(SANPHAM model)
+        public ActionResult CreateEdit(PRODUCT model)
         {
             if (model.ID == 0)
             {

@@ -1,27 +1,45 @@
-﻿@using MockProject.Services
+﻿@using MockProject.Common
+@using MockProject.DataBase
+@using MockProject.Services
 @using Microsoft.AspNet.Identity
 
 @if (Request.IsAuthenticated)
 
 {
     <ul class="nav navbar-top-links navbar-right">
-       
+        
         <li>
-            @Html.ActionLink(UserService.GetUserInfo().TenNV + "!", "Profile", "Account", routeValues: new {id = UserService.GetUserInfo().ID}, htmlAttributes: new {title = "Manage"})
-        </li>
 
+            <a href="@Url.Action("Profile", "Account", routeValues: new {id = UserService.GetUserInfo().ID})"><img class="img-circle" src="@UserLogin.Avatar()" alt="@User.Identity.GetUserName()" style="width: 36px; height: 36px;" /></a>
+        </li>
         <li>
+          
+            @Html.ActionLink(UserService.GetUserInfo().FullName + "!", "Profile", "Account", routeValues: new { id = UserService.GetUserInfo().ID }, htmlAttributes: new { title = "Manage" })
+        </li>
+        @if (UserPermission.Has(Permission.Notify_View))
+        {
+            <li class="dropdown" id="NotifyTop">
+                @Html.Action("Notify", "Notify")
+
+            </li>
+
+        }
+
+        <li class="dropdown" id="Theme">
+            @Html.Action("Theme", "Notify")
+
+        </li>
+        <li>
+
             <a href="javascript:document.getElementById('logoutForm').submit()" onclick="disconnectSignalr()"><i class="fa fa-sign-out"></i>Thoát</a>
         </li>
-        <li>
-         
-            <a href="@Url.Action("Profile", "Account", routeValues: new {id = UserService.GetUserInfo().ID})"><img class="img-circle" src="@UserLogin.Avatar()" alt="@User.Identity.GetUserName()" style="width: 36px; height: 36px;"/></a>
-        </li>
+      
     </ul>
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style="display:none" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", style = "display:none" }))
     {
         @Html.AntiForgeryToken()
     }
+   
 }
 else
 {

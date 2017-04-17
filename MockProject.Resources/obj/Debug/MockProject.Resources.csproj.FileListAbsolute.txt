@@ -5,3 +5,5 @@ F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resource
 F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.csproj.GenerateResource.Cache
 F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.dll
 F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.pdb
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.Language-vi.resources
+F:\Mock Project\MockProject\MockProject.Resources\obj\Debug\MockProject.Resources.Language-en.resources

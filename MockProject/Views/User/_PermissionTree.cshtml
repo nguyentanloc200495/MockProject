@@ -36,28 +36,37 @@
                                     @EnumUtil.ToTreeNode(Permission.NhanVien_CapQuyen, dic),
                                     @EnumUtil.ToTreeNode(Permission.NhanVien_Xem, dic),
                                     @EnumUtil.ToTreeNode(Permission.NhanVien_ThemSua, dic),
-                                    
+
 
                                 ]
                             },
-                            {
+                             {
+                                 "text": "Quản lý thông báo",
+                                 "children": [
+                                     @EnumUtil.ToTreeNode(Permission.Notify_View, dic),
+                                    
+                                 ]
+                             },
+
+                        ]
+                    },
+                      {
+                          "text": "Sản phẩm",
+                          "icon": "fa fa-file-text",
+                          "state": { "opened": false },
+                          "children": [
+
+                             {
                                 "text": "Loại sản phẩm",
                                 "children": [
                                     @EnumUtil.ToTreeNode(Permission.LoaiSanPham_Xem, dic),
                                     @EnumUtil.ToTreeNode(Permission.LoaiSanPham_ThemSua, dic),
-                                    
-                                    
-                                ]
-                            },
 
-                        {
-                            "text": "Quản lý căn hộ",
-                            "children": [
-                                 @*@EnumUtil.ToTreeNode(Permission.Resident_ManagerApartment, dic)*@
-                            ]
-                        }
-                        ]
-                    }
+
+                                ]
+                            }
+                          ]
+                      },
 
 
                 ]

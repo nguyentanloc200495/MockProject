@@ -1,0 +1,58 @@
+﻿@using MockProject.Common
+@using MockProject.DataBase
+@using PagedList.Mvc;
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.NOTIFY>
+<div class="table-responsive">
+    <div class="m-t-lg">
+        <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount thông báo</h5>
+    </div>
+    <table class="table table-hover table-bordered table-striped">
+        <tr>
+            <th>#</th>
+            <th>
+                Tiêu đề
+            </th>
+            <th>
+                Loại thông báo
+            </th>
+            <th>
+                Thời gian
+            </th>
+
+        </tr>
+        @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="@(item.Status == Notifi_Status.ChuaXem ? "font-weight: bold;color: red" : "")">
+                    @(index++)
+                </td>
+
+                <td style="@(item.Status == Notifi_Status.ChuaXem ? "font-weight: bold;color: red" : "") ">
+              
+                       
+                    <a href="@Url.Action("Detail",new {id = item.ID})">@item.Title</a>
+                </td>
+                <td>
+                    @item.Type.Value
+                </td>
+
+                <td>
+                    @item.TimeCreate.ToString()
+                </td>
+
+
+            </tr>
+        }
+    </table>
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page =>
+{
+    Model.SearchModel.PageIndex = page;
+    return Url.Action("List", Model.SearchModel);
+},
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxCommonOption() { HttpMethod = "POST", UpdateTargetId = "content" }))
+</div>
+
+
+

@@ -12,7 +12,7 @@
                 <strong>Quản lý nhâp xuất</strong>
             </li>
         </ol>
-        <a class="btn btn-primary m-t-sm" href=@Url.Action("Create", "NhapXuatKho")> Tạo mới</a>
+        <a class="btn btn-primary m-t-sm" href=@Url.Action("Create1", "NhapXuatKho")> Tạo mới</a>
 
     </div>
 </div>
@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Tên Kho</label>
                                 <div class="col-md-8">
-                                    @Html.DropDownListFor(x => x.KhoID, null, "-----Tất cả--------", new { @class = "form-control select2" })
+                                    @Html.DropDownListFor(x => x.Warehouse_ID, null, "-----Tất cả--------", new { @class = "form-control select2" })
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Loại phiếu</label>
                                 <div class="col-md-8">
-                                    @Html.DropDownListFor(x => x.LoaiPhieu, null, "-----Tất cả--------", new { @class = "form-control" })
+                                    @Html.DropDownListFor(x => x.Type, null, "-----Tất cả--------", new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>

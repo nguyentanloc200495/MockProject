@@ -61,15 +61,15 @@ namespace MockProject.Services
             {
                 var username = HttpContext.Current.User.Identity.Name;
                 var user =
-                    context.NHANVIENs.Include(x => x.NHANVIEN_QUYEN)
-                        .FirstOrDefault(x => x.TaiKhoan == username);
+                    context.USERs.Include(x => x.USER_PERMISSION)
+                        .FirstOrDefault(x => x.UserName == username);
                 if (user == null)
                 {
                     return new List<int>();
                 }
                 else
                 {
-                    var result = user.NHANVIEN_QUYEN.Select(y => y.QuyenID).ToList();
+                    var result = user.USER_PERMISSION.Select(y => y.Permisstion_ID).ToList();
                     //result.AddRange(user.NHANVIEN_QUYEN.Select(x => x.QuyenID));
                     return result.Distinct().ToList();
                 }
@@ -83,7 +83,7 @@ namespace MockProject.Services
                 using (System.Data.Entity.DbContextTransaction dbTran = context.Database.BeginTransaction())
                 {
 
-                    var user = context.NHANVIENs.FirstOrDefault(x => x.TaiKhoan == userName);
+                    var user = context.USERs.FirstOrDefault(x => x.UserName == userName);
                          if (user == null)
                         {
                             return new CommandResult(ResultCode.Fail, "User không tồn tại");
@@ -91,11 +91,11 @@ namespace MockProject.Services
                          else
                          {
                         var passMD5 = Encryptor.MD5Hash(oldPassword);
-                        if (user.MatKhau != passMD5)
+                        if (user.Password != passMD5)
                         {
                             return new CommandResult(ResultCode.Fail, "Mật khẩu cũ không đúng");
                         }
-                        user.MatKhau = Encryptor.MD5Hash(newPassword);
+                        user.Password = Encryptor.MD5Hash(newPassword);
                         context.SaveChanges();
                     }
                         

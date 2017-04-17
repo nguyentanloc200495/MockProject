@@ -9,9 +9,9 @@ namespace MockProject.Models
     public class SanphamSearchModel : SearchModel
     {
         public int? ID { get; set; }
-        public String TenSanpham { get; set; }
-        public decimal? Giaban { get; set; }
-        public int? LoaiSanphamID { get; set; }
+        public String ProductName { get; set; }
+        public decimal? Amount { get; set; }
+        public int? ProductType_ID { get; set; }
 
     }
 }

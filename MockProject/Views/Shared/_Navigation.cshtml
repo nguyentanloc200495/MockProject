@@ -10,14 +10,6 @@
                     <span>
                         <img src="/Content/Image/1logo.png" style="height: 100px;" />
                     </span>
-                    @*<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                                <span class="block m-t-xs">
-                                    <strong class="font-bold">@Html.ActionLink(User.Identity.GetUserName(), "Profile", "Account", routeValues: new { id = UserService.GetUserInfo().Id }, htmlAttributes: new { title = "Manage" })</strong>
-                                </span>
-                            </span>
-                        </a>*@
-
                 </div>
                 <div class="logo-element">
                     &nbsp;
@@ -65,21 +57,21 @@
                     <li class="@Html.IsSelected(action: "Index", controller: "Kho")"><a href="@Url.Action("Index", "Kho")">Quản lý kho hàng</a></li>
                     <li class="@Html.IsSelected(action: "Create", controller: "Kho")"><a href="@Url.Action("Create", "Kho")">Tạo kho</a></li>
                     <li class="@Html.IsSelected(action: "Index", controller: "CTKho")"><a href="@Url.Action("Index", "CTKho")">Tình trạng kho hàng</a></li>
-                </ul>
-            </li>
-
-            <li class="@Html.IsSelected(controller: "NhapXuatKho")">
-                <a href="@Url.Action("Index", "NhapXuatKho")"><i class="fa fa-user"></i> <span class="nav-label"><b>Nhập suất kho</b></span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "NhapXuatKho", cssClass: "in")">
                     <li class="@Html.IsSelected(action: "Index", controller: "NhapXuatKho")"><a href="@Url.Action("Index", "NhapXuatKho")">Quản lý nhập xuất</a></li>
-                    @*<li class="@Html.IsSelected(action: "Create", controller: "NhapXuatKho")"><a href="@Url.Action("Create", "NhapXuatKho")">Tạo sản phẩm</a></li>*@
                 </ul>
             </li>
             <li class="@Html.IsSelected(controller: "HoaDon")">
                 <a href="@Url.Action("Index", "HoaDon")"><i class="fa fa-user"></i> <span class="nav-label"><b>Hóa đơn</b></span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "HoaDon", cssClass: "in")">
                     <li class="@Html.IsSelected(action: "Index", controller: "HoaDon")"><a href="@Url.Action("Index", "HoaDon")">Quản lý hóa đơn</a></li>
-                    @*<li class="@Html.IsSelected(action: "Create", controller: "NhapXuatKho")"><a href="@Url.Action("Create", "NhapXuatKho")">Tạo sản phẩm</a></li>*@
+                  
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller: "ThongKe")">
+                <a href="@Url.Action("Index", "ThongKe")"><i class="fa fa-user"></i> <span class="nav-label"><b>Thống kê</b></span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "ThongKe", cssClass: "in")">
+                    <li class="@Html.IsSelected(action: "Index", controller: "ThongKe")"><a href="@Url.Action("Index", "ThongKe")">Xem thống kê bán hàng</a></li>
+                   
                 </ul>
             </li>
         </ul>

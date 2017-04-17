@@ -1,0 +1,60 @@
+﻿<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" id="NotifyTopIcon">
+
+
+    <i class="fa fa-cogs"></i>
+    <strong>Theme</strong>
+
+</a>
+<ul class="dropdown-menu dropdown-alerts demo-choose-skin" onclick="ChangeSkin()">
+
+    <li data-theme="white" class="active">
+        <div class="white"></div>
+        <span>White</span>
+    </li>
+
+    <li data-theme="deep-purple">
+        <div class="deep-purple"></div>
+        <span>Deep Purple</span>
+    </li>
+
+</ul>
+<script>
+    function ChangeSkin() {
+
+        $('.demo-choose-skin li').on('click', function () {
+
+            var $body = $('body');
+            var $this = $(this);
+            var $pagewrapper = $('#page-wrapper')
+            var existTheme = $('.demo-choose-skin li.active').data('theme');
+            $('.demo-choose-skin li').removeClass('active');
+            $body.removeClass('theme-' + existTheme);
+            $this.addClass('active');
+
+            $pagewrapper.addClass('theme-' + $this.data('theme'));
+
+            $pagewrapper.removeClass('theme-' + existTheme);
+            $this.addClass('active');
+
+            $pagewrapper.addClass('theme-' + $this.data('theme'));
+        });
+    }
+    function skinChanger() {
+
+        $('.demo-choose-skin li').on('click', function () {
+            debugger
+            var $body = $('body');
+            var $this = $(this);
+
+            var existTheme = $('.demo-choose-skin li.active').data('theme');
+            $('.demo-choose-skin li').removeClass('active');
+            $body.removeClass('theme-' + existTheme);
+            $this.addClass('active');
+
+            $body.addClass('theme-' + $this.data('theme'));
+        });
+    }
+</script>
+
+
+

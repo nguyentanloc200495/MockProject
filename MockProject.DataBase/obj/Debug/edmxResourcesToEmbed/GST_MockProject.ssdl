@@ -1,127 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GST_MockProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="CTHD">
-    <Key>
-      <PropertyRef Name="HoaDonID" />
-      <PropertyRef Name="SanPhamID" />
-    </Key>
-    <Property Name="HoaDonID" Type="int" Nullable="false" />
-    <Property Name="SanPhamID" Type="int" Nullable="false" />
-    <Property Name="GiaBan" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <EntityType Name="CTKHO">
-    <Key>
-      <PropertyRef Name="KhoID" />
-      <PropertyRef Name="SanPhamID" />
-    </Key>
-    <Property Name="KhoID" Type="int" Nullable="false" />
-    <Property Name="SanPhamID" Type="int" Nullable="false" />
-    <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <EntityType Name="CTPHIEUNHAPXUATKHO">
-    <Key>
-      <PropertyRef Name="NhapXuatKhoID" />
-      <PropertyRef Name="SanPhamID" />
-    </Key>
-    <Property Name="NhapXuatKhoID" Type="int" Nullable="false" />
-    <Property Name="SanPhamID" Type="int" Nullable="false" />
-    <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="DonGia" Type="decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <EntityType Name="CTPHIEUTRAHANG">
-    <Key>
-      <PropertyRef Name="PhieuNhapID" />
-      <PropertyRef Name="SanPhamID" />
-    </Key>
-    <Property Name="PhieuNhapID" Type="int" Nullable="false" />
-    <Property Name="SanPhamID" Type="int" Nullable="false" />
-    <Property Name="GiaNhap" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="SoLuong" Type="decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <EntityType Name="HOADON">
+  <EntityType Name="BILL">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NgayLap" Type="date" />
-    <Property Name="NhanVienID" Type="int" />
-    <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreateDate" Type="date" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="UpdateDate" Type="date" />
+    <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <EntityType Name="KHO">
+  <EntityType Name="BILL_DETAIL">
+    <Key>
+      <PropertyRef Name="Bill_ID" />
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Bill_ID" Type="int" Nullable="false" />
+    <Property Name="Product_ID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="NOTIFY">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenKho" Type="nvarchar" MaxLength="50" />
-    <Property Name="ViTriKho" Type="nvarchar" MaxLength="50" />
-    <Property Name="TinhTrang" Type="int" />
+    <Property Name="UserCreate" Type="int" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TimeCreate" Type="datetime" Nullable="false" />
+    <Property Name="Type" Type="int" />
+    <Property Name="Status" Type="int" />
   </EntityType>
-  <EntityType Name="LOAISANPHAM">
+  <EntityType Name="PRODUCT">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenLoaiSanPham" Type="nvarchar" MaxLength="50" />
-    <Property Name="TrangThai" Type="int" />
+    <Property Name="ProductType_ID" Type="int" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
-  <EntityType Name="NHANVIEN">
+  <EntityType Name="PRODUCT_TYPE">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
-    <Property Name="NgaySinh" Type="date" />
-    <Property Name="GioiTinh" Type="int" />
-    <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
-    <Property Name="SoDT" Type="varchar" MaxLength="11" />
-    <Property Name="TaiKhoan" Type="nvarchar" MaxLength="50" />
-    <Property Name="MatKhau" Type="nvarchar" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar" MaxLength="50" />
-    <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
-    <Property Name="TrangThai" Type="int" />
-    <Property Name="HinhAnh" Type="nvarchar" MaxLength="100" />
+    <Property Name="ProductTypeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
   </EntityType>
-  <EntityType Name="NHANVIEN_QUYEN">
-    <Key>
-      <PropertyRef Name="NhanVienID" />
-      <PropertyRef Name="QuyenID" />
-    </Key>
-    <Property Name="NhanVienID" Type="int" Nullable="false" />
-    <Property Name="QuyenID" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="NHAPXUATKHO">
+  <EntityType Name="RETURN_BILL">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NgayLapPhieu" Type="date" />
-    <Property Name="NhanVienID" Type="int" />
-    <Property Name="KhoID" Type="int" />
-    <Property Name="LoaiPhieu" Type="int" />
+    <Property Name="Bill_ID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreateDate" Type="date" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="UpdateDate" Type="date" />
+    <Property Name="UpdateBy" Type="int" />
   </EntityType>
-  <EntityType Name="PHIEUTRAHANG">
+  <EntityType Name="RETURNBILL_DETAIL">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ReturnBill_ID" />
+      <PropertyRef Name="Product_ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NgayLap" Type="date" />
-    <Property Name="NhanVienID" Type="int" />
-    <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <EntityType Name="SANPHAM">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="LoaiSanPhamID" Type="int" />
-    <Property Name="TenSP" Type="nvarchar" MaxLength="50" />
-    <Property Name="HinhSP" Type="nvarchar" MaxLength="255" />
-    <Property Name="MoTa" Type="nvarchar(max)" />
-    <Property Name="GiaBan" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="SoLuongTon" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="DonViTinh" Type="nvarchar" MaxLength="50" />
-    <Property Name="TrangThai" Type="bit" />
+    <Property Name="ReturnBill_ID" Type="int" Nullable="false" />
+    <Property Name="Product_ID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -133,274 +86,389 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Sex" Type="int" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Office" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="USER_PERMISSION">
+    <Key>
+      <PropertyRef Name="User_ID" />
+      <PropertyRef Name="Permisstion_ID" />
+    </Key>
+    <Property Name="User_ID" Type="int" Nullable="false" />
+    <Property Name="Permisstion_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WAREHOUSE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WarehouseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="WAREHOUSE_DETAIL">
+    <Key>
+      <PropertyRef Name="Warehouse_ID" />
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="Warehouse_ID" Type="int" Nullable="false" />
+    <Property Name="Product_ID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="WAREHOUSE_TRANSACTION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Warehouse_ID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" />
+    <Property Name="CreateDate" Type="date" />
+    <Property Name="CreateBy" Type="int" />
+    <Property Name="UpdateDate" Type="date" />
+    <Property Name="UpdateBy" Type="int" />
+  </EntityType>
+  <EntityType Name="WAREHOUSETRANSACTION_DETAIL">
+    <Key>
+      <PropertyRef Name="WarehouseTransaction_ID" />
+      <PropertyRef Name="Product_ID" />
+    </Key>
+    <Property Name="WarehouseTransaction_ID" Type="int" Nullable="false" />
+    <Property Name="Product_ID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
   <Association Name="FK__CTHD__HoaDonID__1DE57479">
-    <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
-    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="BILL_DETAIL" Type="Self.BILL_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HOADON">
+      <Principal Role="BILL">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTHD">
-        <PropertyRef Name="HoaDonID" />
+      <Dependent Role="BILL_DETAIL">
+        <PropertyRef Name="Bill_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__CTHD__SanPhamID__1ED998B2">
-    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
-    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="BILL_DETAIL" Type="Self.BILL_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SANPHAM">
+      <Principal Role="PRODUCT">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTHD">
-        <PropertyRef Name="SanPhamID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CTPN__PhieuNhapI__24927208">
-    <End Role="PHIEUTRAHANG" Type="Self.PHIEUTRAHANG" Multiplicity="1" />
-    <End Role="CTPHIEUTRAHANG" Type="Self.CTPHIEUTRAHANG" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PHIEUTRAHANG">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CTPHIEUTRAHANG">
-        <PropertyRef Name="PhieuNhapID" />
+      <Dependent Role="BILL_DETAIL">
+        <PropertyRef Name="Product_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__CTPN__SanPhamID__25869641">
-    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
-    <End Role="CTPHIEUTRAHANG" Type="Self.CTPHIEUTRAHANG" Multiplicity="*" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="RETURNBILL_DETAIL" Type="Self.RETURNBILL_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SANPHAM">
+      <Principal Role="PRODUCT">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTPHIEUTRAHANG">
-        <PropertyRef Name="SanPhamID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HOADON__NhanVien__1B0907CE">
-    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-    <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NHANVIEN">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="HOADON">
-        <PropertyRef Name="NhanVienID" />
+      <Dependent Role="RETURNBILL_DETAIL">
+        <PropertyRef Name="Product_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__NHANVIEN___NhanV__1367E606">
-    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1" />
-    <End Role="NHANVIEN_QUYEN" Type="Self.NHANVIEN_QUYEN" Multiplicity="*" />
+    <End Role="USER" Type="Self.USER" Multiplicity="1" />
+    <End Role="USER_PERMISSION" Type="Self.USER_PERMISSION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="NHANVIEN">
+      <Principal Role="USER">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="NHANVIEN_QUYEN">
-        <PropertyRef Name="NhanVienID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__PHIEUNHAP__NhanV__21B6055D">
-    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-    <End Role="PHIEUTRAHANG" Type="Self.PHIEUTRAHANG" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NHANVIEN">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PHIEUTRAHANG">
-        <PropertyRef Name="NhanVienID" />
+      <Dependent Role="USER_PERMISSION">
+        <PropertyRef Name="User_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__SANPHAM__LoaiSan__182C9B23">
-    <End Role="LOAISANPHAM" Type="Self.LOAISANPHAM" Multiplicity="0..1" />
-    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+    <End Role="PRODUCT_TYPE" Type="Self.PRODUCT_TYPE" Multiplicity="0..1" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="LOAISANPHAM">
+      <Principal Role="PRODUCT_TYPE">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="SANPHAM">
-        <PropertyRef Name="LoaiSanPhamID" />
+      <Dependent Role="PRODUCT">
+        <PropertyRef Name="ProductType_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BILL_USER">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BILL_USER1">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="UpdateBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CTKHO_KHO">
-    <End Role="KHO" Type="Self.KHO" Multiplicity="1" />
-    <End Role="CTKHO" Type="Self.CTKHO" Multiplicity="*" />
+    <End Role="WAREHOUSE" Type="Self.WAREHOUSE" Multiplicity="1" />
+    <End Role="WAREHOUSE_DETAIL" Type="Self.WAREHOUSE_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="KHO">
+      <Principal Role="WAREHOUSE">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTKHO">
-        <PropertyRef Name="KhoID" />
+      <Dependent Role="WAREHOUSE_DETAIL">
+        <PropertyRef Name="Warehouse_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CTKHO_SANPHAM">
-    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
-    <End Role="CTKHO" Type="Self.CTKHO" Multiplicity="*" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="WAREHOUSE_DETAIL" Type="Self.WAREHOUSE_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SANPHAM">
+      <Principal Role="PRODUCT">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTKHO">
-        <PropertyRef Name="SanPhamID" />
+      <Dependent Role="WAREHOUSE_DETAIL">
+        <PropertyRef Name="Product_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
-    <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="1" />
-    <End Role="CTPHIEUNHAPXUATKHO" Type="Self.CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+    <End Role="WAREHOUSE_TRANSACTION" Type="Self.WAREHOUSE_TRANSACTION" Multiplicity="1" />
+    <End Role="WAREHOUSETRANSACTION_DETAIL" Type="Self.WAREHOUSETRANSACTION_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="NHAPXUATKHO">
+      <Principal Role="WAREHOUSE_TRANSACTION">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTPHIEUNHAPXUATKHO">
-        <PropertyRef Name="NhapXuatKhoID" />
+      <Dependent Role="WAREHOUSETRANSACTION_DETAIL">
+        <PropertyRef Name="WarehouseTransaction_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_CTPHIEUNHAPKHO_SANPHAM">
-    <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
-    <End Role="CTPHIEUNHAPXUATKHO" Type="Self.CTPHIEUNHAPXUATKHO" Multiplicity="*" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+    <End Role="WAREHOUSETRANSACTION_DETAIL" Type="Self.WAREHOUSETRANSACTION_DETAIL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SANPHAM">
+      <Principal Role="PRODUCT">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="CTPHIEUNHAPXUATKHO">
-        <PropertyRef Name="SanPhamID" />
+      <Dependent Role="WAREHOUSETRANSACTION_DETAIL">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPHIEUTRAHANG_PHIEUTRAHANG">
+    <End Role="RETURN_BILL" Type="Self.RETURN_BILL" Multiplicity="1" />
+    <End Role="RETURNBILL_DETAIL" Type="Self.RETURNBILL_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RETURN_BILL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RETURNBILL_DETAIL">
+        <PropertyRef Name="ReturnBill_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notify_NHANVIEN">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="NOTIFY" Type="Self.NOTIFY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NOTIFY">
+        <PropertyRef Name="UserCreate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PHIEUNHAPKHO_KHO">
-    <End Role="KHO" Type="Self.KHO" Multiplicity="0..1" />
-    <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="*" />
+    <End Role="WAREHOUSE" Type="Self.WAREHOUSE" Multiplicity="1" />
+    <End Role="WAREHOUSE_TRANSACTION" Type="Self.WAREHOUSE_TRANSACTION" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="KHO">
+      <Principal Role="WAREHOUSE">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="NHAPXUATKHO">
-        <PropertyRef Name="KhoID" />
+      <Dependent Role="WAREHOUSE_TRANSACTION">
+        <PropertyRef Name="Warehouse_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PHIEUNHAPKHO_NHANVIEN">
-    <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
-    <End Role="NHAPXUATKHO" Type="Self.NHAPXUATKHO" Multiplicity="*" />
+  <Association Name="FK_PHIEUTRAHANG_BILL">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="0..1" />
+    <End Role="RETURN_BILL" Type="Self.RETURN_BILL" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="NHANVIEN">
+      <Principal Role="BILL">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="NHAPXUATKHO">
-        <PropertyRef Name="NhanVienID" />
+      <Dependent Role="RETURN_BILL">
+        <PropertyRef Name="Bill_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Association Name="FK_RETURN_BILL_USER">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="RETURN_BILL" Type="Self.RETURN_BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RETURN_BILL">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RETURN_BILL_USER1">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="RETURN_BILL" Type="Self.RETURN_BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RETURN_BILL">
+        <PropertyRef Name="UpdateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WAREHOUSE_TRANSACTION_USER3">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="WAREHOUSE_TRANSACTION" Type="Self.WAREHOUSE_TRANSACTION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WAREHOUSE_TRANSACTION">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WAREHOUSE_TRANSACTION_USER4">
+    <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+    <End Role="WAREHOUSE_TRANSACTION" Type="Self.WAREHOUSE_TRANSACTION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WAREHOUSE_TRANSACTION">
+        <PropertyRef Name="UpdateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="GST_MockProjectModelStoreContainer">
-    <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CTKHO" EntityType="Self.CTKHO" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CTPHIEUNHAPXUATKHO" EntityType="Self.CTPHIEUNHAPXUATKHO" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CTPHIEUTRAHANG" EntityType="Self.CTPHIEUTRAHANG" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KHO" EntityType="Self.KHO" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="NHANVIEN_QUYEN" EntityType="Self.NHANVIEN_QUYEN" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="NHAPXUATKHO" EntityType="Self.NHAPXUATKHO" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PHIEUTRAHANG" EntityType="Self.PHIEUTRAHANG" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BILL_DETAIL" EntityType="Self.BILL_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NOTIFY" EntityType="Self.NOTIFY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCT_TYPE" EntityType="Self.PRODUCT_TYPE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RETURN_BILL" EntityType="Self.RETURN_BILL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RETURNBILL_DETAIL" EntityType="Self.RETURNBILL_DETAIL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER_PERMISSION" EntityType="Self.USER_PERMISSION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WAREHOUSE" EntityType="Self.WAREHOUSE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WAREHOUSE_DETAIL" EntityType="Self.WAREHOUSE_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WAREHOUSE_TRANSACTION" EntityType="Self.WAREHOUSE_TRANSACTION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WAREHOUSETRANSACTION_DETAIL" EntityType="Self.WAREHOUSETRANSACTION_DETAIL" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__CTHD__HoaDonID__1DE57479" Association="Self.FK__CTHD__HoaDonID__1DE57479">
-      <End Role="HOADON" EntitySet="HOADON" />
-      <End Role="CTHD" EntitySet="CTHD" />
+      <End Role="BILL" EntitySet="BILL" />
+      <End Role="BILL_DETAIL" EntitySet="BILL_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK__CTHD__SanPhamID__1ED998B2" Association="Self.FK__CTHD__SanPhamID__1ED998B2">
-      <End Role="SANPHAM" EntitySet="SANPHAM" />
-      <End Role="CTHD" EntitySet="CTHD" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CTPN__PhieuNhapI__24927208" Association="Self.FK__CTPN__PhieuNhapI__24927208">
-      <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANG" />
-      <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANG" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="BILL_DETAIL" EntitySet="BILL_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK__CTPN__SanPhamID__25869641" Association="Self.FK__CTPN__SanPhamID__25869641">
-      <End Role="SANPHAM" EntitySet="SANPHAM" />
-      <End Role="CTPHIEUTRAHANG" EntitySet="CTPHIEUTRAHANG" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HOADON__NhanVien__1B0907CE" Association="Self.FK__HOADON__NhanVien__1B0907CE">
-      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-      <End Role="HOADON" EntitySet="HOADON" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="RETURNBILL_DETAIL" EntitySet="RETURNBILL_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK__NHANVIEN___NhanV__1367E606" Association="Self.FK__NHANVIEN___NhanV__1367E606">
-      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-      <End Role="NHANVIEN_QUYEN" EntitySet="NHANVIEN_QUYEN" />
-    </AssociationSet>
-    <AssociationSet Name="FK__PHIEUNHAP__NhanV__21B6055D" Association="Self.FK__PHIEUNHAP__NhanV__21B6055D">
-      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-      <End Role="PHIEUTRAHANG" EntitySet="PHIEUTRAHANG" />
+      <End Role="USER" EntitySet="USER" />
+      <End Role="USER_PERMISSION" EntitySet="USER_PERMISSION" />
     </AssociationSet>
     <AssociationSet Name="FK__SANPHAM__LoaiSan__182C9B23" Association="Self.FK__SANPHAM__LoaiSan__182C9B23">
-      <End Role="LOAISANPHAM" EntitySet="LOAISANPHAM" />
-      <End Role="SANPHAM" EntitySet="SANPHAM" />
+      <End Role="PRODUCT_TYPE" EntitySet="PRODUCT_TYPE" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BILL_USER" Association="Self.FK_BILL_USER">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BILL_USER1" Association="Self.FK_BILL_USER1">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="BILL" EntitySet="BILL" />
     </AssociationSet>
     <AssociationSet Name="FK_CTKHO_KHO" Association="Self.FK_CTKHO_KHO">
-      <End Role="KHO" EntitySet="KHO" />
-      <End Role="CTKHO" EntitySet="CTKHO" />
+      <End Role="WAREHOUSE" EntitySet="WAREHOUSE" />
+      <End Role="WAREHOUSE_DETAIL" EntitySet="WAREHOUSE_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_CTKHO_SANPHAM" Association="Self.FK_CTKHO_SANPHAM">
-      <End Role="SANPHAM" EntitySet="SANPHAM" />
-      <End Role="CTKHO" EntitySet="CTKHO" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="WAREHOUSE_DETAIL" EntitySet="WAREHOUSE_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO" Association="Self.FK_CTPHIEUNHAPKHO_PHIEUNHAPKHO">
-      <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
-      <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHO" />
+      <End Role="WAREHOUSE_TRANSACTION" EntitySet="WAREHOUSE_TRANSACTION" />
+      <End Role="WAREHOUSETRANSACTION_DETAIL" EntitySet="WAREHOUSETRANSACTION_DETAIL" />
     </AssociationSet>
     <AssociationSet Name="FK_CTPHIEUNHAPKHO_SANPHAM" Association="Self.FK_CTPHIEUNHAPKHO_SANPHAM">
-      <End Role="SANPHAM" EntitySet="SANPHAM" />
-      <End Role="CTPHIEUNHAPXUATKHO" EntitySet="CTPHIEUNHAPXUATKHO" />
+      <End Role="PRODUCT" EntitySet="PRODUCT" />
+      <End Role="WAREHOUSETRANSACTION_DETAIL" EntitySet="WAREHOUSETRANSACTION_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPHIEUTRAHANG_PHIEUTRAHANG" Association="Self.FK_CTPHIEUTRAHANG_PHIEUTRAHANG">
+      <End Role="RETURN_BILL" EntitySet="RETURN_BILL" />
+      <End Role="RETURNBILL_DETAIL" EntitySet="RETURNBILL_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notify_NHANVIEN" Association="Self.FK_Notify_NHANVIEN">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="NOTIFY" EntitySet="NOTIFY" />
     </AssociationSet>
     <AssociationSet Name="FK_PHIEUNHAPKHO_KHO" Association="Self.FK_PHIEUNHAPKHO_KHO">
-      <End Role="KHO" EntitySet="KHO" />
-      <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
+      <End Role="WAREHOUSE" EntitySet="WAREHOUSE" />
+      <End Role="WAREHOUSE_TRANSACTION" EntitySet="WAREHOUSE_TRANSACTION" />
     </AssociationSet>
-    <AssociationSet Name="FK_PHIEUNHAPKHO_NHANVIEN" Association="Self.FK_PHIEUNHAPKHO_NHANVIEN">
-      <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-      <End Role="NHAPXUATKHO" EntitySet="NHAPXUATKHO" />
+    <AssociationSet Name="FK_PHIEUTRAHANG_BILL" Association="Self.FK_PHIEUTRAHANG_BILL">
+      <End Role="BILL" EntitySet="BILL" />
+      <End Role="RETURN_BILL" EntitySet="RETURN_BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RETURN_BILL_USER" Association="Self.FK_RETURN_BILL_USER">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="RETURN_BILL" EntitySet="RETURN_BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RETURN_BILL_USER1" Association="Self.FK_RETURN_BILL_USER1">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="RETURN_BILL" EntitySet="RETURN_BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WAREHOUSE_TRANSACTION_USER3" Association="Self.FK_WAREHOUSE_TRANSACTION_USER3">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="WAREHOUSE_TRANSACTION" EntitySet="WAREHOUSE_TRANSACTION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WAREHOUSE_TRANSACTION_USER4" Association="Self.FK_WAREHOUSE_TRANSACTION_USER4">
+      <End Role="USER" EntitySet="USER" />
+      <End Role="WAREHOUSE_TRANSACTION" EntitySet="WAREHOUSE_TRANSACTION" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

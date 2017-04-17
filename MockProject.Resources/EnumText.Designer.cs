@@ -63,45 +63,27 @@ namespace MockProject.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Chưa xác định.
         /// </summary>
-        public static string LoaiGioiTinh_ChuaXacDinh {
+        public static string Sex_Type_ChuaXacDinh {
             get {
-                return ResourceManager.GetString("LoaiGioiTinh.ChuaXacDinh", resourceCulture);
+                return ResourceManager.GetString("Sex_Type.ChuaXacDinh", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Nam.
         /// </summary>
-        public static string LoaiGioiTinh_Nam {
+        public static string Sex_Type_Nam {
             get {
-                return ResourceManager.GetString("LoaiGioiTinh.Nam", resourceCulture);
+                return ResourceManager.GetString("Sex_Type.Nam", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Nữ.
         /// </summary>
-        public static string LoaiGioiTinh_Nu {
+        public static string Sex_Type_Nu {
             get {
-                return ResourceManager.GetString("LoaiGioiTinh.Nu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phiếu nhập kho.
-        /// </summary>
-        public static string LoaiPhieuNhapXuatKho1_PhieuNhap {
-            get {
-                return ResourceManager.GetString("LoaiPhieuNhapXuatKho1.PhieuNhap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phiếu xuất kho.
-        /// </summary>
-        public static string LoaiPhieuNhapXuatKho1_PhieuXuat {
-            get {
-                return ResourceManager.GetString("LoaiPhieuNhapXuatKho1.PhieuXuat", resourceCulture);
+                return ResourceManager.GetString("Sex_Type.Nu", resourceCulture);
             }
         }
         
@@ -144,36 +126,54 @@ namespace MockProject.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Công tác.
         /// </summary>
-        public static string TrangThaiNhanVien_CongTac {
+        public static string User_Status_CongTac {
             get {
-                return ResourceManager.GetString("TrangThaiNhanVien.CongTac", resourceCulture);
+                return ResourceManager.GetString("User_Status.CongTac", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Đang làm việc.
         /// </summary>
-        public static string TrangThaiNhanVien_DangLamViec {
+        public static string User_Status_DangLamViec {
             get {
-                return ResourceManager.GetString("TrangThaiNhanVien.DangLamViec", resourceCulture);
+                return ResourceManager.GetString("User_Status.DangLamViec", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Nghĩ phép.
         /// </summary>
-        public static string TrangThaiNhanVien_NghiPhep {
+        public static string User_Status_NghiPhep {
             get {
-                return ResourceManager.GetString("TrangThaiNhanVien.NghiPhep", resourceCulture);
+                return ResourceManager.GetString("User_Status.NghiPhep", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Nghĩ việc.
         /// </summary>
-        public static string TrangThaiNhanVien_NghiViec {
+        public static string User_Status_NghiViec {
             get {
-                return ResourceManager.GetString("TrangThaiNhanVien.NghiViec", resourceCulture);
+                return ResourceManager.GetString("User_Status.NghiViec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phiếu nhập kho.
+        /// </summary>
+        public static string WarehouseTransaction_Type_PhieuNhap {
+            get {
+                return ResourceManager.GetString("WarehouseTransaction_Type.PhieuNhap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phiếu xuất kho.
+        /// </summary>
+        public static string WarehouseTransaction_Type_PhieuXuat {
+            get {
+                return ResourceManager.GetString("WarehouseTransaction_Type.PhieuXuat", resourceCulture);
             }
         }
     }

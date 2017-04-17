@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using MockProject.DataBase;
 using MockProject.Models;
+using MockProject.Services;
 
 namespace MockProject.Controllers
 {
@@ -14,132 +15,73 @@ namespace MockProject.Controllers
         // GET: NhapKho
         public ActionResult Index()
         {
-            ViewBag.KhoID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "TenKho");
-            ViewBag.LoaiPhieu = WebUtil.GetEnumSelectList<LoaiPhieuNhapXuatKho1>();
+            ViewBag.Warehouse_ID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "WarehouseName");
+            ViewBag.Type = WebUtil.GetEnumSelectList<WarehouseTransaction_Type>();
             return View();
         }
         public ActionResult List(NhapXuatKhoSearchModel searchModel)
         {
-            var pagedList = NhapXuatKhoService.Search(searchModel.ID, searchModel.KhoID, searchModel.LoaiPhieu, searchModel.PageIndex);
+            var pagedList = NhapXuatKhoService.Search(searchModel.ID, searchModel.Warehouse_ID, searchModel.Type, searchModel.PageIndex);
             pagedList.SearchModel = searchModel;
             return PartialView("_List", pagedList);
         }
-        [HttpGet]
-        public ActionResult Create()
+       [HttpGet]
+        public ActionResult Create1()
         {
             //TODO     
-            ViewBag.KhoID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "TenKho");
-            ViewBag.LoaiPhieu = WebUtil.GetEnumSelectList<LoaiPhieuNhapXuatKho1>();
-            return View("CreateEdit");
+            ViewBag.Warehouse_ID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "WarehouseName");
+            ViewBag.Type = WebUtil.GetEnumSelectList<WarehouseTransaction_Type>();
+            return View("CreateEdit1");
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit1(int id)
         {
-            ViewBag.KhoID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "TenKho");
-            ViewBag.LoaiPhieu = WebUtil.GetEnumSelectList<LoaiPhieuNhapXuatKho1>();
+            ViewBag.Warehouse_ID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "WarehouseName");
+            ViewBag.Type = WebUtil.GetEnumSelectList<WarehouseTransaction_Type>();
             var model = NhapXuatKhoService.GetById(id);
             //TODO        
-            return View("CreateEdit", model);
+            return View("CreateEdit1", model);
         }
         [HttpPost]
-        //[AuthorizeAdmin(Permissions = new Permission[] { Permission.Floor_Create, Permission.Floor_Edit })]
-        public ActionResult CreateEdit(NHAPXUATKHO model)
+        public ActionResult CreateEdit1(WAREHOUSE_TRANSACTION model)
         {
+            if (Request["txtProductIdRow"] == null)
+            {
+                return Json(new CommandResult() { Code = ResultCode.Fail, Message = "Xin vui lòng thêm sản phẩm " }, JsonRequestBehavior.AllowGet);
+            }
+            var listSanPhamID = Request.Form.GetValues("txtProductIdRow");
+            var listSoLuong = Request.Form.GetValues("txtQuantityRow");
+            var listGia = Request.Form.GetValues("txtPriceRow");
             if (model.ID == 0)
             {
-
-                var result = NhapXuatKhoService.Create(model);
+                                                                                                            var user = UserService.GetUserInfo();
+                var result = NhapXuatKhoService.Create1(model, user.ID, listSanPhamID, listSoLuong, listGia);
                 return
-
                 Json(
                 new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
                 JsonRequestBehavior.AllowGet);
             }
             else
             {
-
-                var result = NhapXuatKhoService.Edit(model);
+                var user = UserService.GetUserInfo();
+                var result = NhapXuatKhoService.Edit1(model, user.ID, listSanPhamID, listSoLuong, listGia);
                 return
-                 Json(
+                Json(
                 new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Index", new { id = model.ID }) },
                 JsonRequestBehavior.AllowGet);
+
             }
+
         }
 
-        [HttpGet]
-        //tạo phiếu nhập xuất kho
-        public ActionResult CreateCTPNX(int id)
+        [ChildActionOnly]
+        public ActionResult GetViewListProduct(int id)
         {
-           
-          
-            ViewBag.NhapXuatKhoID = id;
-            //ViewData["ID"]=id;
-            ViewBag.SanPhamID = new SelectList(NhapXuatKhoService.GetSanPham(), "ID", "TenSP");
-     
-            return PartialView("_CreateCTPNX");
-        }
-        [HttpPost]
-        public ActionResult CreateCTPNX(CTPHIEUNHAPXUATKHO model)
-        {
-            var result = NhapXuatKhoService.CreateCTPNX(model);
-            return
-                Json(
-               new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Edit", new { id = model.NhapXuatKhoID }) },
-               JsonRequestBehavior.AllowGet);
-
-
-        }
-        public ActionResult UpdateSoLuongSanPham(int KhoID, int SanPhamID,decimal SoLuong)
-        {
-            var result = NhapXuatKhoService.UpdateSoLuongSanPham(KhoID, SanPhamID, SoLuong);
-            return
-                 Json(
-                 new RedirectCommand() { Code = result.Code, Message = result.Message },
-                 JsonRequestBehavior.AllowGet);
+            var model = NhapXuatKhoService.GetListCTNXK(id);
+            return PartialView("_ListCTNXK", model);
         }
 
-        //chưa xử lý được vì không biết truyền 2id từ view vào contrler
-
-        //[HttpGet]
-        //public ActionResult EditCTPNX(int idSP,int idPNXK)
-        //{
-
-        //    var model = NhapXuatKhoService.GetByIdCT(idSP,idSP);
-        //    return PartialView("_CreateCTPNX");
-        //}
-        //[HttpPost]
-
-        //public ActionResult CreateEditCTPNX(CTPHIEUNHAPXUATKHO model)
-        //{
-        //    if (model.NhapXuatKhoID == 0 && model.SanPhamID == 0)
-        //    {
-
-        //        var result = NhapXuatKhoService.CreateCTPNX(model);
-        //        return
-        //            Json(
-        //           new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Edit", new { id = model.NhapXuatKhoID }) },
-        //           JsonRequestBehavior.AllowGet);
-
-        //    }
-        //    else
-        //    {
-
-        //        var result = NhapXuatKhoService.EditCTPNX(model);
-        //        return
-        //         Json(
-        //        new RedirectCommand() { Code = result.Code, Message = result.Message, Url = Url.Action("Edit", new { id = model.NhapXuatKhoID }) },
-        //        JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-
-
-        public ActionResult ListCTPNX(CTPNXSearchModel searchModel)
-        {
-            var pagedList = NhapXuatKhoService.SearchCTPNX(searchModel.ID, searchModel.PageIndex);
-            pagedList.SearchModel = searchModel;
-            return PartialView("_ListCTPNX", pagedList);
-        }
 
     }
 }

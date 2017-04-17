@@ -14,8 +14,8 @@ namespace MockProject.Controllers
         // GET: CTKho
         public ActionResult Index()
         {
-            ViewBag.KhoID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "TenKho");
-            ViewBag.SanPhamID = new SelectList(NhapXuatKhoService.GetSanPham(), "ID", "TenSP");
+            ViewBag.KhoID = new SelectList(NhapXuatKhoService.GetAllKho(), "ID", "WarehouseName");
+            ViewBag.SanPhamID = new SelectList(NhapXuatKhoService.GetSanPham(), "ID", "ProductName");
             return View();
         }
         public ActionResult List(CTKhoSearchModel searchModel)

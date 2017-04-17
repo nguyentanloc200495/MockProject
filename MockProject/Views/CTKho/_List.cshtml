@@ -1,7 +1,7 @@
 ﻿@using MockProject.Common
 @using CommonData
 @using PagedList.Mvc;
-@model MockProject.Services.PagedSearchList<MockProject.DataBase.CTKHO>
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.WAREHOUSE_DETAIL>
 <div class="table-responsive">
     <div class="m-t-lg">
         <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
@@ -31,15 +31,15 @@
 
                 <td>
                    
-                   @item.KHO.TenKho
+                   @item.WAREHOUSE.WarehouseName
                 
                 </td>
                 <td>
-                    @item.SANPHAM.TenSP
+                    @item.PRODUCT.ProductName
                
                 </td>
                 <td>
-                    @item.SoLuong
+                    @item.Quantity
                 </td>
               
 

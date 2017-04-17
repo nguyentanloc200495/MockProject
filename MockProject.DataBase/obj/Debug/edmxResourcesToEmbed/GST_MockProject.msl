@@ -1,38 +1,152 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="GST_MockProjectModelStoreContainer" CdmEntityContainer="GST_MockProjectEntities">
-    <EntitySetMapping Name="LOAISANPHAMs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.LOAISANPHAM">
-        <MappingFragment StoreEntitySet="LOAISANPHAM">
+    <EntitySetMapping Name="BILLs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.BILL">
+        <MappingFragment StoreEntitySet="BILL">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="TenLoaiSanPham" ColumnName="TenLoaiSanPham" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NHANVIENs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.NHANVIEN">
-        <MappingFragment StoreEntitySet="NHANVIEN">
-          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+    <EntitySetMapping Name="BILL_DETAIL">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.BILL_DETAIL">
+        <MappingFragment StoreEntitySet="BILL_DETAIL">
+          <ScalarProperty Name="Bill_ID" ColumnName="Bill_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.PRODUCT">
+        <MappingFragment StoreEntitySet="PRODUCT">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="TenNV" ColumnName="TenNV" />
-          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
-          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
-          <ScalarProperty Name="SoDT" ColumnName="SoDT" />
-          <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
-          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="ProductType_ID" ColumnName="ProductType_ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCT_TYPE">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.PRODUCT_TYPE">
+        <MappingFragment StoreEntitySet="PRODUCT_TYPE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductTypeName" ColumnName="ProductTypeName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RETURN_BILL">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.RETURN_BILL">
+        <MappingFragment StoreEntitySet="RETURN_BILL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Bill_ID" ColumnName="Bill_ID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RETURNBILL_DETAIL">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.RETURNBILL_DETAIL">
+        <MappingFragment StoreEntitySet="RETURNBILL_DETAIL">
+          <ScalarProperty Name="ReturnBill_ID" ColumnName="ReturnBill_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.USER">
+        <MappingFragment StoreEntitySet="USER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Office" ColumnName="Office" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NHANVIEN_QUYEN">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.NHANVIEN_QUYEN">
-        <MappingFragment StoreEntitySet="NHANVIEN_QUYEN">
-          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-          <ScalarProperty Name="QuyenID" ColumnName="QuyenID" />
+    <EntitySetMapping Name="USER_PERMISSION">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.USER_PERMISSION">
+        <MappingFragment StoreEntitySet="USER_PERMISSION">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Permisstion_ID" ColumnName="Permisstion_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WAREHOUSEs">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.WAREHOUSE">
+        <MappingFragment StoreEntitySet="WAREHOUSE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WAREHOUSE_DETAIL">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.WAREHOUSE_DETAIL">
+        <MappingFragment StoreEntitySet="WAREHOUSE_DETAIL">
+          <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WAREHOUSE_TRANSACTION">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.WAREHOUSE_TRANSACTION">
+        <MappingFragment StoreEntitySet="WAREHOUSE_TRANSACTION">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WAREHOUSETRANSACTION_DETAIL">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.WAREHOUSETRANSACTION_DETAIL">
+        <MappingFragment StoreEntitySet="WAREHOUSETRANSACTION_DETAIL">
+          <ScalarProperty Name="WarehouseTransaction_ID" ColumnName="WarehouseTransaction_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOTIFies">
+      <EntityTypeMapping TypeName="GST_MockProjectModel.NOTIFY">
+        <MappingFragment StoreEntitySet="NOTIFY">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,125 +158,6 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
           <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GST_MockProjectModel.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GST_MockProjectModel.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GST_MockProjectModel.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GST_MockProjectModel.Store.sp_helpdiagramdefinition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GST_MockProjectModel.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GST_MockProjectModel.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="GST_MockProjectModel.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GST_MockProjectModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GST_MockProjectModel.Store.sp_upgraddiagrams" />
-    <EntitySetMapping Name="SANPHAMs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.SANPHAM">
-        <MappingFragment StoreEntitySet="SANPHAM">
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
-          <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
-          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
-          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
-          <ScalarProperty Name="HinhSP" ColumnName="HinhSP" />
-          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
-          <ScalarProperty Name="LoaiSanPhamID" ColumnName="LoaiSanPhamID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTKHOes">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.CTKHO">
-        <MappingFragment StoreEntitySet="CTKHO">
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-          <ScalarProperty Name="KhoID" ColumnName="KhoID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KHOes">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.KHO">
-        <MappingFragment StoreEntitySet="KHO">
-          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
-          <ScalarProperty Name="ViTriKho" ColumnName="ViTriKho" />
-          <ScalarProperty Name="TenKho" ColumnName="TenKho" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTPHIEUTRAHANGs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.CTPHIEUTRAHANG">
-        <MappingFragment StoreEntitySet="CTPHIEUTRAHANG">
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
-          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-          <ScalarProperty Name="PhieuNhapID" ColumnName="PhieuNhapID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PHIEUTRAHANGs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.PHIEUTRAHANG">
-        <MappingFragment StoreEntitySet="PHIEUTRAHANG">
-          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HOADONs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.HOADON">
-        <MappingFragment StoreEntitySet="HOADON">
-          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-          <ScalarProperty Name="NgayLap" ColumnName="NgayLap" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTPHIEUNHAPXUATKHOes">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.CTPHIEUNHAPXUATKHO">
-        <MappingFragment StoreEntitySet="CTPHIEUNHAPXUATKHO">
-          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-          <ScalarProperty Name="NhapXuatKhoID" ColumnName="NhapXuatKhoID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="NHAPXUATKHOes">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.NHAPXUATKHO">
-        <MappingFragment StoreEntitySet="NHAPXUATKHO">
-          <ScalarProperty Name="LoaiPhieu" ColumnName="LoaiPhieu" />
-          <ScalarProperty Name="KhoID" ColumnName="KhoID" />
-          <ScalarProperty Name="NhanVienID" ColumnName="NhanVienID" />
-          <ScalarProperty Name="NgayLapPhieu" ColumnName="NgayLapPhieu" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTHDs">
-      <EntityTypeMapping TypeName="GST_MockProjectModel.CTHD">
-        <MappingFragment StoreEntitySet="CTHD">
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
-          <ScalarProperty Name="SanPhamID" ColumnName="SanPhamID" />
-          <ScalarProperty Name="HoaDonID" ColumnName="HoaDonID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

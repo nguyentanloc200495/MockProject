@@ -1,0 +1,101 @@
+﻿@using MockProject.DataBase
+@model List<MockProject.DataBase.NOTIFY>
+<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" id="NotifyTopIcon" onclick="ChangeStatusNotify()">
+
+
+    <i class="fa fa-bell"></i>
+    @if (@Model.Where(x => x.Status == Notifi_Status.ChuaXem).Count() > 0)
+    {
+        <span id="totalNotifyLabel" class="label label-primary" style="background-color: red">@Model.Where(x => x.Status == Notifi_Status.ChuaXem).Count()</span>
+    }
+    <strong>Thông báo</strong>
+
+</a>
+<ul class="dropdown-menu dropdown-alerts">
+    @foreach (var item in Model.Take(5))
+    {
+        <li>
+       
+            <span style="color: red; cursor: pointer" class="pull-right text-muted small fa fa-times fa-2" onclick="ChangeStatusLine(@item.ID)"></span>
+
+            <a style="@(item.Status == Notifi_Status.ChuaXem ? "color:red" : "")"  href="@Url.Action("Detail",new {id = item.ID})" onclick="ChangeStatusNotify2()" >
+              
+                <div style="font-weight: bold">
+                    @item.Title
+                    @{
+                        string timeString = "";
+                        TimeSpan dateTime = DateTime.Now.TimeOfDay - item.TimeCreate.TimeOfDay;
+
+                        if (DateTime.Now.AddDays(-1).Day == item.TimeCreate.Day)
+                        {
+                            string time = item.TimeCreate.ToString("HH:mm");
+                            timeString = "Hôm qua lúc " + time + "";
+                        }
+                        else if (DateTime.Now.Day == item.TimeCreate.Day)
+                        {
+                            if (dateTime.Hours > 0)
+                            {
+                                timeString = "" + dateTime.Hours + " giờ trước";
+                            }
+                            else
+                            {
+                                timeString = "" + dateTime.Minutes + " phút trước";
+                            }
+                        }
+                        else
+                        {
+                            timeString = "" + item.TimeCreate.ToString("dd/MM/yyyy HH:mm") + "";
+                        }
+                    }
+                    <br />
+
+                    <span class="pull-right text-muted small">@timeString</span>
+
+                </div>
+            </a>
+
+        </li>
+        <li style="margin-top: 22px" class="divider"></li>
+                        }
+
+    <li>
+        <div class="text-center link-block">
+            <a href="@Url.Action("Index")">
+                <strong>Xem tất cả</strong>
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+    </li>
+</ul>
+<script>
+
+
+    function ChangeStatusNotify() {
+
+        $.post('@Url.Action("Notify")', { flag: 0 }, function (html) {
+            $('#totalNotifyLabel').remove();
+            // $('#NotifyTop').html(html);
+        })
+
+
+    }
+    function ChangeStatusNotify2() {
+       
+        $.post('@Url.Action("Notify")', { flag: 0 }, function (html) {
+            $('#totalNotifyLabel').remove();
+            // $('#NotifyTop').html(html);
+        })
+
+
+    }
+    function ChangeStatusLine(id) {
+    debugger 
+        $.post('@Url.Action("Notify")', { ma : id }, function (html) {
+
+            $('#NotifyTop').html(html);
+            $('#NotifyTopIcon').click();
+
+        })
+    }
+</script>
+

@@ -1,6 +1,6 @@
 ﻿@using MockProject.Common
 @using PagedList.Mvc;
-@model MockProject.Services.PagedSearchList<MockProject.DataBase.SANPHAM>
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.PRODUCT>
 <div class="table-responsive">
     <div class="m-t-lg">
         <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
@@ -18,9 +18,7 @@
             <th>
                 Loại sản phẩm
             </th>
-            <th>
-                Số lượng tồn
-            </th>
+      
             <th>
                 Đơn vị tính
             </th>
@@ -43,20 +41,18 @@
                     
                 </td>
                 <td>
-                    @item.TenSP
+                    @item.ProductName
                    
                 </td>
                 <td>
-                    @item.LOAISANPHAM.TenLoaiSanPham
+                    @item.PRODUCT_TYPE.ProductTypeName
+                </td>
+            
+                <td>
+                    @item.Unit
                 </td>
                 <td>
-                    @item.SoLuongTon
-                </td>
-                <td>
-                    @item.DonViTinh
-                </td>
-                <td>
-                    @item.GiaBan
+                    @item.Amount
                 </td>
                 <td>
     

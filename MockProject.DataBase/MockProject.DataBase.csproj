@@ -80,20 +80,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BILL.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BILL_DETAIL.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="CommandResult.cs" />
-    <Compile Include="CTHD.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CTKHO.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CTPHIEUNHAPXUATKHO.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CTPHIEUTRAHANG.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
     <Compile Include="Enums\Permission.cs" />
     <Compile Include="GST_MockProject.Context.cs">
       <AutoGen>True</AutoGen>
@@ -110,53 +104,62 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GST_MockProject.edmx</DependentUpon>
     </Compile>
-    <Compile Include="HOADON.cs">
+    <Compile Include="Notifi_Status.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="KHO.cs">
+    <Compile Include="Notifi_Type.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="LoaiGioiTinh.cs">
+    <Compile Include="NOTIFY.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="LoaiPhieuNhapXuatKho1.cs">
+    <Compile Include="PRODUCT.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="LOAISANPHAM.cs">
+    <Compile Include="ProductType_Status.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="NHANVIEN.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NHANVIEN_QUYEN.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NHAPXUATKHO.cs">
-      <DependentUpon>GST_MockProject.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PHIEUTRAHANG.cs">
+    <Compile Include="PRODUCT_TYPE.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SANPHAM.cs">
+    <Compile Include="RETURNBILL_DETAIL.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="RETURN_BILL.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
+    <Compile Include="Sex_Type.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="TinhTrangKho.cs">
+    <Compile Include="USER.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="TrangThaiLoaiSanPham.cs">
+    <Compile Include="USER_PERMISSION.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="TrangThaiNhanVien.cs">
+    <Compile Include="User_Status.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WAREHOUSE.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WAREHOUSETRANSACTION_DETAIL.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WarehouseTransaction_Type.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WAREHOUSE_DETAIL.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse_Status.cs">
+      <DependentUpon>GST_MockProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WAREHOUSE_TRANSACTION.cs">
       <DependentUpon>GST_MockProject.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -174,7 +177,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="GST_MockProject.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

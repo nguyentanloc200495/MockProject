@@ -1,7 +1,7 @@
 ﻿@using MockProject.Common
 @using CommonData
 @using PagedList.Mvc;
-@model MockProject.Services.PagedSearchList<MockProject.DataBase.NHAPXUATKHO>
+@model MockProject.Services.PagedSearchList<MockProject.DataBase.WAREHOUSE_TRANSACTION>
 <div class="table-responsive">
     <div class="m-t-lg">
         <h5 class="m-t-lg">Tìm thấy @Model.TotalItemCount</h5>
@@ -25,6 +25,9 @@
             <th>
                 Nhân viên lập
             </th>
+            <th>
+                Nhân viên chỉnh sửa
+            </th>
         </tr>
         @{ int index = Model.PageSize * (Model.PageNumber - 1) + 1; }
         @foreach (var item in Model)
@@ -36,23 +39,26 @@
 
                 <td>
                    
-                    <a href="@Url.Action("Edit",new {id = item.ID})">@item.ID</a>
+                    <a href="@Url.Action("Edit1",new {id = item.ID})">@item.ID</a>
                 
                 </td>
                 <td>
-                    @item.LoaiPhieu.GetString();
+                    @item.Type.GetString()
                
                 </td>
                 <td>
-                    @item.KHO.TenKho
+                    
+                    @(item.WAREHOUSE != null ? item.WAREHOUSE.WarehouseName : "")
                 </td>
                 <td>
-                    @item.NgayLapPhieu
+                    @item.CreateDate
                 </td>
                 <td>
-                    @(item.NHANVIEN !=null ? item.NHANVIEN.TenNV : "")
+                    
                 </td>
-
+                <td>
+                    @(item.USER !=null ? item.USER.FullName : "")
+                </td>
 
             </tr>
         }

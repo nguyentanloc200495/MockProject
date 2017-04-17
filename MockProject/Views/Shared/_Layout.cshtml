@@ -51,10 +51,12 @@
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
     <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    @*thay đổi theme *@
+    <link href="~/Content/themes/all-themes.css" rel="stylesheet" />
     @*<script src="~/SignalR/Hubs"></script>*@
 </head>
 <body>
-
+    @Html.Partial("_SkinConfig")
     <!-- Wrapper-->
     <div id="wrapper" class="Advanced">
 
@@ -71,7 +73,7 @@
             @RenderBody()
 
             <!-- Footer -->
-            @*@Html.Partial("_Footer")*@
+            @Html.Partial("_Footer")
 
         </div>
         <!-- End page wrapper-->
@@ -87,7 +89,7 @@
     @Scripts.Render("~/plugins/sweetalert")
     @Scripts.Render("~/plugins/select2")
     @Scripts.Render("~/bundles/inspinia")
-
+    @Scripts.Render("~/bundles/skinConfig")
     <script src="~/Scripts/toastr.min.js"></script>
 
 

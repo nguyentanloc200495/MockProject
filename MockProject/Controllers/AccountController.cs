@@ -1,4 +1,5 @@
 ﻿using CommonData;
+using MockProject.Common;
 using MockProject.DataBase;
 using MockProject.Models;
 using MockProject.Services;
@@ -6,8 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +18,7 @@ using System.Web.Security;
 
 namespace MockProject.Controllers
 {
+
     public class AccountController : Controller
     {
 
@@ -25,6 +29,7 @@ namespace MockProject.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
         [AllowAnonymous]
         public ActionResult Home(string returnUrl)
         {
@@ -47,20 +52,20 @@ namespace MockProject.Controllers
                 {
                     var passMD5 = Encryptor.MD5Hash(password);
 
-                    var user = context.NHANVIENs.FirstOrDefault(x => x.TaiKhoan == username);
-                    
+                    var user = context.USERs.FirstOrDefault(x => x.UserName == username);
+
                     if (user != null
-                        && ((!string.IsNullOrWhiteSpace(user.MatKhau) && user.MatKhau == passMD5) ||
-                            ( Membership.ValidateUser(username, password))))
+                        && ((!string.IsNullOrWhiteSpace(user.Password) && user.Password == passMD5) ||
+                            (Membership.ValidateUser(username, password))))
                     {
-                        if (user.TrangThai == TrangThaiNhanVien.NghiViec)
+                        if (user.Status == User_Status.NghiViec)
                         {
                             ViewBag.Message = "Tài khoản đã bị khóa !";
                             return View();
                         }
                         else
                         {
-                            FormsAuthentication.SetAuthCookie(user.TaiKhoan, rememberMe);
+                            FormsAuthentication.SetAuthCookie(user.UserName, rememberMe);
                             if (string.IsNullOrEmpty(returnUrl))
                             {
                                 return RedirectToAction("Index", "Home");
@@ -121,7 +126,7 @@ namespace MockProject.Controllers
         {
             GST_MockProjectEntities db = new GST_MockProjectEntities();
             var id = UserService.GetUserInfo().ID;
-            NHANVIEN user = db.NHANVIENs.FirstOrDefault(x => x.ID == id);
+            USER user = db.USERs.FirstOrDefault(x => x.ID == id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -134,17 +139,19 @@ namespace MockProject.Controllers
             //ViewBag.Device = DeviceAssignmentService.GetDeviceAssignmentByUser(UserService.GetUserInfo().Id);
             return View(user);
         }
-        public ActionResult ShowUpdateImage()//hiện trang chỉnh sửa hình ảnh
+
+        public ActionResult ShowUpdateImage() //hiện trang chỉnh sửa hình ảnh
         {
             GST_MockProjectEntities db = new GST_MockProjectEntities();
             var id = UserService.GetUserInfo().ID;
-            NHANVIEN user = db.NHANVIENs.SingleOrDefault(s => s.ID == id);
+            USER user = db.USERs.SingleOrDefault(s => s.ID == id);
             return View(user);
         }
-        public ActionResult SaveChangeImage(int id, HttpPostedFileBase ImageUser)//hàm lưu lại hình ảnh đã đổi
+
+        public ActionResult SaveChangeImage(int id, HttpPostedFileBase ImageUser) //hàm lưu lại hình ảnh đã đổi
         {
             GST_MockProjectEntities db = new GST_MockProjectEntities();
-            var imageUpdate = db.NHANVIENs.Find(id);
+            var imageUpdate = db.USERs.Find(id);
 
             try
             {
@@ -162,7 +169,7 @@ namespace MockProject.Controllers
                         var ext = Path.GetExtension(fileNameinput);
                         if (ext != ".jpg" && ext != ".png" && ext != ".gif")
                         {
-                            return RedirectToAction("ShowUpdateImage", "Account", new { id = id });
+                            return RedirectToAction("ShowUpdateImage", "Account", new {id = id});
                         }
                         var fileName = id.ToString() + ".jpg";
                         bool exists = System.IO.Directory.Exists(Server.MapPath(pathFile));
@@ -170,7 +177,7 @@ namespace MockProject.Controllers
                             System.IO.Directory.CreateDirectory(Server.MapPath(pathFile));
                         var path = Path.Combine(Server.MapPath(pathFile), fileName);
                         ImageUser.SaveAs(path);
-                        imageUpdate.HinhAnh = fileName;
+                        imageUpdate.Image = fileName;
 
                     }
                     db.Entry(imageUpdate).State = EntityState.Modified;
@@ -182,7 +189,7 @@ namespace MockProject.Controllers
                 ModelState.AddModelError("", "Error Save Data");
             }
 
-            return RedirectToAction("Profile", "Account", new { id = id });
+            return RedirectToAction("Profile", "Account", new {id = id});
         }
 
         [HttpPost]
@@ -194,13 +201,13 @@ namespace MockProject.Controllers
 
             return RedirectToAction("Login", "Account", "");
         }
-
-
+        
         [HttpGet]
         public ActionResult ResetPassword()
         {
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult ResetPassword(ResetPasswordModel model)
@@ -227,6 +234,41 @@ namespace MockProject.Controllers
             return Json(new CommandResult(ResultCode.Fail, "Thông tin chưa đúng"), JsonRequestBehavior.AllowGet);
         }
 
+        //[AllowAnonymous]
+        //public ActionResult ChangeLanguage(String LanguageName)
+        //{
+        //    if (LanguageName !=null)
+        //    {
+        //        Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageName);
+        //        Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageName);
+        //    }
 
+        //    HttpCookie cookie = new HttpCookie("Language");
+        //    cookie.Value = LanguageName;
+        //    Response.Cookies.Add(cookie);
+        //    return View("Login");
+        //}
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult SetCulture(string culture)
+        {
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = culture;   // update cookie value
+            else
+            {
+
+                cookie = new HttpCookie("_culture");
+                cookie.Value = culture;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+            Language.Instance.SetNull();
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

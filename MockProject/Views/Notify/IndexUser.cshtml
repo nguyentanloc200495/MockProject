@@ -1,0 +1,109 @@
+﻿@using MockProject.Common
+@using MockProject.DataBase
+@model MockProject.Models.NotifySearchModel
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Thông báo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>Thông báo</strong>
+
+                <span class="row" style="color: white">
+                     <a class="btn btn-primary" href="@Url.Action("Create", "Notify")">Gửi thông báo</a>
+                </span>
+            </li>
+        </ol>
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInUp">
+
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Tìm kiếm</h5>
+
+        </div>
+        <div class="ibox-content">
+
+
+            @using (Ajax.BeginForm("ListUser", "Notify", new AjaxCommonOption() { UpdateTargetId = "content" }))
+            {
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Tiêu đề</label>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Loại thông báo</label>
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(x => x.Type, null, "-----Tất cả--------", new { @class = "form-control select2" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Từ ngày</label>
+                                <div class="col-md-8">
+                                    <div class="input-group date">
+                                        <input type="text" name="FromDateTimeCreated" class="form-control" data_val="false" value="">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Đến ngày</label>
+                                <div class="col-md-8">
+                                    <div class="input-group date">
+                                        <input type="text" name="ToDateTimeCreated" class="form-control" data_val="false" value="@DateTime.Now.ToShortDateString()">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary" id="btnSearch" type="submit">Tìm</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div id="content" class="loading">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+
+        $('.input-group.date').datetimepicker({
+
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            extraFormats: ["MM/YYYY"],
+            defaultDate: null
+        });
+    })
+
+
+</script>

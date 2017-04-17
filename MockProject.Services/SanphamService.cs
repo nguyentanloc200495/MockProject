@@ -5,84 +5,84 @@ using System.Text;
 using System.Threading.Tasks;
 using MockProject.DataBase;
 using System.Data;
-using  System.Data.Entity;
+using System.Data.Entity;
 
 namespace MockProject.Services
 {
-   public class SanphamService
+    public class SanphamService
     {
 
-        public static PagedSearchList<SANPHAM> Search(int? id, string tensanpham, decimal? Giaban,int? loaisanphamID, int pageIndex)
+        public static PagedSearchList<PRODUCT> Search(int? id, string tensanpham, decimal? Giaban, int? loaisanphamID, int pageIndex)
         {
-               
+
             using (var context = new GST_MockProjectEntities())
 
             {
-                var query = context.SANPHAMs.Include(x=>x.LOAISANPHAM ).AsNoTracking().AsQueryable().Where(x=>x.TrangThai==true);
-                
+                var query = context.PRODUCTs.Include(x => x.PRODUCT_TYPE).AsNoTracking().AsQueryable().Where(x => x.Status == true);
+
                 if (id.HasValue)
                 {
-                    query = query.Where(x => x.ID==id);
+                    query = query.Where(x => x.ID == id);
                 }
                 if (!string.IsNullOrEmpty(tensanpham))
                 {
-                    query = query.Where(x => x.TenSP.Contains(tensanpham));
+                    query = query.Where(x => x.ProductName.Contains(tensanpham));
                 }
                 if (Giaban.HasValue)
                 {
-                    query = query.Where(x => x.GiaBan == Giaban.Value);
+                    query = query.Where(x => x.Amount == Giaban.Value);
                 }
                 if (loaisanphamID.HasValue)
                 {
-                    query = query.Where(x => x.LoaiSanPhamID==loaisanphamID);
+                    query = query.Where(x => x.ProductType_ID == loaisanphamID);
                 }
                 query = query.OrderByDescending(x => x.ID);
                 int pageSize = 10;
                 pageIndex = pageIndex < 1 ? 1 : pageIndex;
-                return new PagedSearchList<SANPHAM>(query, pageIndex, pageSize);
+                return new PagedSearchList<PRODUCT>(query, pageIndex, pageSize);
             }
         }
-        public static List<LOAISANPHAM> GetAllLoaisanpham()
+        public static List<PRODUCT_TYPE> GetAllLoaisanpham()
         {
             using (var context = new GST_MockProjectEntities())
 
             {
-                return context.LOAISANPHAMs.AsNoTracking().ToList();
+                return context.PRODUCT_TYPE.AsNoTracking().ToList();
             }
         }
-        public static SANPHAM GetById(long id)
+        public static PRODUCT GetById(int id)
         {
             using (var context = new GST_MockProjectEntities())
             {
-                var query = context.SANPHAMs.Include(x=>x.LOAISANPHAM).AsNoTracking().AsQueryable();
+                var query = context.PRODUCTs.Include(x => x.PRODUCT_TYPE).AsNoTracking().AsQueryable();
 
 
                 return query.FirstOrDefault(x => x.ID == id);
             }
         }
-        public static CommandResult Create(SANPHAM c)
+        public static CommandResult Create(PRODUCT c)
         {
             using (var context = new GST_MockProjectEntities())
             {
-                c.TrangThai = true;
-                context.SANPHAMs.Add(c);
+                c.Status = true;
+                context.PRODUCTs.Add(c);
                 context.SaveChanges();
                 //TODO
                 //context.Log(c, LogType.BankBranch_Create, userId, "", HttpContext.Current.Request.Form);
                 return new CommandResult();
             }
         }
-        public static CommandResult Edit(SANPHAM c)
+        public static CommandResult Edit(PRODUCT c)
         {
             using (var context = new GST_MockProjectEntities())
             {
-                var Sanpham = context.SANPHAMs.First(x => x.ID == c.ID);
-                Sanpham.TenSP = c.TenSP;
-                Sanpham.GiaBan = c.GiaBan;
-                Sanpham.SoLuongTon = c.SoLuongTon;
-                Sanpham.DonViTinh = c.DonViTinh;
-                Sanpham.HinhSP = c.HinhSP;
-               Sanpham.LoaiSanPhamID = c.LoaiSanPhamID;
+                var Sanpham = context.PRODUCTs.First(x => x.ID == c.ID);
+                Sanpham.ProductName = c.ProductName;
+                Sanpham.Amount = c.Amount;
+               
+                Sanpham.Unit = c.Unit;
+               
+                Sanpham.ProductType_ID = c.ProductType_ID;
 
                 context.SaveChanges();
                 //TODO
@@ -91,12 +91,12 @@ namespace MockProject.Services
             }
         }
 
-        public static CommandResult Delete(SANPHAM c)
+        public static CommandResult Delete(PRODUCT c)
         {
             using (var context = new GST_MockProjectEntities())
             {
-                var Sanpham = context.SANPHAMs.First(x => x.ID == c.ID);
-                Sanpham.TrangThai = false;
+                var Sanpham = context.PRODUCTs.First(x => x.ID == c.ID);
+                Sanpham.Status = false;
                 context.SaveChanges();
                 return new CommandResult();
             }

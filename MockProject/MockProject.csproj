@@ -208,6 +208,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Common\AjaxCommonOption.cs" />
     <Compile Include="Common\Enum.cs" />
+    <Compile Include="Common\Language.cs" />
     <Compile Include="Common\Security.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -217,7 +218,10 @@
     <Compile Include="Controllers\KhoController.cs" />
     <Compile Include="Controllers\LoaiSanPhamController.cs" />
     <Compile Include="Controllers\NhapXuatKhoController.cs" />
+    <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\ThongKeController.cs" />
+    <Compile Include="Controllers\TraHangController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -225,13 +229,16 @@
     <Compile Include="HtmlHelperExtension.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CTKhoSearchModel.cs" />
+    <Compile Include="Models\TraHangSearchModel.cs" />
     <Compile Include="Models\HoaDonSearchModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KhoSearchModel.cs" />
     <Compile Include="Models\LoaiSanPhamSearchModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NhapXuatKhoSearchModel.cs" />
+    <Compile Include="Models\NotifySearchModel.cs" />
     <Compile Include="Models\SanphamSearchModel.cs" />
+    <Compile Include="Models\ThongKeModel.cs" />
     <Compile Include="Models\UserSearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -301,9 +308,14 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\summernote-bs3.css" />
     <Content Include="Content\summernote.css" />
+    <Content Include="Content\themes\all-themes.css" />
+    <Content Include="Content\themes\all-themes.min.css" />
+    <Content Include="Content\themes\theme-deep-purple.css" />
+    <Content Include="Content\themes\theme-deep-purple.min.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\Upload\noimage.png" />
     <Content Include="Content\UserImage\1.jpg" />
+    <Content Include="Content\UserImage\2.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
     <Content Include="fonts\font-awesome\css\font-awesome.min.css" />
@@ -311,6 +323,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\inspinia.js" />
+    <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\autoNumeric-min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -364,6 +378,7 @@
     <Content Include="Scripts\footable.all.min.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
@@ -458,25 +473,35 @@
     <Content Include="Views\Kho\_List.cshtml" />
     <Content Include="Views\Kho\CreateEdit.cshtml" />
     <Content Include="Views\NhapXuatKho\Index.cshtml" />
-    <Content Include="Views\NhapXuatKho\CreateEdit.cshtml" />
     <Content Include="Views\NhapXuatKho\_List.cshtml" />
-    <Content Include="Views\NhapXuatKho\_CreateEditCTPNX.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Account\ShowUpdateImage.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\User\_PermissionTree.cshtml" />
     <Content Include="Views\User\ListPermission.cshtml" />
-    <Content Include="Views\NhapXuatKho\_CreateCTPNX.cshtml" />
-    <Content Include="Views\NhapXuatKho\_ListCTPNX.cshtml" />
     <Content Include="Views\CTKho\Index.cshtml" />
     <Content Include="Views\CTKho\_List.cshtml" />
-    <Content Include="Views\HoaDon\Create.cshtml" />
     <Content Include="Views\HoaDon\_List.cshtml" />
-    <Content Include="Views\HoaDon\CreateEdit.cshtml" />
     <Content Include="Views\HoaDon\Index.cshtml" />
-    <Content Include="Views\HoaDon\_EditCTHD.cshtml" />
-    <Content Include="Views\HoaDon\Edit.cshtml" />
     <Content Include="Views\HoaDon\CreateEdit1.cshtml" />
+    <Content Include="Views\HoaDon\_ListCTHD.cshtml" />
+    <Content Include="Views\ThongKe\Index.cshtml" />
+    <Content Include="Views\ThongKe\_ChartThongKe.cshtml" />
+    <Content Include="Views\NhapXuatKho\CreateEdit1.cshtml" />
+    <Content Include="Views\NhapXuatKho\_ListCTNXK.cshtml" />
+    <Content Include="Views\Notify\Index.cshtml" />
+    <Content Include="Views\Notify\_List.cshtml" />
+    <Content Include="Views\Notify\IndexUser.cshtml" />
+    <Content Include="Views\Notify\Detail.cshtml" />
+    <Content Include="Views\Notify\Create.cshtml" />
+    <Content Include="Views\Notify\_ListUser.cshtml" />
+    <Content Include="Views\Notify\_Notify.cshtml" />
+    <Content Include="Views\Notify\_Theme.cshtml" />
+    <Content Include="Views\TraHang\Index.cshtml" />
+    <Content Include="Views\TraHang\_List.cshtml" />
+    <Content Include="Views\TraHang\_ListCTHD.cshtml" />
+    <Content Include="Views\TraHang\CreateEdit.cshtml" />
+    <Content Include="Views\Shared\_SkinConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -500,6 +525,10 @@
     <ProjectReference Include="..\MockProject.DataBase\MockProject.DataBase.csproj">
       <Project>{20CDE88F-8E81-4E04-9BA5-776DBDF48104}</Project>
       <Name>MockProject.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MockProject.Resources\MockProject.Resources.csproj">
+      <Project>{A4A5AAA0-046A-4A8A-990D-B0AB46E23A46}</Project>
+      <Name>MockProject.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\MockProject.Services\MockProject.Services.csproj">
       <Project>{89FCE0AD-677D-4082-800D-E3F22125E6FA}</Project>

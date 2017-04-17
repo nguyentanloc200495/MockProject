@@ -31,21 +31,21 @@ namespace MockProject.Controllers
         public ActionResult Create()
         {
             //TODO     
-            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiLoaiSanPham>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<ProductType_Status>();
             return View("CreateEdit");
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiLoaiSanPham>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<ProductType_Status>();
             var model = LoaiSanPham.GetById(id);
             //TODO        
             return View("CreateEdit", model);
         }
         [HttpPost]
         [AuthorizeAdmin(Permission = Permission.LoaiSanPham_ThemSua)]
-        public ActionResult CreateEdit(LOAISANPHAM model)
+        public ActionResult CreateEdit(PRODUCT_TYPE model)
         {
             if (model.ID == 0)
             {

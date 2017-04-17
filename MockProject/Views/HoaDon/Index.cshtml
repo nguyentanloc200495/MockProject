@@ -12,7 +12,7 @@
                 <strong>Quản lý hóa đơn</strong>
             </li>
         </ol>
-        <a class="btn btn-primary m-t-sm" href=@Url.Action("Create", "HoaDon")> Tạo mới</a>
+        <a class="btn btn-primary m-t-sm" href=@Url.Action("Create1", "HoaDon")> Tạo mới</a>
         @*@Ajax.ActionLink("Tạo mới", "Create", new {}, new AjaxOptions() { UpdateTargetId = "updateCommision", OnSuccess = "ShowModalCommision" }, new { @class = "btn btn-success", role = "button" })*@
 
 </div>
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Tên nhân viên lập</label>
                                 <div class="col-md-8">
-                                    @Html.DropDownListFor(x => x.NhanVienID, null, "-----Tất cả--------", new { @class = "form-control select2" })
+                                    @Html.DropDownListFor(x => x.CreateBy, null, "-----Tất cả--------", new { @class = "form-control select2" })
                                 </div>
                             </div>
                         </div>

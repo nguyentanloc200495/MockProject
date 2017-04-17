@@ -15,6 +15,7 @@ using System.Data.Entity.Validation;
 
 namespace MockProject.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private GST_MockProjectEntities db = new GST_MockProjectEntities();
@@ -34,8 +35,8 @@ namespace MockProject.Controllers
         //tạo nhân viên  
         public ActionResult Create()
         {
-            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
-            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
+            ViewBag.Sex = WebUtil.GetEnumSelectList<Sex_Type>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<User_Status>();
             
               
             return View("CreateEdit");
@@ -45,16 +46,18 @@ namespace MockProject.Controllers
         public ActionResult Edit(int id)
         {
             var model = UserSevice.GetById(id);
-            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
-            ViewBag.TrangThai = WebUtil.GetEnumSelectList<TrangThaiNhanVien>();
-                   
+            ViewBag.Sex = WebUtil.GetEnumSelectList<Sex_Type>();
+            ViewBag.Status = WebUtil.GetEnumSelectList<User_Status>();
+
             return View("CreateEdit", model);
         }
+
+
         [HttpPost]
         [AuthorizeAdmin(Permission = Permission.NhanVien_ThemSua)]
-        public ActionResult CreateEdit(NHANVIEN model)
+        public ActionResult CreateEdit(USER model)
         {
-            ViewBag.GioiTinh = WebUtil.GetEnumSelectList<LoaiGioiTinh>();
+            ViewBag.Sex = WebUtil.GetEnumSelectList<Sex_Type>();
             if (model.ID == 0)
             {
                
@@ -86,7 +89,7 @@ namespace MockProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NHANVIEN user = db.NHANVIENs.Find(id);
+            USER user = db.USERs.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -98,13 +101,13 @@ namespace MockProject.Controllers
         [AuthorizeAdmin(Permission = Permission.NhanVien_CapQuyen)]
         [HttpPost]
        // [ValidateAntiForgeryToken]
-        public ActionResult ListPermission2(NHANVIEN user, AddUserPermission model, string selectedPermissions)
+        public ActionResult ListPermission2(USER user, AddUserPermission model, string selectedPermissions)
         {
             //lấy ra các quyền nhân viên
                 int[] SelectedGroupPermission = string.IsNullOrWhiteSpace(selectedPermissions) ? new int[0]
                     : selectedPermissions.Split(',').Select(x => int.Parse(x)).ToArray();
           
-                    user = db.NHANVIENs.Include(x => x.NHANVIEN_QUYEN).FirstOrDefault(x => x.ID == model.UserId);
+                    user = db.USERs.Include(x => x.USER_PERMISSION).FirstOrDefault(x => x.ID == model.UserId);
                     if (user == null)
                     {
                         return HttpNotFound();
@@ -114,21 +117,21 @@ namespace MockProject.Controllers
                         SelectedGroupPermission = new int[0];
                     }
                     //ktra selectedpermiss có quyền hay chưa
-                    var deleted = user.NHANVIEN_QUYEN.Where(x => SelectedGroupPermission.Contains(x.QuyenID) == false);
+                    var deleted = user.USER_PERMISSION.Where(x => SelectedGroupPermission.Contains(x.Permisstion_ID) == false);
                     foreach (var userPermission in deleted.ToList())
                     {
-                        db.NHANVIEN_QUYEN.Remove(userPermission);
+                        db.USER_PERMISSION.Remove(userPermission);
                     }
-                    var addNew = SelectedGroupPermission.Where(x => user.NHANVIEN_QUYEN.All(y => y.QuyenID != x));
+                    var addNew = SelectedGroupPermission.Where(x => user.USER_PERMISSION.All(y => y.Permisstion_ID != x));
                     foreach (var permissionId in addNew)
                     {
-                        var permission = new NHANVIEN_QUYEN();
-                        permission.NhanVienID = model.UserId;
-                        permission.QuyenID = permissionId;
-                        db.NHANVIEN_QUYEN.Add(permission);
+                        var permission = new USER_PERMISSION();
+                        permission.User_ID = model.UserId;
+                        permission.Permisstion_ID = permissionId;
+                        db.USER_PERMISSION.Add(permission);
                     }
                 var log = new StringBuilder();
-                log.Append(db.GetAddDeleteLog((NHANVIEN_QUYEN permission) => permission.QuyenID));
+                log.Append(db.GetAddDeleteLog((USER_PERMISSION permission) => permission.Permisstion_ID));
                 db.SaveChanges();
                 return Json(new RedirectCommand() { Code = ResultCode.Success, Message = "Cập nhật thành công", Url = Url.Action("ListPermission", new { id = user.ID }) },
                       JsonRequestBehavior.AllowGet);

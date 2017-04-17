@@ -1,4 +1,5 @@
-﻿@using MockProject
+﻿@using MockProject.Common
+@using MockProject.Resources
 @model MockProject.Models.LoginViewModel
 
 @{
@@ -57,17 +58,17 @@
             }
             @Html.ValidationSummary(true)
                 <div class="form-group">
-                    @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control", @required = true, @placeholder = "Tên đăng nhập" })
+                    @Html.TextBoxFor(m => m.UserName, "", new { @class = "form-control", @required = true, @placeholder = @Language.Instance.UserName})
 
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ", @required = true, @placeholder = "Mật khẩu" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ", @required = true, @placeholder = Language.Instance.Password})
 
                 </div>
                 <div class="form-group">
                     <div class="checkbox block full-width m-b">
                         @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.Label("RememberMe", "ghi nhớ đăng nhập")
+                        @Html.Label("RememberMe", Language.Instance.RememberMe)
                     </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +76,7 @@
                 </div>
             }
         </div>
-       
+        <p class="m-t"> <small><a href="/Account/SetCulture?culture=vi-VN">Vietnamese</a> | <a href="/Account/SetCulture?culture=en-US">English</a></small> </p>
         <p class="m-t"> <small>Welcome to Tên Nhóm website &copy; 2017</small> </p>
 
     </div>

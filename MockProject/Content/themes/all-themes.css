@@ -1,0 +1,158 @@
+﻿
+
+/*.theme-deep-purple .navbar {
+  background-color: #673AB7; }
+
+.theme-deep-purple .navbar-brand {
+  color: #fff; }
+  .theme-deep-purple .navbar-brand:hover {
+    color: #fff; }
+  .theme-deep-purple .navbar-brand:active {
+    color: #fff; }
+  .theme-deep-purple .navbar-brand:focus {
+    color: #fff; }
+
+.theme-deep-purple .nav > li > a {
+  color: #fff; }
+  .theme-deep-purple .nav > li > a:hover {
+    background-color: transparent; }
+  .theme-deep-purple .nav > li > a:focus {
+    background-color: transparent; }
+
+.theme-deep-purple .nav .open > a {
+  background-color: transparent; }
+  .theme-deep-purple .nav .open > a:hover {
+    background-color: transparent; }
+  .theme-deep-purple .nav .open > a:focus {
+    background-color: transparent; }
+
+.theme-deep-purple .bars {
+  color: #fff; }
+
+.theme-deep-purple .sidebar-collapse .side-menu .list li.active {
+  background-color: transparent; }
+  .theme-deep-purple .sidebar-collapse .side-menu .list li.active > :first-child i, .theme-deep-purple .sidebar-collapse .side-menu .list li.active > :first-child span {
+    color: #673AB7; }
+
+.theme-deep-purple .sidebar-collapse .side-menu .list .toggled {
+  background-color: transparent; }
+
+.theme-deep-purple .sidebar-collapse .side-menu .list .ml-menu {
+  background-color: transparent; }
+
+.theme-deep-purple .sidebar-collapse .legal {
+  background-color: #fff; }
+  .theme-deep-purple .sidebar-collapse .legal .copyright a {
+    color: #673AB7 !important; }
+
+
+ .theme-deep-purple .navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+  background-color: #673AB7;
+  color: white; }*/
+
+
+
+
+/*thay đổi*/
+
+
+
+
+
+ .theme-deep-purple .minimalize-styl-2 {
+  margin: 14px 5px 5px 30px; }
+
+.theme-deep-purple .navbar-top-links li:last-child {
+  margin-right: 30px; }
+
+.theme-deep-purple.fixed-nav .minimalize-styl-2 {
+  margin: 14px 5px 5px 15px; }
+
+.theme-deep-purple .spin-icon {
+  background: #ecba52 !important; }
+
+body.boxed-layout.theme-deep-purple #wrapper {
+  background: #3e2c42; }
+
+.theme-deep-purple .nav-header {
+  background: #ecba52;
+  background: url("patterns/header-profile-skin-3.png"); }
+
+.theme-deep-purple.mini-navbar .nav-second-level {
+  background: #3e2c42; }
+
+.theme-deep-purple .breadcrumb {
+  background: transparent; }
+
+.theme-deep-purple .page-heading {
+  border: none; }
+
+.theme-deep-purple .nav > li.active {
+  background: #38283c; }
+
+.fixed-nav.theme-deep-purple .navbar-fixed-top {
+  background: #fff; }
+
+.theme-deep-purple .nav > li > a {
+  color: #948b96; }
+
+.theme-deep-purple .nav > li.active > a {
+  color: #fff; }
+
+.theme-deep-purple .navbar-minimalize {
+  background: #ecba52;
+  border-color: #ecba52; }
+
+body.theme-deep-purple {
+  background: #3e2c42; }
+
+.theme-deep-purple .navbar-static-top {
+  background: #ffffff; }
+
+.theme-deep-purple .dashboard-header {
+  background: transparent;
+  border-bottom: none !important;
+  border-top: none;
+  padding: 20px 30px 10px 30px; }
+
+.theme-deep-purple .wrapper-content {
+  padding: 30px 15px; }
+
+.theme-deep-purple #page-wrapper {
+  background: #f4f6fa; }
+
+.theme-deep-purple .ibox-title, .theme-deep-purple .ibox-content {
+  border-width: 1px; }
+
+.theme-deep-purple .ibox-content:last-child {
+  border-style: solid solid solid solid; }
+
+.theme-deep-purple .nav > li.active {
+  border: none; }
+
+.theme-deep-purple .nav-header {
+  padding: 35px 25px 25px 25px; }
+
+.theme-deep-purple .nav-header a.dropdown-toggle {
+  color: #fff;
+  margin-top: 10px; }
+
+.theme-deep-purple .nav-header a.dropdown-toggle .text-muted {
+  color: #fff;
+  opacity: 0.8; }
+
+.theme-deep-purple .profile-element {
+  text-align: center; }
+
+.theme-deep-purple .img-circle {
+  border-radius: 5px; }
+
+.theme-deep-purple .navbar-default .nav > li > a:hover, .theme-deep-purple .navbar-default .nav > li > a:focus {
+  background: #38283c;
+  color: #fff; }
+
+.theme-deep-purple .nav.nav-tabs > li.active > a {
+  color: #555; }
+
+.theme-deep-purple .nav.nav-tabs > li.active {
+  background: transparent; }

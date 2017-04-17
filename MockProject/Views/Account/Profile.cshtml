@@ -1,5 +1,5 @@
 ﻿
-@model MockProject.DataBase.NHANVIEN
+@model MockProject.DataBase.USER
 
 @{
     ViewBag.Title = "Thông tin";
@@ -11,9 +11,9 @@
         <div class="col-md-6">
             <div class="profile-image">
                 <a href="@Url.Action("ShowUpdateImage")">
-                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    @if (!string.IsNullOrEmpty(Model.Image))
                     {
-                        <img src="~/Content/UserImage/@Model.HinhAnh" class="img-circle circle-border m-b-md" alt="profile" />
+                        <img src="~/Content/UserImage/@Model.Image" class="img-circle circle-border m-b-md" alt="profile" />
 
                     }
                     else
@@ -26,12 +26,12 @@
                 <div class="">
                     <div>
                         <h2 class="no-margins">
-                            @Model.TenNV
+                            @Model.FullName
                         </h2>
                         
                        
                         <small>
-                            Chức vụ: @Model.ChucVu
+                            Chức vụ: @Model.Office
                         </small>
                       
                     </div>
@@ -61,14 +61,14 @@
                             <div class="form-group">
                                 @Html.Label("Tài khoản", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.TaiKhoan)</p>
+                                    <p class="form-control-static">@Html.DisplayFor(model => model.UserName)</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.Label("Họ và tên", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.TenNV)</p>
+                                    <p class="form-control-static">@Html.DisplayFor(model => model.FullName)</p>
                                 </div>
                             </div>
                             @*<div class="form-group">
@@ -80,28 +80,28 @@
                             <div class="form-group">
                                 @Html.Label("Chức vụ", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.ChucVu)</p>
+                                    <p class="form-control-static">@Html.DisplayFor(model => model.Office)</p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.Label("Số điện thoại", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <p class="form-control-static">@Html.DisplayFor(model => model.SoDT)</p>
+                                    <p class="form-control-static">@Html.DisplayFor(model => model.FullName)</p>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label col-md-2">Hình ảnh</label>
                                 <div class="col-md-10">
-                                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                                    @if (!string.IsNullOrEmpty(Model.Image))
                                     {
                                         @*<img id="blah" src="@Url.Content(Model.ImagePath)" alt="@Model.Fullname" style="max-width: 100px; max-height: 100px" />*@
-                                        <img id="blah" src="~/Content/UserImage/@Model.HinhAnh" alt="@Model.TenNV" style="max-width: 100px; max-height: 100px" />
+                                        <img id="blah" src="~/Content/UserImage/@Model.Image" alt="@Model.FullName" style="max-width: 100px; max-height: 100px" />
 
                                     }
                                     else
                                     {
-                                        <img id="blah" src="~/Content/Upload/noimage.png" alt="@Model.TenNV" style="max-width: 100px; max-height: 100px" />
+                                        <img id="blah" src="~/Content/Upload/noimage.png" alt="@Model.FullName" style="max-width: 100px; max-height: 100px" />
                                     }
                                     @*<img src="@Url.Content(Model.ImagePath)" alt="@Model.Fullname" style="max-width: 150px; max-height: 150px"/>*@
                                     @Html.ActionLink("Đổi Hình Ảnh", "ShowUpdateImage", new { id = Model.ID }, new { @class = "btn btn-primary btn-xs" })

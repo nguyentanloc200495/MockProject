@@ -1,3 +1,113 @@
+/*change theme*/
+.demo-choose-skin {
+  list-style: none;
+  padding-left: 0;
+  overflow-y: hidden; }
+  .demo-choose-skin li {
+    border-bottom: 1px solid #eee;
+    padding: 10px 10px 4px 10px;
+    position: relative;
+    cursor: pointer; }
+    .demo-choose-skin li.active {
+      background-color: #eee; }
+      .demo-choose-skin li.active:after {
+        font-family: 'Material Icons';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        content: '\E876';
+        font-size: 18px;
+        font-weight: bold; }
+    .demo-choose-skin li:hover {
+      background-color: #eee; }
+    .demo-choose-skin li div {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      -ms-border-radius: 3px;
+      border-radius: 3px; }
+    .demo-choose-skin li span {
+      position: relative;
+      bottom: 7px;
+      left: 5px; }
+  .demo-choose-skin .red {
+    background-color: #F44336; }
+  .demo-choose-skin .pink {
+    background-color: #E91E63; }
+  .demo-choose-skin .purple {
+    background-color: #9C27B0; }
+  .demo-choose-skin .deep-purple {
+    background-color: #673AB7; }
+  .demo-choose-skin .indigo {
+    background-color: #3F51B5; }
+  .demo-choose-skin .blue {
+    background-color: #2196F3; }
+  .demo-choose-skin .light-blue {
+    background-color: #03A9F4; }
+  .demo-choose-skin .cyan {
+    background-color: #00BCD4; }
+  .demo-choose-skin .teal {
+    background-color: #009688; }
+  .demo-choose-skin .green {
+    background-color: #4CAF50; }
+  .demo-choose-skin .light-green {
+    background-color: #8BC34A; }
+  .demo-choose-skin .lime {
+    background-color: #CDDC39; }
+  .demo-choose-skin .yellow {
+    background-color: #ffe821; }
+  .demo-choose-skin .amber {
+    background-color: #FFC107; }
+  .demo-choose-skin .orange {
+    background-color: #FF9800; }
+  .demo-choose-skin .deep-orange {
+    background-color: #FF5722; }
+  .demo-choose-skin .brown {
+    background-color: #795548; }
+  .demo-choose-skin .grey {
+    background-color: #9E9E9E; }
+  .demo-choose-skin .blue-grey {
+    background-color: #607D8B; }
+  .demo-choose-skin .black {
+    background-color: #000000; }
+  .demo-choose-skin .white {
+    background-color: #ffffff; }
+  .right-sidebar {
+  width: 280px;
+  height: calc(100vh - 70px);
+  position: fixed;
+  right: -300px;
+  top: 70px;
+  background: #fdfdfd;
+  z-index: 11 !important;
+  -webkit-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s; }
+  .right-sidebar.open {
+    right: 0; }
+  .right-sidebar .nav-tabs {
+    font-weight: 600;
+    font-size: 13px;
+    width: 100%;
+    margin-left: 2px; }
+    .right-sidebar .nav-tabs li {
+      text-align: center; }
+      .right-sidebar .nav-tabs li > a {
+        margin-right: 0; }
+      .right-sidebar .nav-tabs li:first-child {
+        width: 45%; }
+      .right-sidebar .nav-tabs li:last-child {
+        width: 55%; }
+
+
 /* jsTree default theme */
 .jstree-node,
 .jstree-children,
@@ -101,6 +211,7 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 .vakata-context {
   display: none;
 }

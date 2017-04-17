@@ -28,5 +28,10 @@ namespace MockProject.DataBase
         [Description("Thêm, sửa loại sản phẩm")]
         LoaiSanPham_ThemSua = 2002,
 
+
+        //cấp quyền cho xem thông báo
+        [Description("Xem loại sản phẩm")]
+        Notify_View = 3001,
+
     }
 }

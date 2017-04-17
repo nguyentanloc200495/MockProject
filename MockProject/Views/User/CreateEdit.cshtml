@@ -1,7 +1,7 @@
 ﻿@using MockProject.Common
-@model MockProject.DataBase.NHANVIEN
+@model MockProject.DataBase.USER
 @{
-    ViewBag.Title = "CreateEdit";
+    ViewBag.Title = "Nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Tên nhân viên<span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.TenNV, new {@class = "form-control",@required = "" })
+                                            @Html.TextBoxFor(x => x.FullName, new {@class = "form-control",@required = "" })
 
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                         <label class="col-md-4 control-label">Ngày sinh</label>
                                         <div class="col-md-8">
                                             <div class="input-group date">
-                                                @Html.TextBoxFor(x => x.NgaySinh@*DateTime.Now.ToShortDateString().ToString()*@, new { @class = "form-control", data_val = "false", value = "" })
+                                                @Html.TextBoxFor(x => x.DateOfBirth, new { @class = "form-control", data_val = "false", value = "" })
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@
                                         <label class="col-md-4 control-label">Giới tính</label>
                                         <div class="col-md-8">
                                             
-                                            @Html.DropDownListFor(x => x.GioiTinh, null, new { @class = "form-control" })
+                                            @Html.DropDownListFor(x => x.Sex, null, new { @class = "form-control" })
                                             @*@Html.TextBoxFor(x => x.GioiTinh, new { @class = "form-control" })*@
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Số điện thoại</label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.SoDT, new {@class = "form-control"})
+                                            @Html.TextBoxFor(x => x.PhoneNumber, new {@class = "form-control"})
                                             
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Tài khoản <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.TaiKhoan, new { @class = "form-control",@required ="" })
+                                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control",@required ="" })
 
                                         </div>
                                     </div>
@@ -86,12 +86,12 @@
                                         <div class="col-md-8">
                                             @if (Model == null)
                                             {
-                                                @Html.TextBoxFor(x => x.MatKhau, new {@class = "form-control", @required = ""})
+                                                @Html.TextBoxFor(x => x.Password, new {@class = "form-control", @required = ""})
                                                 // PasswordFor
                                             }
                                             else
                                             {
-                                                @Html.TextBoxFor(x => x.MatKhau, new { @class = "form-control", @disabled = "disabled", @type = "password" })
+                                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @disabled = "disabled", @type = "password" })
                                               
                                             }
                                             
@@ -115,7 +115,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Chức vụ </label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.ChucVu, new { @class = "form-control" })
+                                            @Html.TextBoxFor(x => x.Office, new { @class = "form-control" })
 
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Tình trạng</label>
                                         <div class="col-md-8">
-                                            @Html.DropDownListFor(x => x.TrangThai, null, new { @class = "form-control" })
+                                            @Html.DropDownListFor(x => x.Status, null, new { @class = "form-control" })
                                             @*@Html.TextBoxFor(x => x.TrangThai, new { @class = "form-control" })*@
                                         </div>
                                     </div>
@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Địa chỉ</label>
                                         <div class="col-md-8">
-                                            @Html.TextAreaFor(x => x.DiaChi, new { @class = "form-control" })
+                                            @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
                                         </div>
                                     </div>
                                 </div>

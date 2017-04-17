@@ -9,7 +9,7 @@ namespace MockProject.Models
 {
     public class KhoSearchModel : SearchModel
     {
-        public string TenKho { get; set; }
-        public TinhTrangKho? TinhTrang { get; set; }
+        public string WarehouseName { get; set; }
+        public Warehouse_Status? Status { get; set; }
     }
 }

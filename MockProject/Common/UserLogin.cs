@@ -43,7 +43,7 @@ namespace MockProject
 
         public static string Avatar()
         {
-            var image = UserService.GetUserInfo()?.HinhAnh;
+            var image = UserService.GetUserInfo()?.Image;
             if (string.IsNullOrEmpty(image) || !File.Exists(HttpContext.Current.Server.MapPath($"~/Content/UserImage/{HttpUtility.UrlEncode(image)}")))
             {
                 return "/Content/Upload/noimage.png";
@@ -70,11 +70,11 @@ namespace MockProject
             string name = string.Empty;
             using (var context = new GST_MockProjectEntities())
             {
-                if (context.NHANVIENs.Any(x => x.ID == id))
+                if (context.USERs.Any(x => x.ID == id))
                 {
-                    var _users = from s in context.NHANVIENs
+                    var _users = from s in context.USERs
                         select s;
-                    name = _users.Select(x => x.TaiKhoan).ToString();
+                    name = _users.Select(x => x.UserName).ToString();
                 }
             }
             return name;

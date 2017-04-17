@@ -1,0 +1,73 @@
+﻿@using MockProject.Common
+@model MockProject.DataBase.NOTIFY
+@{
+    ViewBag.Title = "Thông báo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Thông báo", "Index")
+            </li>
+            <li class="active">
+                <strong>Tạo mới thông báo</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    @using (Ajax.BeginForm("Create", "Notify", null, new AjaxCommonOption(), new { role = "form", id = "MainForm" }))
+                    {
+                        @Html.HiddenFor(x => x.ID)
+                        <div class="form-horizontal">
+                            <div class="col-lg-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Tiêu đề thông báo </label>
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @required = "" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Loại thông báo </label>
+                                        <div class="col-md-8">
+                                            @Html.DropDownListFor(x => x.Type, null, "--- Tất cã ---", new { @class = "form-control", @required = "" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Nội dung thông báo</label>
+                                        <div class="col-md-8">
+                                            @Html.TextAreaFor(x => x.Description, new { @class = "form-control", })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary" type="submit">Lưu</button>
+                                    @Html.ActionLink("Hủy", "Index", null, htmlAttributes: new { @class = "btn btn-default", role = "button" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>

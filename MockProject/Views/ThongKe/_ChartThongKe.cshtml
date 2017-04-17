@@ -1,0 +1,121 @@
+﻿@using MockProject.Services
+@using CommonData
+@using Newtonsoft.Json
+@model List<MockProject.Services.ChartThongKe>
+<style>
+    .with-transitions {
+        min-height: 500px;
+        width: 100%;
+    }
+</style>
+
+<div class="row">
+    @{
+        var dbTotal = ViewBag.TotalRevenue as ChartTotalThongKe;
+    }
+    <div class="col-sm-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="text-align: center">
+                <h5 style="text-align: center; float: none; color: blue">Số tiền bán: &nbsp;&nbsp;@(string.IsNullOrEmpty(dbTotal.Ban.Value.ToString()) ? "0" : dbTotal.Ban.Value.ToString()) VND</h5>
+            </div>
+        </div>
+    </div>
+   
+        
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div id="linechart_material" class="with-transitions">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@{
+    var format = "yyyy";
+    if (ViewBag.Flag == 1)
+    {
+        format = "d/M/yyyy";
+    }
+    if (ViewBag.Flag == 2)
+    {
+        format = "MM/yy";
+    }
+}
+
+<script type="text/javascript">
+
+
+    google.charts.load('current', { 'packages': ['corechart'], 'language': 'vi' });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        debugger 
+        var list = @Html.Raw(JsonConvert.SerializeObject(Model, Formatting.Indented));
+        var listData = [];
+        $.each(list,
+            function(key, value) {
+                listData.push([new Date(value.Year, value.Month - 1, value.Day), value.Ban]);
+                //listData.push([new Date(value.Year, value.Month - 1, value.Day), value.Ban,value.Tra]);
+            });
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Ngày');
+        data.addColumn('number', 'Số Tiền');
+        //data.addColumn('number', 'Tra');
+
+
+        data.addRows(listData);
+
+        var options = {
+            //chart: {
+            //    title: 'Thống kê thu chi'
+
+            //},
+            title: 'Thống kê thu chi',
+            vAxis: {
+                format: 'currency'
+
+            },
+            hAxis: {
+
+                format: '@format'
+            },
+
+
+            theme: 'material',
+            pointSize: 5,
+            legend: { position: 'bottom' }
+        };
+        var formatterDate = new google.visualization.DateFormat({pattern: '@format'});
+        formatterDate.format(data, 0);
+
+        var formatterNumber = new google.visualization.NumberFormat(
+    {pattern:'#,### VND'});
+        formatterNumber.format(data, 1);
+        //formatterNumber.format(data, 2);
+
+        //var chart = new google.charts.Line(document.getElementById('linechart_material'));
+        var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
+
+        //chart.draw(data, google.charts.Line.convertOptions(options));
+
+        chart.draw(data, options);
+
+    }
+
+    $(window)
+        .resize(function() {
+            drawChart();
+
+        });
+</script>

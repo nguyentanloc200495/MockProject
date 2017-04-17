@@ -26,6 +26,10 @@ namespace MockProject
             bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
                       "~/Scripts/app/inspinia.js"));
 
+            // Inspinia skin config script
+            bundles.Add(new ScriptBundle("~/bundles/skinConfig").Include(
+                      "~/Scripts/app/skin.config.min.js"));
+
             // SlimScroll
             bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
                       "~/Scripts/plugins/slimScroll/jquery.slimscroll.min.js"));

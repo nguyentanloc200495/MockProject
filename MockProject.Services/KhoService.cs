@@ -10,81 +10,81 @@ namespace MockProject.Services
 {
     public class KhoService
     {
-        public static PagedSearchList<KHO> Search(string TenKho,TinhTrangKho? Tinhtrang, int pageIndex)
+        public static PagedSearchList<WAREHOUSE> Search(string TenKho,Warehouse_Status? Tinhtrang, int pageIndex)
         {
             using (var context = new GST_MockProjectEntities())
 
             {
-                var query = context.KHOes.AsNoTracking().AsQueryable();
+                var query = context.WAREHOUSEs.AsNoTracking().AsQueryable();
 
                 if (!string.IsNullOrEmpty(TenKho))
                 {
-                    query = query.Where(x => x.TenKho.Contains(TenKho));
+                    query = query.Where(x => x.WarehouseName.Contains(TenKho));
                 }
                 if (Tinhtrang.HasValue)
                 {
-                    query = query.Where(x => x.TinhTrang == Tinhtrang);
+                    query = query.Where(x => x.Status == Tinhtrang);
                 }
                 query = query.OrderByDescending(x => x.ID);
                 int pageSize = 10;
                 pageIndex = pageIndex < 1 ? 1 : pageIndex;
-                return new PagedSearchList<KHO>(query, pageIndex, pageSize);
+                return new PagedSearchList<WAREHOUSE>(query, pageIndex, pageSize);
             }
         }
-        public static KHO GetById(long id)
+        public static WAREHOUSE GetById(long id)
         {
             using (var context = new GST_MockProjectEntities())
             {
-                var query = context.KHOes.AsNoTracking().AsQueryable();
+                var query = context.WAREHOUSEs.AsNoTracking().AsQueryable();
                 return query.FirstOrDefault(x => x.ID == id);
             }
         }
 
-        public static PagedSearchList<CTKHO> SearchCTKho(int? Khoid, int? Sanphamid, int pageIndex)
+        public static PagedSearchList<WAREHOUSE_DETAIL> SearchCTKho(int? Khoid, int? Sanphamid, int pageIndex)
         {
             using (var context = new GST_MockProjectEntities())
 
             {
-                var query = context.CTKHOes
-                    .Include(x=>x.SANPHAM)
-                    .Include(x=>x.KHO)
+                var query = context.WAREHOUSE_DETAIL
+                    .Include(x=>x.PRODUCT)
+                    .Include(x=>x.WAREHOUSE)
                     .AsNoTracking().AsQueryable();
 
                 if (Khoid.HasValue)
                 {
-                    query = query.Where(x => x.KhoID == Khoid);
+                    query = query.Where(x => x.Warehouse_ID == Khoid);
                 }
                 if (Sanphamid.HasValue)
                 {
-                    query = query.Where(x => x.SanPhamID == Sanphamid);
+                    query = query.Where(x => x.Product_ID == Sanphamid);
                 }
-                query = query.OrderBy(x => x.SoLuong);
+                query = query.OrderBy(x => x.Quantity);
                 int pageSize = 10;
                 pageIndex = pageIndex < 1 ? 1 : pageIndex;
-                return new PagedSearchList<CTKHO>(query, pageIndex, pageSize);
+                return new PagedSearchList<WAREHOUSE_DETAIL>(query, pageIndex, pageSize);
             }
         }
-        public static CommandResult Create(KHO c)
+        public static CommandResult Create(WAREHOUSE c)
         {
             using (var context = new GST_MockProjectEntities())
             {
 
-                context.KHOes.Add(c);
+                context.WAREHOUSEs.Add(c);
                 context.SaveChanges();
                 //TODO
                 //context.Log(c, LogType.BankBranch_Create, userId, "", HttpContext.Current.Request.Form);
                 return new CommandResult();
             }
         }
-        public static CommandResult Edit(KHO c)
+        public static CommandResult Edit(WAREHOUSE c)
         {
             using (var context = new GST_MockProjectEntities())
             {
-                var Kho = context.KHOes.First(x => x.ID == c.ID);
+                var Kho = context.WAREHOUSEs.First(x => x.ID == c.ID);
 
-                Kho.TenKho = c.TenKho;
-                Kho.ViTriKho = c.ViTriKho;
-                Kho.TinhTrang = c.TinhTrang;
+                Kho.WarehouseName = c.WarehouseName;
+                Kho.Address = c.Address;
+                Kho.Status = c.Status;
                 context.SaveChanges();
                 //TODO
                 // context.Log(c, LogType.Customer_Edit, userId, "", HttpContext.Current.Request.Form);

@@ -10,13 +10,10 @@ namespace MockProject.Models
     public class NhapXuatKhoSearchModel : SearchModel
     {
         public int? ID { get; set; }
-        public DateTime? NgayLapPhieu { get; set; }
-        public int? KhoID { get; set; }
-        public LoaiPhieuNhapXuatKho1? LoaiPhieu { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public int? Warehouse_ID { get; set; }
+        public WarehouseTransaction_Type? Type { get; set; }
     }
 
-    public class CTPNXSearchModel : SearchModel
-    {
-        public int? ID { get; set; }
-    }
+   
 }

@@ -117,20 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LoaiGioiTinh.ChuaXacDinh" xml:space="preserve">
+  <data name="Sex_Type.ChuaXacDinh" xml:space="preserve">
     <value>Chưa xác định</value>
   </data>
-  <data name="LoaiGioiTinh.Nam" xml:space="preserve">
+  <data name="Sex_Type.Nam" xml:space="preserve">
     <value>Nam</value>
   </data>
-  <data name="LoaiGioiTinh.Nu" xml:space="preserve">
+  <data name="Sex_Type.Nu" xml:space="preserve">
     <value>Nữ</value>
-  </data>
-  <data name="LoaiPhieuNhapXuatKho1.PhieuNhap" xml:space="preserve">
-    <value>Phiếu nhập kho</value>
-  </data>
-  <data name="LoaiPhieuNhapXuatKho1.PhieuXuat" xml:space="preserve">
-    <value>Phiếu xuất kho</value>
   </data>
   <data name="TinhTrangKho.KhongKichHoat" xml:space="preserve">
     <value>Không kích hoạt</value>
@@ -144,16 +138,22 @@
   <data name="TrangThaiLoaiSanPham.KhongDung" xml:space="preserve">
     <value>Không dùng</value>
   </data>
-  <data name="TrangThaiNhanVien.CongTac" xml:space="preserve">
+  <data name="User_Status.CongTac" xml:space="preserve">
     <value>Công tác</value>
   </data>
-  <data name="TrangThaiNhanVien.DangLamViec" xml:space="preserve">
+  <data name="User_Status.DangLamViec" xml:space="preserve">
     <value>Đang làm việc</value>
   </data>
-  <data name="TrangThaiNhanVien.NghiPhep" xml:space="preserve">
+  <data name="User_Status.NghiPhep" xml:space="preserve">
     <value>Nghĩ phép</value>
   </data>
-  <data name="TrangThaiNhanVien.NghiViec" xml:space="preserve">
+  <data name="User_Status.NghiViec" xml:space="preserve">
     <value>Nghĩ việc</value>
+  </data>
+  <data name="WarehouseTransaction_Type.PhieuNhap" xml:space="preserve">
+    <value>Phiếu nhập kho</value>
+  </data>
+  <data name="WarehouseTransaction_Type.PhieuXuat" xml:space="preserve">
+    <value>Phiếu xuất kho</value>
   </data>
 </root>

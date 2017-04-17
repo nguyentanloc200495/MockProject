@@ -1,7 +1,7 @@
 ﻿@using MockProject.Common
-@model MockProject.DataBase.SANPHAM
+@model MockProject.DataBase.PRODUCT
 @{
-    ViewBag.Title = "CreateEdit";
+    ViewBag.Title = "Sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Tên sản phẩm <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.TenSP, new { @class = "form-control", @required = "" })
+                                            @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control", @required = "" })
 
                                         </div>
                                     </div>
@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Loại sản phẩm <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.DropDownListFor(x => x.LoaiSanPhamID, null, "--- Tất cã ---", new { @class = "form-control" })
+                                            @Html.DropDownListFor(x => x.ProductType_ID, null, "--- Tất cã ---", new { @class = "form-control", @required = "" })
 
                                         </div>
                                     </div>
@@ -50,38 +50,31 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Giá bán <span style="color: Red">(*)</span></label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.GiaBan, new { @class = "form-control", @required = "" })
+                                            @Html.TextBoxFor(x => x.Amount, new { @class = "form-control", @required = "" })
 
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">Số lượng tồn<span style="color: Red">(*)</span></label>
-                                        <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.SoLuongTon, new { @class = "form-control", @required = "" })
-
-                                        </div>
-                                    </div>
-                                </div>
+                              
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Đơn vị tính</label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.DonViTinh, new { @class = "form-control" })
+                                            @Html.TextBoxFor(x => x.Unit, new { @class = "form-control" })
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Hình ảnh</label>
+                                        <label class="col-md-4 control-label">Nội dung</label>
                                         <div class="col-md-8">
-                                            @Html.TextBoxFor(x => x.HinhSP, new { @class = "form-control" })
+                                            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
 
                                         </div>
                                     </div>
                                 </div>
+                              
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -97,3 +90,4 @@
     </div>
 </div>
 <script src="~/Scripts/plugins/iCheck/icheck.min.js"></script>
+
